@@ -1,0 +1,8 @@
+{
+  "name": "@ubermanu/autoscroll",
+  "version": "4.10.0",
+  "license": "MIT",
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}
