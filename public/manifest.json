@@ -24,8 +24,7 @@
     {
       "all_frames": false,
       "js": [
-        "data/defaults.js",
-        "data/AutoScroll.js"
+        "bundle.js"
       ],
       "matches": [
         "<all_urls>"
