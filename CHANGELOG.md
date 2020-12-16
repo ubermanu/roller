@@ -1,4 +1,8 @@
 <h1>AutoScroll Changelog</h1>
+<h2 title="2020-12-16">Version 5.1</h2>
+<ul>
+  <li>Fixed scrolling on pages with smooth scroll behavior enabled.</li>
+</ul>
 <h2 title="2020-12-16">Version 5.0</h2>
 <ul>
   <li>Reworked and cleaned up the whole project.</li>

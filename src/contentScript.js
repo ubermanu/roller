@@ -51,6 +51,11 @@ chrome.storage.local.get(defaults, function (options) {
     // This is needed to support SVG
     let bodyNode = document.body ? document.body : htmlNode
 
+    // Keep default scroll behavior
+    // TODO: Handle current container behavior?
+    // TODO: Test for SVG
+    const scrollBehavior = htmlNode.style.scrollBehavior
+
     // The timer that does the actual scrolling; must be very fast so that the scrolling is smooth
     function startCycle(elem, scroller, root) {
         // This is needed to support SVG
@@ -213,6 +218,9 @@ chrome.storage.local.get(defaults, function (options) {
 
         state.click = false
         state.scrolling = false
+
+        // Restore scroll behavior
+        htmlNode.style.setProperty('scroll-behavior', scrollBehavior)
     }
 
     function normalCursor() {
@@ -237,6 +245,9 @@ chrome.storage.local.get(defaults, function (options) {
         )
 
         inner.style.removeProperty('display')
+
+        // Force normal scroll behavior to fix the unresponsive movements
+        htmlNode.style.setProperty('scroll-behavior', 'auto')
     }
 
     function isInvalid(elem) {
