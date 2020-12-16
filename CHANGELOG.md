@@ -1,4 +1,10 @@
 <h1>AutoScroll Changelog</h1>
+<h2 title="2020-12-16">Version 5.0</h2>
+<ul>
+  <li>Reworked and cleaned up the whole project.</li>
+  <li>The "Options" page is now bootstrapped by React.</li>
+  <li>Optimized SVG and PNG images.</li>
+</ul>
 <h2 title="2018-11-21">Version 4.10</h2>
 <ul>
   <li>Fixing a regression that caused it to incorrectly activate on various things. (Thanks to <a href="https://github.com/Tynach">Tynach</a>)</li>
