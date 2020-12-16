@@ -31,8 +31,5 @@
       ],
       "run_at": "document_end"
     }
-  ],
-  "web_accessible_resources": [
-    "data/images/origin/*.svg"
   ]
 }
