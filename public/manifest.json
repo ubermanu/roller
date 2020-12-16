@@ -19,12 +19,12 @@
     ],
     "persistent": false
   },
-  "options_page": "data/options.html",
+  "options_page": "options_page.html",
   "content_scripts": [
     {
       "all_frames": false,
       "js": [
-        "bundle.js"
+        "content_script.js"
       ],
       "matches": [
         "<all_urls>"

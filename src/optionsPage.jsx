@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import defaults from '../defaultOptions'
+import defaults from './defaultOptions'
+import './optionsPage.css'
 import 'bulma/css/bulma.min.css'
-import './options.css'
 
 // TODO: Restore options listener
 function getOpts(f) {
