@@ -1,5 +1,6 @@
 import options from './defaultOptions'
 import math from './helpers/math'
+import { getStyleFromAngle } from './helpers/cursor'
 
 // TODO: Restore listener on option changes
 // chrome.storage.local.get(defaults, function (options) {
@@ -23,27 +24,6 @@ function image(o) {
         return chrome.runtime.getURL('data/images/origin/horizontal.svg')
     } else {
         return chrome.runtime.getURL('data/images/origin/vertical.svg')
-    }
-}
-
-function direction(x, y) {
-    const angle = math.angle(x, y)
-    if (angle < 30 || angle >= 330) {
-        return 'e-resize'
-    } else if (angle < 60) {
-        return 'se-resize'
-    } else if (angle < 120) {
-        return 's-resize'
-    } else if (angle < 150) {
-        return 'sw-resize'
-    } else if (angle < 210) {
-        return 'w-resize'
-    } else if (angle < 240) {
-        return 'nw-resize'
-    } else if (angle < 300) {
-        return 'n-resize'
-    } else {
-        return 'ne-resize'
     }
 }
 
@@ -160,7 +140,7 @@ function mousemove(event) {
     if (math.hypot(x, y) > options.moveThreshold) {
         //state.stickyScroll = false;
 
-        inner.style.setProperty('cursor', direction(x, y))
+        inner.style.setProperty('cursor', getStyleFromAngle(math.angle(x, y)))
 
         // 10 = 5
         // 5  = 10
