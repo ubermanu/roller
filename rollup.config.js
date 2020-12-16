@@ -34,7 +34,13 @@ export default [
                 browser: true,
             }),
             resolve(),
-            commonjs(),
+            commonjs({
+                include: ['node_modules/**'],
+                exclude: ['node_modules/process-es6/**'],
+                namedExports: {
+                    'node_modules/react/index.js': ['useState'],
+                },
+            }),
             babel({
                 exclude: 'node_modules/**',
                 presets: ['@babel/env', '@babel/preset-react'],

@@ -1,47 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import defaults from './defaultOptions'
 import './optionsPage.css'
 import 'bulma/css/bulma.min.css'
 
-// TODO: Restore options listener
-function getOpts(f) {
-    // chrome.storage.local.get(defaults, function (options) {
-    //     var opts = {}
-    //
-    //     for (var s in options) {
-    //         opts[s] = (function (s) {
-    //             return cell.dedupe(options[s], {
-    //                 set: function (self, x) {
-    //                     if (x === defaults[s]) {
-    //                         chrome.storage.local.remove(s)
-    //                     } else {
-    //                         var o = {}
-    //                         o[s] = x
-    //                         chrome.storage.local.set(o)
-    //                     }
-    //                 },
-    //             })
-    //         })(s)
-    //     }
-    //
-    //     chrome.storage.onChanged.addListener(function (o, s) {
-    //         console.assert(s === 'local')
-    //         for (var k in o) {
-    //             var x = o[k]
-    //             if ('newValue' in x) {
-    //                 opts[k].set(x.newValue)
-    //             } else if ('oldValue' in x) {
-    //                 opts[k].set(defaults[k])
-    //             }
-    //         }
-    //     })
-    //
-    //     f(opts)
-    // })
-}
-
 function OptionsPage() {
+    const [formData, setFormData] = useState(defaults)
+
+    function handleChange(e) {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+        // TODO: Update config in chrome local storage
+    }
+
     return (
         <main className="container">
             <section className="section">
@@ -49,34 +19,63 @@ function OptionsPage() {
                 <div className="field">
                     <div className="control">
                         <label className="checkbox">
-                            <input type="checkbox" /> Scroll without holding
-                            down the mouse button
+                            <input
+                                type="checkbox"
+                                name="stickyScroll"
+                                defaultChecked={formData.stickyScroll}
+                                onChange={handleChange}
+                            />{' '}
+                            Scroll without holding down the mouse button
                         </label>
                     </div>
                     <div className="control">
                         ...if moving less than{' '}
-                        <input type="text" className="is-small" /> pixels
+                        <input
+                            type="text"
+                            className="is-small"
+                            name="moveThreshold"
+                            defaultValue={formData.moveThreshold}
+                            onChange={handleChange}
+                        />{' '}
+                        pixels
                     </div>
                 </div>
                 <div className="field">
                     <div className="control">
                         Scroll if moving more than{' '}
-                        <input type="text" className="is-small" /> pixels
+                        <input
+                            type="text"
+                            className="is-small"
+                            name="dragThreshold"
+                            defaultValue={formData.dragThreshold}
+                            onChange={handleChange}
+                        />{' '}
+                        pixels
                     </div>
                 </div>
                 <div className="field">
                     <div className="control">
                         <label className="checkbox">
-                            <input type="checkbox" /> Scroll by using (Middle
-                            Click)
+                            <input
+                                type="checkbox"
+                                name="middleClick"
+                                defaultChecked={formData.middleClick}
+                                onChange={handleChange}
+                            />{' '}
+                            Scroll by using (Middle Click)
                         </label>
                     </div>
                 </div>
                 <div className="field">
                     <div className="control">
                         <label className="checkbox">
-                            <input type="checkbox" /> Scroll by using (Ctrl/⌘ +
-                            Left Click)
+                            <input
+                                type="checkbox"
+                                name="ctrlClick"
+                                defaultChecked={formData.ctrlClick}
+                                onChange={handleChange}
+                            />{' '}
+                            Scroll by using (Ctrl/⌘ + Left Click)
                         </label>
                     </div>
                 </div>
@@ -85,23 +84,48 @@ function OptionsPage() {
                 <h2 className="title is-5">Speed</h2>
                 <div className="field">
                     <div className="control">
-                        Move speed: <input type="text" className="is-small" />{' '}
+                        Move speed:{' '}
+                        <input
+                            type="text"
+                            className="is-small"
+                            name="moveSpeed"
+                            defaultValue={formData.moveSpeed}
+                            onChange={handleChange}
+                        />{' '}
                         (lower is faster)
                     </div>
                 </div>
                 <div className="field">
                     <div className="control">
                         <label className="checkbox">
-                            <input type="checkbox" /> Scroll at the same speed
-                            (ignore mouse movement)
+                            <input
+                                type="checkbox"
+                                name="sameSpeed"
+                                defaultValue={formData.sameSpeed}
+                                onChange={handleChange}
+                            />{' '}
+                            Scroll at the same speed (ignore mouse movement)
                         </label>
                     </div>
                 </div>
                 <div className="field">
                     <div className="control">
                         <label className="checkbox">
-                            <input type="checkbox" /> Don't scroll faster than{' '}
-                            <input type="text" className="is-small" /> pixels
+                            <input
+                                type="checkbox"
+                                name="shouldCap"
+                                defaultChecked={formData.shouldCap}
+                                onChange={handleChange}
+                            />{' '}
+                            Don't scroll faster than{' '}
+                            <input
+                                type="text"
+                                className="is-small"
+                                name="capSpeed"
+                                defaultValue={formData.capSpeed}
+                                onChange={handleChange}
+                            />{' '}
+                            pixels
                         </label>
                     </div>
                 </div>
@@ -111,15 +135,26 @@ function OptionsPage() {
                 <div className="field">
                     <div className="control">
                         <label className="checkbox">
-                            <input type="checkbox" /> Scroll on inner elements
+                            <input
+                                type="checkbox"
+                                name="innerScroll"
+                                defaultChecked={formData.innerScroll}
+                                onChange={handleChange}
+                            />{' '}
+                            Scroll on inner elements
                         </label>
                     </div>
                 </div>
                 <div className="field">
                     <div className="control">
                         <label className="checkbox">
-                            <input type="checkbox" /> Scroll when clicking on a
-                            link or textarea
+                            <input
+                                type="checkbox"
+                                name="scrollOnLinks"
+                                defaultChecked={formData.scrollOnLinks}
+                                onChange={handleChange}
+                            />{' '}
+                            Scroll when clicking on a link or textarea
                         </label>
                     </div>
                 </div>
