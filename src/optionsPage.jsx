@@ -13,11 +13,23 @@ function OptionsPage() {
         })
     }, [])
 
+    // TODO: Find a more elegant way to parse this (check useForm)
+    // TODO: Add overlay to tell the input has been modified?
     function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
+        const value =
+            e.target.type === 'checkbox'
+                ? e.target.checked
+                : parseInt(e.target.value)
+
+        setFormData({ ...formData, [e.target.name]: value })
+    }
+
+    // TODO: Add feedback
+    function handleSave() {
         chrome.storage.local.set(formData)
     }
 
+    // TODO: Add feedback + confirmation
     function handleReset() {
         chrome.storage.local.set(defaults)
         location.reload()
@@ -172,6 +184,9 @@ function OptionsPage() {
             </section>
             <section className="section">
                 <div className="buttons">
+                    <button className="button is-primary" onClick={handleSave}>
+                        Save
+                    </button>
                     <button className="button is-danger" onClick={handleReset}>
                         Reset
                     </button>
