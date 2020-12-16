@@ -21,7 +21,6 @@ import originVertical from './images/origin/vertical.svg'
 //         }
 //     })
 
-// TODO: Fix these images
 function image(o) {
     if (o.width && o.height) {
         return originBoth

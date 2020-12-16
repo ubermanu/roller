@@ -16,7 +16,9 @@ export default [
             format: 'iife',
         },
         plugins: [
-            svg(),
+            svg({
+                base64: true,
+            }),
             uglify(),
             copy({
                 targets: [{ src: 'public/*', dest: 'dist' }],
