@@ -1,6 +1,4 @@
-'use strict'
-
-var defaults = {
+export default {
     dragThreshold: 10,
     moveThreshold: 10,
     moveSpeed: 10,

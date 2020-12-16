@@ -1,3 +1,4 @@
+import defaults from './defaultOptions'
 import math from './helpers/math'
 
 // Get the options
