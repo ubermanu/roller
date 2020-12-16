@@ -6,6 +6,11 @@
     "build": "rollup  -c",
     "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force"
   },
+  "dependencies": {
+    "bulma": "^0.9.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
   "devDependencies": {
     "pngquant": "^3.1.0",
     "prettier": "^2.2.1",
