@@ -18,6 +18,11 @@ function OptionsPage() {
         chrome.storage.local.set(formData)
     }
 
+    function handleReset() {
+        chrome.storage.local.set(defaults)
+        location.reload()
+    }
+
     return (
         <main className="container">
             <section className="section">
@@ -163,6 +168,13 @@ function OptionsPage() {
                             Scroll when clicking on a link or textarea
                         </label>
                     </div>
+                </div>
+            </section>
+            <section className="section">
+                <div className="buttons">
+                    <button className="button is-danger" onClick={handleReset}>
+                        Reset
+                    </button>
                 </div>
             </section>
         </main>
