@@ -119,5 +119,5 @@ export default Object.freeze({
     deepMerge,
     clone,
     deepClone,
-    set,
+    set: set,
 })
