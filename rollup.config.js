@@ -50,6 +50,7 @@ export default [
             uglify(),
             postcss({
                 extract: true,
+                minimize: true,
             }),
             replace({
                 'process.env.NODE_ENV': JSON.stringify('production'),
