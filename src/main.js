@@ -6,8 +6,8 @@ import math from './helpers/math'
 //     // Update the options when they change
 //     chrome.storage.onChanged.addListener(function (o, s) {
 //         console.assert(s === 'local')
-//         for (var k in o) {
-//             var x = o[k]
+//         for (let k in o) {
+//             let x = o[k]
 //             if ('newValue' in x) {
 //                 options[k] = x.newValue
 //             } else if ('oldValue' in x) {
@@ -27,7 +27,7 @@ function image(o) {
 }
 
 function direction(x, y) {
-    var angle = math.angle(x, y)
+    const angle = math.angle(x, y)
     if (angle < 30 || angle >= 330) {
         return 'e-resize'
     } else if (angle < 60) {
@@ -47,7 +47,7 @@ function direction(x, y) {
     }
 }
 
-var state = {
+const state = {
     timeout: null,
 
     oldX: null,
@@ -60,23 +60,23 @@ var state = {
     scrolling: false,
 }
 
-var htmlNamespace = 'http://www.w3.org/1999/xhtml'
+let htmlNamespace = 'http://www.w3.org/1999/xhtml'
 
-var htmlNode = document.documentElement
+let htmlNode = document.documentElement
 
 // This is needed to support SVG
-var bodyNode = document.body ? document.body : htmlNode
+let bodyNode = document.body ? document.body : htmlNode
 
 // The timer that does the actual scrolling; must be very fast so that the scrolling is smooth
 function startCycle(elem, scroller, root) {
     // This is needed to support SVG
-    var scrollX = root ? window.scrollX : scroller.scrollLeft,
+    let scrollX = root ? window.scrollX : scroller.scrollLeft,
         scrollY = root ? window.scrollY : scroller.scrollTop
 
     function loop() {
         state.timeout = requestAnimationFrame(loop)
 
-        var scrollWidth = scroller.scrollWidth - elem.clientWidth,
+        let scrollWidth = scroller.scrollWidth - elem.clientWidth,
             scrollHeight = scroller.scrollHeight - elem.clientHeight
 
         scrollX += state.dirX
@@ -120,10 +120,10 @@ function scale(value) {
 }
 
 // This is needed to make AutoScroll work in SVG documents
-var outer = document.createElementNS(htmlNamespace, 'auto-scroll')
+let outer = document.createElementNS(htmlNamespace, 'auto-scroll')
 
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow
-var shadow = outer.attachShadow
+let shadow = outer.attachShadow
     ? outer.attachShadow({ mode: 'closed' })
     : outer.createShadowRoot
     ? outer.createShadowRoot()
@@ -131,7 +131,7 @@ var shadow = outer.attachShadow
       outer.webkitCreateShadowRoot()
 
 // This is needed to make AutoScroll work in SVG documents
-var inner = document.createElementNS(htmlNamespace, 'div')
+let inner = document.createElementNS(htmlNamespace, 'div')
 // TODO hack to make it so that Chrome doesn't repaint when scrolling
 inner.style.setProperty('transform', 'translateZ(0)')
 inner.style.setProperty('display', 'none')
@@ -154,7 +154,7 @@ function mousemove(event) {
     // TODO is this a good idea ?
     stopEvent(event, true)
 
-    var x = event.clientX - state.oldX,
+    let x = event.clientX - state.oldX,
         y = event.clientY - state.oldY
 
     if (math.hypot(x, y) > options['moveThreshold']) {
@@ -194,7 +194,7 @@ function mouseup(event) {
     // TODO is this a good idea ?
     stopEvent(event, true)
 
-    var x = event.clientX - state.oldX,
+    let x = event.clientX - state.oldX,
         y = event.clientY - state.oldY
 
     if (state.click || !shouldSticky(x, y)) {
@@ -336,18 +336,18 @@ function canScrollTop(html, body) {
 
 // TODO this isn't quite correct, but it's close enough
 function findScrollTop(element) {
-    var scroller = document.scrollingElement
+    let scroller = document.scrollingElement
         ? document.scrollingElement
         : bodyNode
 
-    var htmlStyle = getComputedStyle(htmlNode)
-    var bodyStyle = getComputedStyle(bodyNode)
+    let htmlStyle = getComputedStyle(htmlNode)
+    let bodyStyle = getComputedStyle(bodyNode)
 
-    var width =
+    let width =
         canScrollTop(htmlStyle.overflowX, bodyStyle.overflowX) &&
         scroller.scrollWidth > element.clientWidth
 
-    var height =
+    let height =
         canScrollTop(htmlStyle.overflowY, bodyStyle.overflowY) &&
         scroller.scrollHeight > element.clientHeight
 
@@ -365,12 +365,12 @@ function findScrollTop(element) {
 }
 
 function findScrollNormal(elem) {
-    var style = getComputedStyle(elem)
+    let style = getComputedStyle(elem)
 
-    var width =
+    let width =
         canScroll(style.overflowX) && elem.scrollWidth > elem.clientWidth
 
-    var height =
+    let height =
         canScroll(style.overflowY) && elem.scrollHeight > elem.clientHeight
 
     if (width || height) {
@@ -398,7 +398,7 @@ function findScroll(elem) {
             } else if (elem.host) {
                 elem = elem.host
             } else {
-                var x = findScrollNormal(elem)
+                let x = findScrollNormal(elem)
 
                 if (x === null) {
                     elem = elem.parentNode
@@ -435,9 +435,9 @@ addEventListener(
         if (state.scrolling) {
             stopEvent(e, true)
         } else {
-            var path = e.composedPath()
+            let path = e.composedPath()
             // TODO use e.target instead of null ?
-            var target = path.length === 0 ? null : path[0]
+            let target = path.length === 0 ? null : path[0]
 
             if (
                 target != null &&
@@ -451,7 +451,7 @@ addEventListener(
                 e.clientY < htmlNode.clientHeight &&
                 isValid(target)
             ) {
-                var elem = findScroll(target)
+                let elem = findScroll(target)
 
                 if (elem !== null) {
                     stopEvent(e, true)
