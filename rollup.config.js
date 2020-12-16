@@ -15,17 +15,4 @@ export default [
             }),
         ],
     },
-    {
-        input: 'src/pages/options.js',
-        output: {
-            file: 'dist/pages/options.js',
-            format: 'iife',
-        },
-        plugins: [
-            uglify(),
-            copy({
-                targets: [{ src: 'src/pages/options.html', dest: 'dist/pages' }],
-            }),
-        ],
-    }
 ]

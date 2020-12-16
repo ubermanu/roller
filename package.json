@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup  -c",
+    "dev:options": "vite",
     "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force"
   },
   "dependencies": {
@@ -17,6 +18,8 @@
     "rollup": "^2.35.1",
     "rollup-plugin-copy": "^3.3.0",
     "rollup-plugin-uglify": "^6.0.4",
-    "svgo": "^1.3.2"
+    "svgo": "^1.3.2",
+    "vite": "^1.0.0-rc.13",
+    "vite-plugin-react": "^4.0.1"
   }
 }
