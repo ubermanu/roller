@@ -1,4 +1,4 @@
-'use strict'
+import math from './helpers/math'
 
 // Get the options
 chrome.storage.local.get(defaults, function (options) {
@@ -14,38 +14,6 @@ chrome.storage.local.get(defaults, function (options) {
             }
         }
     })
-
-    var RAD_TO_DEG = Math.PI / 180
-
-    var math = {
-        hypot: function (x, y) {
-            return Math.sqrt(x * x + y * y)
-        },
-
-        /*min: function (num, cap) {
-          var neg = cap * -1
-          return (num > neg && num < 0
-                   ? neg
-                   : (num < cap && num > 0
-                       ? cap
-                       : num))
-        },*/
-
-        max: function (num, cap) {
-            var neg = cap * -1
-            return num > cap ? cap : num < neg ? neg : num
-        },
-
-        angle: function (x, y) {
-            var angle = Math.atan(y / x) / RAD_TO_DEG
-            if (x < 0) {
-                angle += 180
-            } else if (y < 0) {
-                angle += 360
-            }
-            return angle
-        },
-    }
 
     function image(o) {
         if (o.width && o.height) {
