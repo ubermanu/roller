@@ -5,6 +5,8 @@ import commonjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import css from 'rollup-plugin-import-css'
 import svg from 'rollup-plugin-svg'
+import nodeResolve from 'rollup-plugin-node-resolve'
+import replace from 'rollup-plugin-replace'
 
 export default [
     {
@@ -28,6 +30,9 @@ export default [
             format: 'iife',
         },
         plugins: [
+            nodeResolve({
+                browser: true,
+            }),
             resolve(),
             commonjs(),
             babel({
@@ -36,7 +41,9 @@ export default [
             }),
             uglify(),
             css(),
+            replace({
+                'process.env.NODE_ENV': JSON.stringify('production'),
+            }),
         ],
-        external: ['react', 'prop-types'],
     },
 ]
