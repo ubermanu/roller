@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "rollup  -c",
-    "optimize": "svgo src/data/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force"
+    "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force"
   },
   "devDependencies": {
     "pngquant": "^3.1.0",
