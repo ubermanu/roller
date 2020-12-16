@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import defaults from './defaultOptions'
+import 'bulma/css/bulma.min.css';
 import './optionsPage.css'
-import 'bulma/css/bulma.min.css'
 
 function OptionsPage() {
     const [formData, setFormData] = useState(defaults)
