@@ -4,6 +4,7 @@ import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
 import babel from 'rollup-plugin-babel'
 import css from 'rollup-plugin-import-css'
+import svg from 'rollup-plugin-svg'
 
 export default [
     {
@@ -13,6 +14,7 @@ export default [
             format: 'iife',
         },
         plugins: [
+            svg(),
             uglify(),
             copy({
                 targets: [{ src: 'public/*', dest: 'dist' }],

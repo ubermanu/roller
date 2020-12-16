@@ -2,6 +2,10 @@ import options from './defaultOptions'
 import math from './helpers/math'
 import { getStyleFromAngle } from './helpers/cursor'
 
+import originBoth from './images/origin/both.svg'
+import originHorizontal from './images/origin/horizontal.svg'
+import originVertical from './images/origin/vertical.svg'
+
 // TODO: Restore listener on option changes
 // chrome.storage.local.get(defaults, function (options) {
 //     // Update the options when they change
@@ -17,13 +21,14 @@ import { getStyleFromAngle } from './helpers/cursor'
 //         }
 //     })
 
+// TODO: Fix these images
 function image(o) {
     if (o.width && o.height) {
-        return chrome.runtime.getURL('data/images/origin/both.svg')
+        return originBoth
     } else if (o.width) {
-        return chrome.runtime.getURL('data/images/origin/horizontal.svg')
+        return originHorizontal
     } else {
-        return chrome.runtime.getURL('data/images/origin/vertical.svg')
+        return originVertical
     }
 }
 
