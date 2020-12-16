@@ -1,0 +1,8 @@
+html {
+    background: rgb(78, 89, 101);
+}
+
+.section {
+    max-width: 30rem;
+    background: white;
+}

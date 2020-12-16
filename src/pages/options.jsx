@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import defaults from '../defaultOptions'
 import 'bulma/css/bulma.min.css'
+import './options.css'
 
 // TODO: Restore options listener
 function getOpts(f) {
@@ -42,63 +43,85 @@ function getOpts(f) {
 
 function OptionsPage() {
     return (
-        <main>
-            <section>
-                <h2>Basic</h2>
+        <main className="container">
+            <section className="section">
+                <h2 className="title is-5">Basic</h2>
                 <div className="field">
-                    <input type="checkbox" />
-                    <label htmlFor="">
-                        Scroll without holding down the mouse button
-                    </label>
-                </div>
-                <div className="field">
-                    ...if moving less than{' '}
-                    <input type="text" className="is-small" /> pixels
-                </div>
-                <div className="field">
-                    <input type="checkbox" />
-                    <label htmlFor="">
-                        Scroll without holding down the mouse button
-                    </label>
-                </div>
-                <div className="field">
-                    <input type="checkbox" />
-                    <label htmlFor="">
-                        Scroll by using (Ctrl/⌘ + Left Click)
-                    </label>
-                </div>
-            </section>
-            <section>
-                <h2>Speed</h2>
-                <div className="field">
-                    Move speed: <input type="text" className="is-small" />{' '}
-                    (lower is faster)
-                </div>
-                <div className="field">
-                    <input type="checkbox" />
-                    <label htmlFor="">
-                        Scroll at the same speed (ignore mouse movement)
-                    </label>
-                </div>
-                <div className="field">
-                    <input type="checkbox" />
-                    <label htmlFor="">
-                        Don't scroll faster than{' '}
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" /> Scroll without holding
+                            down the mouse button
+                        </label>
+                    </div>
+                    <div className="control">
+                        ...if moving less than{' '}
                         <input type="text" className="is-small" /> pixels
-                    </label>
+                    </div>
+                </div>
+                <div className="field">
+                    <div className="control">
+                        Scroll if moving more than{' '}
+                        <input type="text" className="is-small" /> pixels
+                    </div>
+                </div>
+                <div className="field">
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" /> Scroll by using (Middle
+                            Click)
+                        </label>
+                    </div>
+                </div>
+                <div className="field">
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" /> Scroll by using (Ctrl/⌘ +
+                            Left Click)
+                        </label>
+                    </div>
                 </div>
             </section>
-            <section>
-                <h2>Advanced</h2>
+            <section className="section">
+                <h2 className="title is-5">Speed</h2>
                 <div className="field">
-                    <input type="checkbox" />
-                    <label htmlFor="">Scroll on inner elements</label>
+                    <div className="control">
+                        Move speed: <input type="text" className="is-small" />{' '}
+                        (lower is faster)
+                    </div>
                 </div>
                 <div className="field">
-                    <input type="checkbox" />
-                    <label htmlFor="">
-                        Scroll when clicking on a link or textarea
-                    </label>
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" /> Scroll at the same speed
+                            (ignore mouse movement)
+                        </label>
+                    </div>
+                </div>
+                <div className="field">
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" /> Don't scroll faster than{' '}
+                            <input type="text" className="is-small" /> pixels
+                        </label>
+                    </div>
+                </div>
+            </section>
+            <section className="section">
+                <h2 className="title is-5">Advanced</h2>
+                <div className="field">
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" /> Scroll on inner elements
+                        </label>
+                    </div>
+                </div>
+                <div className="field">
+                    <div className="control">
+                        <label className="checkbox">
+                            <input type="checkbox" /> Scroll when clicking on a
+                            link or textarea
+                        </label>
+                    </div>
                 </div>
             </section>
         </main>
