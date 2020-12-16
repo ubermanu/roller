@@ -110,13 +110,13 @@ function startCycle(elem, scroller, root) {
 
 function shouldSticky(x, y) {
     return (
-        options['stickyScroll'] &&
-        /*state.stickyScroll && */ math.hypot(x, y) < options['dragThreshold']
+        options.stickyScroll &&
+        /*state.stickyScroll && */ math.hypot(x, y) < options.dragThreshold
     )
 }
 
 function scale(value) {
-    return value / options['moveSpeed']
+    return value / options.moveSpeed
 }
 
 // This is needed to make AutoScroll work in SVG documents
@@ -157,7 +157,7 @@ function mousemove(event) {
     let x = event.clientX - state.oldX,
         y = event.clientY - state.oldY
 
-    if (math.hypot(x, y) > options['moveThreshold']) {
+    if (math.hypot(x, y) > options.moveThreshold) {
         //state.stickyScroll = false;
 
         inner.style.setProperty('cursor', direction(x, y))
@@ -165,7 +165,7 @@ function mousemove(event) {
         // 10 = 5
         // 5  = 10
         // 1  = 50
-        if (options['sameSpeed']) {
+        if (options.sameSpeed) {
             x = math.max(x, 1) * 50
             //(Options.get("moveSpeed") * 0.04);
             y = math.max(y, 1) * 50
@@ -175,9 +175,9 @@ function mousemove(event) {
         x = scale(x)
         y = scale(y)
 
-        if (options['shouldCap']) {
-            x = math.max(x, options['capSpeed'])
-            y = math.max(y, options['capSpeed'])
+        if (options.shouldCap) {
+            x = math.max(x, options.capSpeed)
+            y = math.max(y, options.capSpeed)
         }
 
         state.dirX = x
@@ -267,7 +267,7 @@ function isEditableText(elem) {
 }
 
 function isValid(elem) {
-    if (options['scrollOnLinks']) {
+    if (options.scrollOnLinks) {
         return true
     } else {
         while (true) {
@@ -388,7 +388,7 @@ function findScrollNormal(elem) {
 
 // TODO this should handle the case where <body> has its own scrollbar (separate from the viewport's scrollbar)
 function findScroll(elem) {
-    if (options['innerScroll']) {
+    if (options.innerScroll) {
         while (elem !== document && elem !== htmlNode && elem !== bodyNode) {
             // TODO is this correct ?
             if (elem == null) {
@@ -441,10 +441,10 @@ addEventListener(
 
             if (
                 target != null &&
-                ((e.button === 1 && options['middleClick']) ||
+                ((e.button === 1 && options.middleClick) ||
                     (e.button === 0 &&
                         (e.ctrlKey || e.metaKey) &&
-                        options['ctrlClick'])) &&
+                        options.ctrlClick)) &&
                 // Make sure the click is not on a scrollbar
                 // TODO what about using middle click on the scrollbar of a non-<html> element ?
                 e.clientX < htmlNode.clientWidth &&
