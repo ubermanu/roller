@@ -13,6 +13,11 @@ function OptionsPage() {
         })
     }, [])
 
+    function handleChange(e) {
+        setFormData({ ...formData, [e.target.name]: e.target.value })
+        chrome.storage.local.set(formData)
+    }
+
     return (
         <main className="container">
             <section className="section">
@@ -23,7 +28,7 @@ function OptionsPage() {
                             <input
                                 type="checkbox"
                                 name="stickyScroll"
-                                defaultChecked={formData.stickyScroll}
+                                checked={formData.stickyScroll}
                                 onChange={handleChange}
                             />{' '}
                             Scroll without holding down the mouse button
@@ -32,10 +37,10 @@ function OptionsPage() {
                     <div className="control">
                         ...if moving less than{' '}
                         <input
-                            type="text"
-                            className="is-small"
+                            type="number"
+                            className="input is-small"
                             name="moveThreshold"
-                            defaultValue={formData.moveThreshold}
+                            value={formData.moveThreshold}
                             onChange={handleChange}
                         />{' '}
                         pixels
@@ -45,10 +50,10 @@ function OptionsPage() {
                     <div className="control">
                         Scroll if moving more than{' '}
                         <input
-                            type="text"
-                            className="is-small"
+                            type="number"
+                            className="input is-small"
                             name="dragThreshold"
-                            defaultValue={formData.dragThreshold}
+                            value={formData.dragThreshold}
                             onChange={handleChange}
                         />{' '}
                         pixels
@@ -60,7 +65,7 @@ function OptionsPage() {
                             <input
                                 type="checkbox"
                                 name="middleClick"
-                                defaultChecked={formData.middleClick}
+                                checked={formData.middleClick}
                                 onChange={handleChange}
                             />{' '}
                             Scroll by using (Middle Click)
@@ -73,7 +78,7 @@ function OptionsPage() {
                             <input
                                 type="checkbox"
                                 name="ctrlClick"
-                                defaultChecked={formData.ctrlClick}
+                                checked={formData.ctrlClick}
                                 onChange={handleChange}
                             />{' '}
                             Scroll by using (Ctrl/⌘ + Left Click)
@@ -87,10 +92,10 @@ function OptionsPage() {
                     <div className="control">
                         Move speed:{' '}
                         <input
-                            type="text"
-                            className="is-small"
+                            type="number"
+                            className="input is-small"
                             name="moveSpeed"
-                            defaultValue={formData.moveSpeed}
+                            value={formData.moveSpeed}
                             onChange={handleChange}
                         />{' '}
                         (lower is faster)
@@ -102,7 +107,7 @@ function OptionsPage() {
                             <input
                                 type="checkbox"
                                 name="sameSpeed"
-                                defaultValue={formData.sameSpeed}
+                                value={formData.sameSpeed}
                                 onChange={handleChange}
                             />{' '}
                             Scroll at the same speed (ignore mouse movement)
@@ -115,15 +120,15 @@ function OptionsPage() {
                             <input
                                 type="checkbox"
                                 name="shouldCap"
-                                defaultChecked={formData.shouldCap}
+                                checked={formData.shouldCap}
                                 onChange={handleChange}
                             />{' '}
                             Don't scroll faster than{' '}
                             <input
-                                type="text"
-                                className="is-small"
+                                type="number"
+                                className="input is-small"
                                 name="capSpeed"
-                                defaultValue={formData.capSpeed}
+                                value={formData.capSpeed}
                                 onChange={handleChange}
                             />{' '}
                             pixels
@@ -139,7 +144,7 @@ function OptionsPage() {
                             <input
                                 type="checkbox"
                                 name="innerScroll"
-                                defaultChecked={formData.innerScroll}
+                                checked={formData.innerScroll}
                                 onChange={handleChange}
                             />{' '}
                             Scroll on inner elements
@@ -152,7 +157,7 @@ function OptionsPage() {
                             <input
                                 type="checkbox"
                                 name="scrollOnLinks"
-                                defaultChecked={formData.scrollOnLinks}
+                                checked={formData.scrollOnLinks}
                                 onChange={handleChange}
                             />{' '}
                             Scroll when clicking on a link or textarea
