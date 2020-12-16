@@ -38,7 +38,7 @@ export default [
                 include: ['node_modules/**'],
                 exclude: ['node_modules/process-es6/**'],
                 namedExports: {
-                    'node_modules/react/index.js': ['useState'],
+                    'node_modules/react/index.js': ['useState', 'useEffect'],
                 },
             }),
             babel({

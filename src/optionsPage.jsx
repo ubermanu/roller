@@ -1,16 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import defaults from './defaultOptions'
-import 'bulma/css/bulma.min.css';
+import 'bulma/css/bulma.min.css'
 import './optionsPage.css'
 
 function OptionsPage() {
     const [formData, setFormData] = useState(defaults)
 
-    function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value })
-        // TODO: Update config in chrome local storage
-    }
+    useEffect(() => {
+        chrome.storage.local.get(defaults, (options) => {
+            setFormData(options)
+        })
+    }, [])
 
     return (
         <main className="container">
