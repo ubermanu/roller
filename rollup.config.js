@@ -2,11 +2,9 @@ import copy from 'rollup-plugin-copy'
 import { uglify } from 'rollup-plugin-uglify'
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs'
-import babel from 'rollup-plugin-babel'
 import svg from 'rollup-plugin-svg'
-import nodeResolve from 'rollup-plugin-node-resolve'
-import replace from 'rollup-plugin-replace'
 import postcss from 'rollup-plugin-postcss'
+import svelte from 'rollup-plugin-svelte'
 
 export default [
     {
@@ -26,35 +24,25 @@ export default [
         ],
     },
     {
-        input: 'src/optionsPage.jsx',
+        input: 'src/optionsPage.js',
         output: {
+            name: 'app',
             file: 'dist/options_page.js',
             format: 'iife',
         },
         plugins: [
-            nodeResolve({
-                browser: true,
+            svelte({
+                emitCss: false,
             }),
-            resolve(),
-            commonjs({
-                include: ['node_modules/**'],
-                exclude: ['node_modules/process-es6/**'],
-                namedExports: {
-                    'node_modules/react/index.js': ['useState', 'useEffect'],
-                },
-            }),
-            babel({
-                exclude: 'node_modules/**',
-                presets: ['@babel/env', '@babel/preset-react'],
-            }),
-            uglify(),
             postcss({
                 extract: true,
                 minimize: true,
             }),
-            replace({
-                'process.env.NODE_ENV': JSON.stringify('production'),
+            resolve({
+                browser: true,
+                dedupe: ['svelte'],
             }),
+            commonjs(),
         ],
     },
 ]
