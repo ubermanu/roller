@@ -1,8 +1,9 @@
 <script>
-    import {onMount} from 'svelte'
+    import { onMount } from 'svelte'
+    import { writable } from 'svelte/store'
     import defaults from './defaultOptions'
 
-    let options = defaults
+    let options = writable(defaults)
 
     onMount(() => {
         chrome.storage.local.get(defaults, (data) => {
