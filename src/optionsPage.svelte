@@ -7,13 +7,13 @@
 
     onMount(() => {
         chrome.storage.local.get(defaults, (data) => {
-            options = data
+            $options = data
         })
     })
 
     // TODO: Add feedback
     function handleSave() {
-        chrome.storage.local.set(options)
+        chrome.storage.local.set($options)
     }
 
     // TODO: Add feedback + confirmation
