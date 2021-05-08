@@ -1,3 +1,7 @@
+/**
+ * @param {number} angle
+ * @return {string}
+ */
 export function getStyleFromAngle(angle) {
   if (angle < 30 || angle >= 330) {
     return 'e-resize'
