@@ -2,6 +2,7 @@
     import { onMount } from 'svelte'
     import { writable } from 'svelte/store'
     import defaults from './defaultOptions'
+    import { _ } from 'svelte-intl'
 
     let options = writable(defaults)
 
@@ -41,25 +42,25 @@
 
 <main class="container">
     <section class="section">
-        <h2 class="title is-5">Basic</h2>
+        <h2 class="title is-5">{$_('Basic')}</h2>
         <div class="field">
             <div class="control">
                 <label class="checkbox">
                     <input type="checkbox"
                            bind:checked={$options.stickyScroll}
                     />{' '}
-                    Scroll without holding down the mouse button
+                    {$_('Scroll without holding down the mouse button')}
                 </label>
             </div>
             <div class="control">
-                ...if moving less than{' '}
+                {$_('...if moving less than')}{' '}
                 <input
                         type="number"
                         class="input is-small"
                         bind:value={$options.moveThreshold}
-                        aria-label="..if moving less than X pixels"
+                        aria-label={$_('...if moving less than X pixels')}
                 />{' '}
-                pixels
+                {$_('pixels')}
             </div>
         </div>
         <div class="field">

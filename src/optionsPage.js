@@ -1,8 +1,7 @@
 import OptionsPage from './optionsPage.svelte'
 import 'bulma/css/bulma.min.css'
+import './i18n'
 
-const app = new OptionsPage({
+export default new OptionsPage({
   target: document.body,
 })
-
-export default app
