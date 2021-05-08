@@ -1,4 +1,20 @@
 {
   "Basic": "Basique",
-  "Scroll without holding down the mouse button": "Scroll sans maintenir le bouton enfoncé"
+  "Scroll without holding down the mouse button": "Défiler sans maintenir le bouton enfoncé",
+  "...if moving less than": "...si le curseur se déplace de plus de",
+  "pixels": "pixels",
+  "Scroll if moving more than": "Défiler si le curseur a bougé plus de",
+  "Scroll by using (Middle Click)": "Défiler en utilisant le Clic de la molette (bouton du milieu)",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "Défiler en utilisant (Ctrl/⌘ + Clic Gauche)",
+  "Move speed:": "Vitesse:",
+  "Move speed in pixels": "Vitesse de défilement en pixels",
+  "(lower is faster)": "(plus bas = plus rapide)",
+  "Scroll at the same speed (ignore mouse movement)": "Défiler à vitesse constante (ignore la souris)",
+  "Don't scroll faster than": "Ne pas défiler plus vite que",
+  "Speed cap in pixels": "Vitesse maximum en pixels",
+  "Advanced": "Avancé",
+  "Scroll on inner elements": "Défiler dans les éléments intérieurs",
+  "Scroll when clicking on a link or textarea": "Défiler si un lien ou un champ text est cliqué",
+  "Save": "Enregistrer",
+  "Reset": "Réinitialiser"
 }

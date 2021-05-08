@@ -65,14 +65,14 @@
         </div>
         <div class="field">
             <div class="control">
-                Scroll if moving more than{' '}
+                {$_('Scroll if moving more than')}{' '}
                 <input
                         type="number"
                         class="input is-small"
                         bind:value={$options.dragThreshold}
-                        aria-label="Drag threshold in pixels"
+                        aria-label={$_('Drag threshold in pixels')}
                 />{' '}
-                pixels
+                {$_('pixels')}
             </div>
         </div>
         <div class="field">
@@ -82,7 +82,7 @@
                             type="checkbox"
                             bind:checked={$options.middleClick}
                     />{' '}
-                    Scroll by using (Middle Click)
+                    {$_('Scroll by using (Middle Click)')}
                 </label>
             </div>
         </div>
@@ -93,22 +93,22 @@
                             type="checkbox"
                             bind:checked={$options.ctrlClick}
                     />{' '}
-                    Scroll by using (Ctrl/⌘ + Left Click)
+                    {$_('Scroll by using (Ctrl/⌘ + Left Click)')}
                 </label>
             </div>
         </div>
     </section>
     <section class="section">
-        <h2 class="title is-5">Speed</h2>
+        <h2 class="title is-5">{$_('Speed')}</h2>
         <div class="field">
             <div class="control">
-                Move speed:{' '}
+                {$_('Move speed:')}{' '}
                 <input type="number"
                        class="input is-small"
                        bind:value={$options.moveSpeed}
-                       aria-label="Move speed in pixels"
+                       aria-label={$_('Move speed in pixels')}
                 />{' '}
-                (lower is faster)
+                {$_('(lower is faster)')}
             </div>
         </div>
         <div class="field">
@@ -117,7 +117,7 @@
                     <input type="checkbox"
                            bind:checked={$options.sameSpeed}
                     />{' '}
-                    Scroll at the same speed (ignore mouse movement)
+                    {$_('Scroll at the same speed (ignore mouse movement)')}
                 </label>
             </div>
         </div>
@@ -127,19 +127,19 @@
                     <input type="checkbox"
                            bind:checked={$options.shouldCap}
                     />{' '}
-                    Don't scroll faster than{' '}
+                    {$_('Don\'t scroll faster than')}{' '}
                     <input type="number"
                            class="input is-small"
                            bind:value={$options.capSpeed}
-                           aria-label="Speed cap in pixels"
+                           aria-label={$_('Speed cap in pixels')}
                     />{' '}
-                    pixels
+                    {$_('pixels')}
                 </label>
             </div>
         </div>
     </section>
     <section class="section">
-        <h2 class="title is-5">Advanced</h2>
+        <h2 class="title is-5">{$_('Advanced')}</h2>
         <div class="field">
             <div class="control">
                 <label class="checkbox">
@@ -147,7 +147,7 @@
                            name="innerScroll"
                            bind:checked={$options.innerScroll}
                     />{' '}
-                    Scroll on inner elements
+                    {$_('Scroll on inner elements')}
                 </label>
             </div>
         </div>
@@ -158,7 +158,7 @@
                            name="scrollOnLinks"
                            bind:checked={$options.scrollOnLinks}
                     />{' '}
-                    Scroll when clicking on a link or textarea
+                    {$_('Scroll when clicking on a link or textarea')}
                 </label>
             </div>
         </div>
@@ -166,10 +166,10 @@
     <section class="section">
         <div class="buttons">
             <button class="button is-primary" on:click={handleSave}>
-                Save
+                {$_('Save')}
             </button>
             <button class="button is-danger" on:click={handleReset}>
-                Reset
+                {$_('Reset')}
             </button>
         </div>
     </section>
