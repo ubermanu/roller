@@ -1,5 +1,5 @@
 import copy from 'rollup-plugin-copy'
-import { uglify } from 'rollup-plugin-uglify'
+import { terser } from 'rollup-plugin-terser'
 import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import svg from 'rollup-plugin-svg'
@@ -18,7 +18,7 @@ export default [
       svg({
         base64: true,
       }),
-      uglify(),
+      terser(),
       copy({
         targets: [{ src: 'public/*', dest: 'dist' }],
       }),
@@ -45,6 +45,7 @@ export default [
         dedupe: ['svelte'],
       }),
       commonjs(),
+      terser(),
     ],
   },
 ]
