@@ -6,6 +6,7 @@
   "Scroll if moving more than": "Défiler si le curseur a bougé plus de",
   "Scroll by using (Middle Click)": "Défiler en utilisant le Clic de la molette (bouton du milieu)",
   "Scroll by using (Ctrl/⌘ + Left Click)": "Défiler en utilisant (Ctrl/⌘ + Clic Gauche)",
+  "Speed": "Vitesse",
   "Move speed:": "Vitesse:",
   "Move speed in pixels": "Vitesse de défilement en pixels",
   "(lower is faster)": "(plus bas = plus rapide)",
