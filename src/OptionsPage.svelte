@@ -7,12 +7,12 @@
   let options = writable(defaults)
 
   onMount(() => {
-    chrome.storage.local.get(defaults, (data) => {
+    browser.storage.local.get(defaults, (data) => {
       options.set(data)
     })
 
     options.subscribe((data) => {
-      chrome.storage.local.set(data)
+      browser.storage.local.set(data)
     })
   })
 
