@@ -8,19 +8,16 @@
 
     onMount(() => {
         chrome.storage.local.get(defaults, (data) => {
-            $options = data
+            options.set(data)
+        })
+
+        options.subscribe((data) => {
+            chrome.storage.local.set(data)
         })
     })
 
-    // TODO: Add feedback
-    function handleSave() {
-        chrome.storage.local.set($options)
-    }
-
-    // TODO: Add feedback + confirmation
     function handleReset() {
-        chrome.storage.local.set(defaults)
-        location.reload()
+        options.set(defaults)
     }
 </script>
 
@@ -167,10 +164,7 @@
     </section>
     <section class="section">
         <div class="buttons">
-            <button class="button is-primary" on:click={handleSave}>
-                {$_('Save')}
-            </button>
-            <button class="button is-danger" on:click={handleReset}>
+            <button class="button" on:click={handleReset}>
                 {$_('Reset')}
             </button>
         </div>
