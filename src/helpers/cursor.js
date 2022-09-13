@@ -1,3 +1,7 @@
+import originBoth from '../images/origin/both.svg'
+import originHorizontal from '../images/origin/horizontal.svg'
+import originVertical from '../images/origin/vertical.svg'
+
 /**
  * @param {number} angle
  * @return {string}
@@ -19,5 +23,15 @@ export function getStyleFromAngle(angle) {
     return 'n-resize'
   } else {
     return 'ne-resize'
+  }
+}
+
+export function image(o) {
+  if (o.width && o.height) {
+    return originBoth
+  } else if (o.width) {
+    return originHorizontal
+  } else {
+    return originVertical
   }
 }
