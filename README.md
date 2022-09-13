@@ -4,7 +4,7 @@ Browser extension that allow auto scrolling of web pages, by pressing the mouse 
 
 ## Installation
 
-You can download the [release](https://github.com/ubermanu/browser-extension-autoscroll/releases) and install it manually in your browser.
+You can download the [latest release](https://github.com/ubermanu/AutoScroll/releases/latest) and install it manually in your browser.
 
 ## Compatibility
 
