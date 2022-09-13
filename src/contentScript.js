@@ -333,7 +333,7 @@ function onmousedown(e) {
 }
 
 // TODO: Restore listener on option changes
-browser.storage.local.get(defaults, function (data) {
+chrome.storage.local.get(defaults, function (data) {
   options = data
   shadow.appendChild(inner)
   htmlNode.appendChild(outer)
