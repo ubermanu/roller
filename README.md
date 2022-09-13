@@ -1,5 +1,7 @@
 # AutoScroll
 
+![Version](https://img.shields.io/github/v/tag/ubermanu/AutoScroll?label=version) ![CI](https://github.com/ubermanu/AutoScroll/actions/workflows/ci.yml/badge.svg)
+
 Browser extension that allow auto scrolling of web pages, by pressing the mouse wheel button.
 
 ## Installation
