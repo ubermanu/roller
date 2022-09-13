@@ -1,5 +1,5 @@
-import OptionsPage from './optionsPage.svelte'
-import 'bulma/css/bulma.min.css'
+import OptionsPage from './OptionsPage.svelte'
+import 'webext-base-css/webext-base.css'
 import './i18n'
 
 export default new OptionsPage({

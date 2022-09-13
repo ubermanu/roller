@@ -25,18 +25,20 @@
 </script>
 
 <style>
-    :global(html) {
-        background: rgb(78, 89, 101);
-    }
-
     .section {
+        margin-top: 2rem;
         max-width: 30rem;
-        background: white;
     }
 
     .input {
+        display: inline;
         width: 5em;
         vertical-align: baseline;
+    }
+
+    .control {
+        margin-top: 3px;
+        margin-bottom: 3px;
     }
 </style>
 

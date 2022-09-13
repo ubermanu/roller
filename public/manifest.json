@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
   "name": "AutoScroll",
   "version": "5.3",
   "description": "This extension adds customizable autoscroll support to Chrome.",
@@ -13,7 +13,11 @@
   "permissions": [
     "storage"
   ],
-  "options_page": "options_page.html",
+  "options_ui": {
+    "page": "options_page.html",
+    "browser_style": true,
+    "chrome_style": true
+  },
   "content_scripts": [
     {
       "all_frames": false,
