@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "AutoScroll",
-  "version": "5.2",
+  "version": "5.3",
   "description": "This extension adds customizable autoscroll support to Chrome.",
   "minimum_chrome_version": "29",
   "icons": {
@@ -13,12 +13,6 @@
   "permissions": [
     "storage"
   ],
-  "background": {
-    "scripts": [
-      "background.js"
-    ],
-    "persistent": false
-  },
   "options_page": "options_page.html",
   "content_scripts": [
     {
