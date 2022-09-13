@@ -6,7 +6,8 @@
     "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
     "build": "rimraf dist && rollup -c",
     "watch": "rimraf dist && rollup -c -w",
-    "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force"
+    "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force",
+    "zip": "web-ext build --source-dir ./dist/ --overwrite-dest"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
