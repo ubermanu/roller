@@ -1,6 +1,6 @@
 {
   "name": "@ubermanu/autoscroll",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "license": "MIT",
   "scripts": {
     "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
