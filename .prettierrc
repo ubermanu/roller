@@ -1,4 +1,5 @@
 {
+  "plugins": ["prettier-plugin-svelte"],
   "trailingComma": "es5",
   "printWidth": 200,
   "tabWidth": 2,

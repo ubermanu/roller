@@ -7,7 +7,8 @@ specifiers:
   format-message: ^6.2.3
   pngquant: ^3.1.0
   postcss: ^8.2.1
-  prettier: ^2.2.1
+  prettier: ^2.7.1
+  prettier-plugin-svelte: ^2.7.0
   rimraf: ^3.0.2
   rollup: ^2.35.1
   rollup-plugin-copy: ^3.3.0
@@ -28,7 +29,8 @@ devDependencies:
   format-message: 6.2.3
   pngquant: 3.1.0
   postcss: 8.2.14
-  prettier: 2.2.1
+  prettier: 2.7.1
+  prettier-plugin-svelte: 2.7.0_oqufkiu4kfz7j5i2x4w2hi6tga
   rimraf: 3.0.2
   rollup: 2.47.0
   rollup-plugin-copy: 3.4.0
@@ -3198,7 +3200,7 @@ packages:
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
     dev: true
 
   /jsonfile/6.1.0:
@@ -3206,7 +3208,7 @@ packages:
     dependencies:
       universalify: 2.0.0
     optionalDependencies:
-      graceful-fs: 4.2.10
+      graceful-fs: 4.2.6
     dev: true
 
   /jsonwebtoken/8.5.1:
@@ -4623,8 +4625,18 @@ packages:
     dev: true
     optional: true
 
-  /prettier/2.2.1:
-    resolution: {integrity: sha512-PqyhM2yCjg/oKkFPtTGUojv7gnZAoG80ttl45O6x2Ug/rMJw4wcc9k6aaf2hibP7BGVCCM33gZoGjyvt9mm16Q==}
+  /prettier-plugin-svelte/2.7.0_oqufkiu4kfz7j5i2x4w2hi6tga:
+    resolution: {integrity: sha512-fQhhZICprZot2IqEyoiUYLTRdumULGRvw0o4dzl5jt0jfzVWdGqeYW27QTWAeXhoupEZJULmNoH3ueJwUWFLIA==}
+    peerDependencies:
+      prettier: ^1.16.4 || ^2.0.0
+      svelte: ^3.2.0
+    dependencies:
+      prettier: 2.7.1
+      svelte: 3.38.2
+    dev: true
+
+  /prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==}
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
