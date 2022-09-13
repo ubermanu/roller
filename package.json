@@ -7,7 +7,7 @@
     "build": "rimraf dist && rollup -c",
     "watch": "rimraf dist && rollup -c -w",
     "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force",
-    "zip": "web-ext build --source-dir ./dist/ --overwrite-dest"
+    "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
