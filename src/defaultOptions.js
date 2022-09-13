@@ -6,7 +6,7 @@ export default {
   innerScroll: true,
   scrollOnLinks: false,
   sameSpeed: false,
-  capSpeed: '',
+  capSpeed: 10,
   shouldCap: false,
   ctrlClick: true,
   middleClick: true,
