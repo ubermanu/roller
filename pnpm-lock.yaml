@@ -1,22 +1,22 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@rollup/plugin-commonjs': ^17.0.0
+  '@rollup/plugin-commonjs': ^17.1.0
   '@rollup/plugin-json': ^4.1.0
-  '@rollup/plugin-node-resolve': ^11.0.1
+  '@rollup/plugin-node-resolve': ^11.2.1
   format-message: ^6.2.3
   pngquant: ^3.1.0
-  postcss: ^8.2.1
+  postcss: ^8.2.14
   prettier: ^2.7.1
   prettier-plugin-svelte: ^2.7.0
   rimraf: ^3.0.2
-  rollup: ^2.35.1
-  rollup-plugin-copy: ^3.3.0
+  rollup: ^2.47.0
+  rollup-plugin-copy: ^3.4.0
   rollup-plugin-postcss: ^4.0.0
-  rollup-plugin-svelte: ^7.0.0
+  rollup-plugin-svelte: ^7.1.0
   rollup-plugin-svg: ^2.0.0
   rollup-plugin-terser: ^7.0.2
-  svelte: ^3.31.0
+  svelte: ^3.38.2
   svelte-intl: ^1.1.3
   svgo: ^1.3.2
   web-ext: ^7.2.0
@@ -732,7 +732,7 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001223
+      caniuse-lite: 1.0.30001446
       colorette: 1.2.2
       electron-to-chromium: 1.3.727
       escalade: 3.1.1
@@ -879,13 +879,13 @@ packages:
     resolution: {integrity: sha512-bsTwuIg/BZZK/vreVTYYbSWoe2F+71P7K5QGEX+pT250DZbfU1MQ5prOKpPR+LL6uWKK3KMwMCAS74QB3Um1uw==}
     dependencies:
       browserslist: 4.16.6
-      caniuse-lite: 1.0.30001223
+      caniuse-lite: 1.0.30001446
       lodash.memoize: 4.1.2
       lodash.uniq: 4.5.0
     dev: true
 
-  /caniuse-lite/1.0.30001223:
-    resolution: {integrity: sha512-k/RYs6zc/fjbxTjaWZemeSmOjO0JJV+KguOBA3NwPup8uzxM1cMhR2BD9XmO86GuqaqTCO8CgkgH9Rz//vdDiA==}
+  /caniuse-lite/1.0.30001446:
+    resolution: {integrity: sha512-fEoga4PrImGcwUUGEol/PoFCSBnSkA9drgdkxXkJLsUBOnJ8rs3zDv6ApqYXGQFOyMPsjh79naWhF4DAxbF8rw==}
     dev: true
 
   /caseless/0.12.0:
