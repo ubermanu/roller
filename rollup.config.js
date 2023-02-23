@@ -11,6 +11,7 @@ export default [
   {
     input: 'src/contentScript.js',
     output: {
+      name: 'AutoScroll',
       file: 'dist/content_script.js',
       format: 'iife',
     },
