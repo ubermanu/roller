@@ -1,4 +1,4 @@
-import OptionsPage from './OptionsPage.svelte'
+import OptionsPage from './components/OptionsPage.svelte'
 import 'webext-base-css/webext-base.css'
 import './i18n'
 
