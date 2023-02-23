@@ -1,7 +1,7 @@
 <svelte:options tag="auto-scroll" />
 
 <script>
-  import { onMount } from 'svelte'
+  import { onDestroy, onMount } from 'svelte'
   import math from '../helpers/math'
   import { getStyleFromAngle, getImageFromScrollNormal } from '../helpers/cursor'
   import { canScrollTop, findScrollNormal } from '../helpers/scroll'
@@ -332,6 +332,10 @@
 
   onMount(() => {
     addEventListener('mousedown', onmousedown, true)
+  })
+
+  onDestroy(() => {
+    removeEventListener('mousedown', onmousedown, true)
   })
 </script>
 
