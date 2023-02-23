@@ -159,13 +159,13 @@
       y = event.clientY - state.oldY
 
     if (state.click || !shouldSticky(x, y)) {
-      unclick()
+      hide()
     } else {
       state.click = true
     }
   }
 
-  function unclick() {
+  function hide() {
     cancelAnimationFrame(state.timeout)
     state.timeout = null
 
@@ -335,6 +335,7 @@
   })
 
   onDestroy(() => {
+    hide()
     removeEventListener('mousedown', onmousedown, true)
   })
 </script>
