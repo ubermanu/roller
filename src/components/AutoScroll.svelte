@@ -4,7 +4,7 @@
   import { onDestroy, onMount } from 'svelte'
   import * as math from '../helpers/math'
   import { getStyleFromAngle, getImageFromScrollNormal } from '../helpers/cursor'
-  import { canScrollTop, findScrollNormal } from '../helpers/scroll'
+  import { findScroll, getDocumentContext, isScrollable } from '../helpers/scroll'
   import { stopEvent } from '../helpers/event'
   import defaultOptions from '../defaultOptions'
 
@@ -24,9 +24,7 @@
   let clicked = false
   let scrolling = false
 
-  let htmlNode = document.documentElement
-  // This is needed to support SVG
-  let bodyNode = document.body ? document.body : htmlNode
+  const { htmlNode } = getDocumentContext()
 
   // Keep default scroll behavior
   // TODO: Handle current container behavior?
@@ -206,113 +204,30 @@
     htmlNode.style.setProperty('scroll-behavior', 'auto')
   }
 
-  function isInvalid(elem) {
-    return (
-      elem.isContentEditable ||
-      (elem.localName === 'a' && elem.href) ||
-      (elem.localName === 'area' && elem.href) ||
-      (elem.localName === 'textarea' && isEditableText(elem)) ||
-      (elem.localName === 'input' && isEditableText(elem))
-    )
-  }
-
-  function isEditableText(elem) {
-    return !(elem.disabled || elem.readOnly)
-  }
-
-  function isValid(elem) {
-    if (options.scrollOnLinks) {
-      return true
-    } else {
-      while (true) {
-        if (elem == null) {
-          return false
-        } else if (elem === document || elem === htmlNode || elem === bodyNode) {
-          return true
-        } else if (elem.host) {
-          elem = elem.host
-        } else if (isInvalid(elem)) {
-          return false
-        } else {
-          elem = elem.parentNode
-        }
-      }
-    }
-  }
-
-  // TODO this isn't quite correct, but it's close enough
-  function findScrollTop(element) {
-    let scroller = document.scrollingElement ? document.scrollingElement : bodyNode
-
-    let htmlStyle = getComputedStyle(htmlNode)
-    let bodyStyle = getComputedStyle(bodyNode)
-
-    let width = canScrollTop(htmlStyle.overflowX, bodyStyle.overflowX) && scroller.scrollWidth > element.clientWidth
-    let height = canScrollTop(htmlStyle.overflowY, bodyStyle.overflowY) && scroller.scrollHeight > element.clientHeight
-
-    if (width || height) {
-      return {
-        element: element,
-        scroller: scroller,
-        width: width,
-        height: height,
-        root: true,
-      }
-    } else {
-      return null
-    }
-  }
-
-  // TODO this should handle the case where <body> has its own scrollbar (separate from the viewport's scrollbar)
-  function findScroll(elem) {
-    if (options.innerScroll) {
-      while (elem !== document && elem !== htmlNode && elem !== bodyNode) {
-        if (elem == null) {
-          return null
-        } else if (elem.host) {
-          elem = elem.host
-        } else {
-          const x = findScrollNormal(elem)
-          if (x === null) {
-            elem = elem.parentNode
-          } else {
-            return x
-          }
-        }
-      }
-    }
-
-    // hack needed to work around non-spec-compliant versions of Chrome
-    // https://code.google.com/p/chromium/issues/detail?id=157855
-    if (document.compatMode === 'CSS1Compat') {
-      return findScrollTop(htmlNode)
-    } else {
-      return findScrollTop(bodyNode)
-    }
-  }
-
-  function handleMouseDown(e) {
+  /**
+   * @param {MouseEvent} event
+   */
+  function handleMouseDown(event) {
     if (scrolling) {
-      stopEvent(e, true)
+      stopEvent(event, true)
     } else {
-      const path = e.composedPath()
+      const path = event.composedPath()
       // TODO use e.target instead of null ?
       const target = path.length === 0 ? null : path[0]
 
       if (
         target != null &&
-        ((e.button === 1 && options.middleClick) || (e.button === 0 && (e.ctrlKey || e.metaKey) && options.ctrlClick)) &&
+        ((event.button === 1 && options.middleClick) || (event.button === 0 && (event.ctrlKey || event.metaKey) && options.ctrlClick)) &&
         // Make sure the click is not on a scrollbar
         // TODO what about using middle click on the scrollbar of a non-<html> element ?
-        e.clientX < htmlNode.clientWidth &&
-        e.clientY < htmlNode.clientHeight &&
-        isValid(target)
+        event.clientX < htmlNode.clientWidth &&
+        event.clientY < htmlNode.clientHeight &&
+        (options.scrollOnLinks || isScrollable(target))
       ) {
-        let elem = findScroll(target)
-
+        const elem = findScroll(target)
         if (elem !== null) {
-          stopEvent(e, true)
-          start(elem, e.clientX, e.clientY)
+          stopEvent(event, true)
+          start(elem, event.clientX, event.clientY)
         }
       }
     }
