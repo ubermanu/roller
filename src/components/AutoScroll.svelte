@@ -2,9 +2,10 @@
 
 <script>
   import { onDestroy, onMount } from 'svelte'
-  import math from '../helpers/math'
+  import * as math from '../helpers/math'
   import { getStyleFromAngle, getImageFromScrollNormal } from '../helpers/cursor'
   import { canScrollTop, findScrollNormal } from '../helpers/scroll'
+  import { stopEvent } from '../helpers/event'
   import defaultOptions from '../defaultOptions'
 
   export let options = defaultOptions
@@ -100,16 +101,14 @@
   /**
    * @param {WheelEvent} event
    */
-  function mousewheel(event) {
-    // TODO is this a good idea ?
+  function handleMouseWheel(event) {
     stopEvent(event, true)
   }
 
   /**
    * @param {MouseEvent} event
    */
-  function mousemove(event) {
-    // TODO is this a good idea ?
+  function handleMouseMove(event) {
     stopEvent(event, true)
 
     let x = event.clientX - state.oldX,
@@ -151,27 +150,26 @@
   /**
    * @param {MouseEvent} event
    */
-  function mouseup(event) {
-    // TODO is this a good idea ?
+  function handleMouseUp(event) {
     stopEvent(event, true)
 
     let x = event.clientX - state.oldX,
       y = event.clientY - state.oldY
 
     if (state.click || !shouldSticky(x, y)) {
-      hide()
+      stop()
     } else {
       state.click = true
     }
   }
 
-  function hide() {
+  function stop() {
     cancelAnimationFrame(state.timeout)
     state.timeout = null
 
-    removeEventListener('wheel', mousewheel, true)
-    removeEventListener('mousemove', mousemove, true)
-    removeEventListener('mouseup', mouseup, true)
+    removeEventListener('wheel', handleMouseWheel, true)
+    removeEventListener('mousemove', handleMouseMove, true)
+    removeEventListener('mouseup', handleMouseUp, true)
 
     visible = false
     cursor = 'auto'
@@ -189,16 +187,16 @@
     htmlNode.style.setProperty('scroll-behavior', scrollBehavior)
   }
 
-  function show(o, _x, _y) {
+  function start(o, _x, _y) {
     state.scrolling = true
     state.oldX = _x
     state.oldY = _y
 
     startCycle(o.element, o.scroller, o.root)
 
-    addEventListener('wheel', mousewheel, true)
-    addEventListener('mousemove', mousemove, true)
-    addEventListener('mouseup', mouseup, true)
+    addEventListener('wheel', handleMouseWheel, true)
+    addEventListener('mousemove', handleMouseMove, true)
+    addEventListener('mouseup', handleMouseUp, true)
 
     visible = true
     image = getImageFromScrollNormal(o)
@@ -294,16 +292,7 @@
     }
   }
 
-  function stopEvent(e, preventDefault) {
-    e.stopImmediatePropagation()
-    e.stopPropagation()
-
-    if (preventDefault) {
-      e.preventDefault()
-    }
-  }
-
-  function onmousedown(e) {
+  function handleMouseDown(e) {
     if (state.scrolling) {
       stopEvent(e, true)
     } else {
@@ -324,19 +313,19 @@
 
         if (elem !== null) {
           stopEvent(e, true)
-          show(elem, e.clientX, e.clientY)
+          start(elem, e.clientX, e.clientY)
         }
       }
     }
   }
 
   onMount(() => {
-    addEventListener('mousedown', onmousedown, true)
+    addEventListener('mousedown', handleMouseDown, true)
   })
 
   onDestroy(() => {
-    hide()
-    removeEventListener('mousedown', onmousedown, true)
+    stop()
+    removeEventListener('mousedown', handleMouseDown, true)
   })
 </script>
 

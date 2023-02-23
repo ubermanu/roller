@@ -8,7 +8,7 @@ export const RAD_TO_DEG = Math.PI / 180
  * @param {number} y
  * @return {number}
  */
-function hypot(x, y) {
+export function hypot(x, y) {
   return Math.sqrt(x * x + y * y)
 }
 
@@ -17,7 +17,7 @@ function hypot(x, y) {
  * @param {number} cap
  * @return {number|*}
  */
-function min(num, cap) {
+export function min(num, cap) {
   let neg = cap * -1
   return num > neg && num < 0 ? neg : num < cap && num > 0 ? cap : num
 }
@@ -27,7 +27,7 @@ function min(num, cap) {
  * @param {number} cap
  * @return {*|number}
  */
-function max(num, cap) {
+export function max(num, cap) {
   let neg = cap * -1
   return num > cap ? cap : num < neg ? neg : num
 }
@@ -37,7 +37,7 @@ function max(num, cap) {
  * @param {number} y
  * @return {number}
  */
-function angle(x, y) {
+export function angle(x, y) {
   let angle = Math.atan(y / x) / RAD_TO_DEG
   if (x < 0) {
     angle += 180
@@ -45,11 +45,4 @@ function angle(x, y) {
     angle += 360
   }
   return angle
-}
-
-export default {
-  hypot,
-  min,
-  max,
-  angle,
 }
