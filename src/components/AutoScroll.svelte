@@ -22,7 +22,7 @@
     oldY: null,
     dirX: 0,
     dirY: 0,
-    click: false,
+    clicked: false,
     scrolling: false,
   }
 
@@ -156,10 +156,10 @@
     let x = event.clientX - state.oldX,
       y = event.clientY - state.oldY
 
-    if (state.click || !shouldSticky(x, y)) {
+    if (state.clicked || !shouldSticky(x, y)) {
       stop()
     } else {
-      state.click = true
+      state.clicked = true
     }
   }
 
@@ -180,7 +180,7 @@
     state.dirX = 0
     state.dirY = 0
 
-    state.click = false
+    state.clicked = false
     state.scrolling = false
 
     // Restore scroll behavior
