@@ -2,6 +2,7 @@ import defaults from './defaultOptions'
 import math from './helpers/math'
 import { getStyleFromAngle, image } from './helpers/cursor'
 import { canScrollTop, findScrollNormal } from './helpers/scroll'
+import AutoScroll from './components/AutoScroll.svelte'
 
 let options = defaults
 
@@ -15,7 +16,6 @@ const state = {
   scrolling: false,
 }
 
-let htmlNamespace = 'http://www.w3.org/1999/xhtml'
 let htmlNode = document.documentElement
 // This is needed to support SVG
 let bodyNode = document.body ? document.body : htmlNode
@@ -25,7 +25,12 @@ let bodyNode = document.body ? document.body : htmlNode
 // TODO: Test for SVG
 const scrollBehavior = htmlNode.style.scrollBehavior
 
-// The timer that does the actual scrolling; must be very fast so that the scrolling is smooth
+/**
+ * The timer that does the actual scrolling; must be very fast so that the scrolling is smooth.
+ * @param elem
+ * @param scroller
+ * @param root
+ */
 function startCycle(elem, scroller, root) {
   // This is needed to support SVG
   let scrollX = root ? window.scrollX : scroller.scrollLeft,
@@ -66,39 +71,39 @@ function startCycle(elem, scroller, root) {
   loop()
 }
 
+/**
+ * @param x
+ * @param y
+ * @returns {boolean}
+ */
 function shouldSticky(x, y) {
-  return options.stickyScroll && /*state.stickyScroll && */ math.hypot(x, y) < options.dragThreshold
+  return options.stickyScroll && math.hypot(x, y) < options.dragThreshold
 }
 
+/**
+ * @param value
+ * @returns {number}
+ */
 function scale(value) {
   return value / options.moveSpeed
 }
 
-// This is needed to make AutoScroll work in SVG documents
-let outer = document.createElementNS(htmlNamespace, 'auto-scroll')
+/**
+ * The component that shows the wheel cursor.
+ */
+let component
 
-// https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow
-let shadow = outer.attachShadow ? outer.attachShadow({ mode: 'closed' }) : outer.createShadowRoot ? outer.createShadowRoot() : outer.webkitCreateShadowRoot()
-
-// This is needed to make AutoScroll work in SVG documents
-let inner = document.createElementNS(htmlNamespace, 'div')
-
-// TODO hack to make it so that Chrome doesn't repaint when scrolling
-inner.style.setProperty('transform', 'translateZ(0)')
-inner.style.setProperty('display', 'none')
-inner.style.setProperty('position', 'fixed')
-inner.style.setProperty('left', '0px')
-inner.style.setProperty('top', '0px')
-inner.style.setProperty('width', '100%')
-inner.style.setProperty('height', '100%')
-inner.style.setProperty('z-index', '2147483647') // 32-bit signed int
-inner.style.setProperty('background-repeat', 'no-repeat')
-
+/**
+ * @param {WheelEvent} event
+ */
 function mousewheel(event) {
   // TODO is this a good idea ?
   stopEvent(event, true)
 }
 
+/**
+ * @param {MouseEvent} event
+ */
 function mousemove(event) {
   // TODO is this a good idea ?
   stopEvent(event, true)
@@ -109,7 +114,10 @@ function mousemove(event) {
   if (math.hypot(x, y) > options.moveThreshold) {
     //state.stickyScroll = false;
 
-    inner.style.setProperty('cursor', getStyleFromAngle(math.angle(x, y)))
+    // TODO: Move into component
+    component.$set({
+      cursor: getStyleFromAngle(math.angle(x, y)),
+    })
 
     // 10 = 5
     // 5  = 10
@@ -132,13 +140,18 @@ function mousemove(event) {
     state.dirX = x
     state.dirY = y
   } else {
-    normalCursor()
+    component.$set({
+      cursor: 'auto',
+    })
 
     state.dirX = 0
     state.dirY = 0
   }
 }
 
+/**
+ * @param {MouseEvent} event
+ */
 function mouseup(event) {
   // TODO is this a good idea ?
   stopEvent(event, true)
@@ -161,11 +174,7 @@ function unclick() {
   removeEventListener('mousemove', mousemove, true)
   removeEventListener('mouseup', mouseup, true)
 
-  normalCursor()
-
-  inner.style.removeProperty('background-image')
-  inner.style.removeProperty('background-position')
-  inner.style.setProperty('display', 'none')
+  component.$set({ visible: false, cursor: 'auto' })
 
   state.oldX = null
   state.oldY = null
@@ -180,10 +189,6 @@ function unclick() {
   htmlNode.style.setProperty('scroll-behavior', scrollBehavior)
 }
 
-function normalCursor() {
-  inner.style.removeProperty('cursor')
-}
-
 function show(o, x, y) {
   state.scrolling = true
   state.oldX = x
@@ -195,10 +200,7 @@ function show(o, x, y) {
   addEventListener('mousemove', mousemove, true)
   addEventListener('mouseup', mouseup, true)
 
-  inner.style.setProperty('background-image', 'url("' + image(o) + '")')
-  inner.style.setProperty('background-position', x - 13 + 'px ' + (y - 13) + 'px')
-
-  inner.style.removeProperty('display')
+  component.$set({ visible: true, image: image(o), x, y })
 
   // Force normal scroll behavior to fix the unresponsive movements
   htmlNode.style.setProperty('scroll-behavior', 'auto')
@@ -224,12 +226,9 @@ function isValid(elem) {
   } else {
     while (true) {
       if (elem == null) {
-        // TODO is this correct ?
         return false
       } else if (elem === document || elem === htmlNode || elem === bodyNode) {
         return true
-
-        // TODO better check for this
       } else if (elem.host) {
         elem = elem.host
       } else if (isInvalid(elem)) {
@@ -268,16 +267,12 @@ function findScrollTop(element) {
 function findScroll(elem) {
   if (options.innerScroll) {
     while (elem !== document && elem !== htmlNode && elem !== bodyNode) {
-      // TODO is this correct ?
       if (elem == null) {
         return null
-
-        // TODO better check for this
       } else if (elem.host) {
         elem = elem.host
       } else {
         let x = findScrollNormal(elem)
-
         if (x === null) {
           elem = elem.parentNode
         } else {
@@ -287,8 +282,8 @@ function findScroll(elem) {
     }
   }
 
-  // TODO hack needed to work around non-spec-compliant versions of Chrome
-  //      https://code.google.com/p/chromium/issues/detail?id=157855
+  // hack needed to work around non-spec-compliant versions of Chrome
+  // https://code.google.com/p/chromium/issues/detail?id=157855
   if (document.compatMode === 'CSS1Compat') {
     return findScrollTop(htmlNode)
   } else {
@@ -332,10 +327,21 @@ function onmousedown(e) {
   }
 }
 
-// TODO: Restore listener on option changes
-chrome.storage.local.get(defaults, function (data) {
-  options = data
-  shadow.appendChild(inner)
-  htmlNode.appendChild(outer)
+/**
+ * Inject the component into the DOM, and listen for mousedown events
+ */
+function init() {
+  component = new AutoScroll()
+  htmlNode.appendChild(component)
   addEventListener('mousedown', onmousedown, true)
-})
+}
+
+// TODO: Restore listener on option changes
+if (chrome?.storage?.local) {
+  chrome?.storage?.local.get(defaults, (data) => {
+    options = data
+    init()
+  })
+} else {
+  init()
+}

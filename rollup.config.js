@@ -15,10 +15,21 @@ export default [
       format: 'iife',
     },
     plugins: [
+      svelte({
+        emitCss: false,
+        compilerOptions: {
+          customElement: true,
+        },
+      }),
       svg({
         base64: true,
       }),
       terser(),
+      resolve({
+        browser: true,
+        dedupe: ['svelte'],
+      }),
+      commonjs(),
       copy({
         targets: [{ src: 'public/*', dest: 'dist' }],
       }),

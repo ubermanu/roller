@@ -16,7 +16,7 @@ specifiers:
   rollup-plugin-svelte: ^7.1.0
   rollup-plugin-svg: ^2.0.0
   rollup-plugin-terser: ^7.0.2
-  svelte: ^3.38.2
+  svelte: ^3.55.1
   svelte-intl: ^1.1.3
   svgo: ^1.3.2
   web-ext: ^7.2.0
@@ -30,16 +30,16 @@ devDependencies:
   pngquant: 3.1.0
   postcss: 8.2.14
   prettier: 2.7.1
-  prettier-plugin-svelte: 2.7.0_oqufkiu4kfz7j5i2x4w2hi6tga
+  prettier-plugin-svelte: 2.7.0_oaijcowt4gpvlnkwmhxna5iywq
   rimraf: 3.0.2
   rollup: 2.47.0
   rollup-plugin-copy: 3.4.0
   rollup-plugin-postcss: 4.0.0_postcss@8.2.14
-  rollup-plugin-svelte: 7.1.0_4dnarmd2s7lbpt6cb6pot4jv5y
+  rollup-plugin-svelte: 7.1.0_ri6kmcpm3tvfkihpdowwilakbq
   rollup-plugin-svg: 2.0.0
   rollup-plugin-terser: 7.0.2_rollup@2.47.0
-  svelte: 3.38.2
-  svelte-intl: 1.1.3_okmwtvpisihbuvvjcot7fo3q2q
+  svelte: 3.55.1
+  svelte-intl: 1.1.3_ne2ahe3udpofwpzhrn226p3ow4
   svgo: 1.3.2
   web-ext: 7.2.0
   webext-base-css: 1.4.2
@@ -4625,14 +4625,14 @@ packages:
     dev: true
     optional: true
 
-  /prettier-plugin-svelte/2.7.0_oqufkiu4kfz7j5i2x4w2hi6tga:
+  /prettier-plugin-svelte/2.7.0_oaijcowt4gpvlnkwmhxna5iywq:
     resolution: {integrity: sha512-fQhhZICprZot2IqEyoiUYLTRdumULGRvw0o4dzl5jt0jfzVWdGqeYW27QTWAeXhoupEZJULmNoH3ueJwUWFLIA==}
     peerDependencies:
       prettier: ^1.16.4 || ^2.0.0
       svelte: ^3.2.0
     dependencies:
       prettier: 2.7.1
-      svelte: 3.38.2
+      svelte: 3.55.1
     dev: true
 
   /prettier/2.7.1:
@@ -4988,7 +4988,7 @@ packages:
       style-inject: 0.3.0
     dev: true
 
-  /rollup-plugin-svelte/7.1.0_4dnarmd2s7lbpt6cb6pot4jv5y:
+  /rollup-plugin-svelte/7.1.0_ri6kmcpm3tvfkihpdowwilakbq:
     resolution: {integrity: sha512-vopCUq3G+25sKjwF5VilIbiY6KCuMNHP1PFvx2Vr3REBNMDllKHFZN2B9jwwC+MqNc3UPKkjXnceLPEjTjXGXg==}
     engines: {node: '>=10'}
     peerDependencies:
@@ -4998,7 +4998,7 @@ packages:
       require-relative: 0.8.7
       rollup: 2.47.0
       rollup-pluginutils: 2.8.2
-      svelte: 3.38.2
+      svelte: 3.55.1
     dev: true
 
   /rollup-plugin-svg/2.0.0:
@@ -5539,18 +5539,18 @@ packages:
       has-flag: 4.0.0
     dev: true
 
-  /svelte-intl/1.1.3_okmwtvpisihbuvvjcot7fo3q2q:
+  /svelte-intl/1.1.3_ne2ahe3udpofwpzhrn226p3ow4:
     resolution: {integrity: sha512-urVfuF7s9ISPEIcLjAABiRt1u/MwkpHvaepatnix5iCF52UhLHy/909pY7P3BL4B2upb2K3PAeuZDKP1bQP3BQ==}
     peerDependencies:
       format-message: ^6.2.1
       svelte: ^3.0.0
     dependencies:
       format-message: 6.2.3
-      svelte: 3.38.2
+      svelte: 3.55.1
     dev: true
 
-  /svelte/3.38.2:
-    resolution: {integrity: sha512-q5Dq0/QHh4BLJyEVWGe7Cej5NWs040LWjMbicBGZ+3qpFWJ1YObRmUDZKbbovddLC9WW7THTj3kYbTOFmU9fbg==}
+  /svelte/3.55.1:
+    resolution: {integrity: sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==}
     engines: {node: '>= 8'}
     dev: true
 
