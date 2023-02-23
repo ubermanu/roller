@@ -26,7 +26,7 @@ export function getStyleFromAngle(angle) {
   }
 }
 
-export function image(o) {
+export function getImageFromScrollNormal(o) {
   if (o.width && o.height) {
     return originBoth
   } else if (o.width) {
