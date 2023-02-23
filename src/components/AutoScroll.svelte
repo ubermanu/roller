@@ -11,20 +11,18 @@
   export let options = defaultOptions
 
   let visible = false
-  let image = null
-  let x = 0
-  let y = 0
+  let backgroundImage = null
+  let backgroundPositionX = 0
+  let backgroundPositionY = 0
   let cursor = 'auto'
 
-  const state = {
-    timeout: null,
-    oldX: null,
-    oldY: null,
-    dirX: 0,
-    dirY: 0,
-    clicked: false,
-    scrolling: false,
-  }
+  let timeout = null
+  let oldX = null
+  let oldY = null
+  let dirX = 0
+  let dirY = 0
+  let clicked = false
+  let scrolling = false
 
   let htmlNode = document.documentElement
   // This is needed to support SVG
@@ -47,13 +45,13 @@
       scrollY = root ? window.scrollY : scroller.scrollTop
 
     function loop() {
-      state.timeout = requestAnimationFrame(loop)
+      timeout = requestAnimationFrame(loop)
 
       let scrollWidth = scroller.scrollWidth - elem.clientWidth,
         scrollHeight = scroller.scrollHeight - elem.clientHeight
 
-      scrollX += state.dirX
-      scrollY += state.dirY
+      scrollX += dirX
+      scrollY += dirY
 
       if (scrollX < 0) {
         scrollX = 0
@@ -68,11 +66,10 @@
       }
 
       // This is needed to support SVG
+      // This triggers a reflow
       if (root) {
-        // This triggers a reflow
         window.scroll(scrollX, scrollY)
       } else {
-        // This triggers a reflow
         scroller.scrollLeft = scrollX
         scroller.scrollTop = scrollY
       }
@@ -111,12 +108,10 @@
   function handleMouseMove(event) {
     stopEvent(event, true)
 
-    let x = event.clientX - state.oldX,
-      y = event.clientY - state.oldY
+    let x = event.clientX - oldX,
+      y = event.clientY - oldY
 
     if (math.hypot(x, y) > options.moveThreshold) {
-      //state.stickyScroll = false;
-
       cursor = getStyleFromAngle(math.angle(x, y))
 
       // 10 = 5
@@ -124,9 +119,7 @@
       // 1  = 50
       if (options.sameSpeed) {
         x = math.max(x, 1) * 50
-        //(Options.get("moveSpeed") * 0.04);
         y = math.max(y, 1) * 50
-        //(Options.get("moveSpeed") * 0.04);
       }
 
       x = scale(x)
@@ -137,13 +130,12 @@
         y = math.max(y, options.capSpeed)
       }
 
-      state.dirX = x
-      state.dirY = y
+      dirX = x
+      dirY = y
     } else {
       cursor = 'auto'
-
-      state.dirX = 0
-      state.dirY = 0
+      dirX = 0
+      dirY = 0
     }
   }
 
@@ -153,19 +145,23 @@
   function handleMouseUp(event) {
     stopEvent(event, true)
 
-    let x = event.clientX - state.oldX,
-      y = event.clientY - state.oldY
+    let x = event.clientX - oldX,
+      y = event.clientY - oldY
 
-    if (state.clicked || !shouldSticky(x, y)) {
+    if (clicked || !shouldSticky(x, y)) {
       stop()
     } else {
-      state.clicked = true
+      clicked = true
     }
   }
 
+  /**
+   * Stop the scrolling
+   * Remove all the listeners, and reset the scrolling state values
+   */
   function stop() {
-    cancelAnimationFrame(state.timeout)
-    state.timeout = null
+    cancelAnimationFrame(timeout)
+    timeout = null
 
     removeEventListener('wheel', handleMouseWheel, true)
     removeEventListener('mousemove', handleMouseMove, true)
@@ -173,24 +169,27 @@
 
     visible = false
     cursor = 'auto'
-
-    state.oldX = null
-    state.oldY = null
-
-    state.dirX = 0
-    state.dirY = 0
-
-    state.clicked = false
-    state.scrolling = false
+    oldX = null
+    oldY = null
+    dirX = 0
+    dirY = 0
+    clicked = false
+    scrolling = false
 
     // Restore scroll behavior
     htmlNode.style.setProperty('scroll-behavior', scrollBehavior)
   }
 
-  function start(o, _x, _y) {
-    state.scrolling = true
-    state.oldX = _x
-    state.oldY = _y
+  /**
+   * Start the scrolling
+   * @param o
+   * @param x
+   * @param y
+   */
+  function start(o, x, y) {
+    scrolling = true
+    oldX = x
+    oldY = y
 
     startCycle(o.element, o.scroller, o.root)
 
@@ -199,9 +198,9 @@
     addEventListener('mouseup', handleMouseUp, true)
 
     visible = true
-    image = getImageFromScrollNormal(o)
-    x = _x
-    y = _y
+    backgroundImage = getImageFromScrollNormal(o)
+    backgroundPositionX = x
+    backgroundPositionY = y
 
     // Force normal scroll behavior to fix the unresponsive movements
     htmlNode.style.setProperty('scroll-behavior', 'auto')
@@ -273,7 +272,7 @@
         } else if (elem.host) {
           elem = elem.host
         } else {
-          let x = findScrollNormal(elem)
+          const x = findScrollNormal(elem)
           if (x === null) {
             elem = elem.parentNode
           } else {
@@ -293,12 +292,12 @@
   }
 
   function handleMouseDown(e) {
-    if (state.scrolling) {
+    if (scrolling) {
       stopEvent(e, true)
     } else {
-      let path = e.composedPath()
+      const path = e.composedPath()
       // TODO use e.target instead of null ?
-      let target = path.length === 0 ? null : path[0]
+      const target = path.length === 0 ? null : path[0]
 
       if (
         target != null &&
@@ -333,8 +332,8 @@
   <div
     class="inner"
     style="transform: translateZ(0); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2147483647; background-repeat: no-repeat;"
-    style:background-image={`url("${image}")`}
-    style:background-position={`${x - 13}px ${y - 13}px`}
+    style:background-image={`url("${backgroundImage}")`}
+    style:background-position={`${backgroundPositionX - 13}px ${backgroundPositionY - 13}px`}
     style:cursor={cursor}
   />
 {/if}
