@@ -1,12 +1,12 @@
-# AutoScroll
+# Roller
 
-![Version](https://img.shields.io/github/v/tag/ubermanu/AutoScroll?label=version) ![CI](https://github.com/ubermanu/AutoScroll/actions/workflows/ci.yml/badge.svg)
+![Version](https://img.shields.io/github/v/tag/ubermanu/roller?label=version) ![CI](https://github.com/ubermanu/roller/actions/workflows/ci.yml/badge.svg)
 
 Browser extension that allow auto scrolling of web pages, by pressing the mouse wheel button.
 
 ## Installation
 
-You can download the [latest release](https://github.com/ubermanu/AutoScroll/releases/latest) and install it manually in your browser.
+You can download the [latest release](https://github.com/ubermanu/roller/releases/latest) and install it manually in your browser.
 
 ## Compatibility
 
