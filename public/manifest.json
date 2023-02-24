@@ -27,5 +27,10 @@
       ],
       "run_at": "document_end"
     }
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{c0b65bfc-5191-4489-b2ed-4052c055e9b2}"
+    }
+  }
 }
