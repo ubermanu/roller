@@ -9,7 +9,7 @@
     "scroll",
     "mouse",
     "firefox-extension",
-    "goggle-chrome-extension",
+    "google-chrome-extension",
     "auto-scroll"
   ],
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
@@ -25,7 +25,8 @@
     "build": "rimraf dist && rollup -c",
     "watch": "rimraf dist && rollup -c -w",
     "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force",
-    "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest"
+    "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest",
+    "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
