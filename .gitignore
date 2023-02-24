@@ -2,3 +2,7 @@
 node_modules
 dist
 web-ext-artifacts
+*.pem
+*.zip
+*.xpi
+*.crx
