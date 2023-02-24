@@ -32,7 +32,7 @@
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
-    "@webcomponents/webcomponentsjs": "^2.7.0",
+    "@webcomponents/custom-elements": "^1.5.1",
     "format-message": "^6.2.3",
     "pngquant": "^3.1.0",
     "postcss": "^8.2.14",
