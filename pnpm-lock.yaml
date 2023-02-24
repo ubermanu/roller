@@ -4,6 +4,7 @@ specifiers:
   '@rollup/plugin-commonjs': ^17.1.0
   '@rollup/plugin-json': ^4.1.0
   '@rollup/plugin-node-resolve': ^11.2.1
+  '@webcomponents/webcomponentsjs': ^2.7.0
   format-message: ^6.2.3
   pngquant: ^3.1.0
   postcss: ^8.2.14
@@ -27,6 +28,7 @@ devDependencies:
   '@rollup/plugin-commonjs': 17.1.0_rollup@2.47.0
   '@rollup/plugin-json': 4.1.0_rollup@2.47.0
   '@rollup/plugin-node-resolve': 11.2.1_rollup@2.47.0
+  '@webcomponents/webcomponentsjs': 2.7.0
   format-message: 6.2.3
   pngquant: 3.1.0
   postcss: 8.2.14
@@ -338,6 +340,10 @@ packages:
     resolution: {integrity: sha512-Cn6WYCm0tXv8p6k+A8PvbDG763EDpBoTzHdA+Q/MF6H3sapGjCm9NzoaJncJS9tUKSuCoDs9XHxYYsQDgxR6kw==}
     dependencies:
       '@types/node': 15.0.2
+    dev: true
+
+  /@webcomponents/webcomponentsjs/2.7.0:
+    resolution: {integrity: sha512-j161Z9oiy8k74vchdrQGihfSp7QulrTclCUiPo0D7JF6/RjpXAmB0ThlTAFlSElkgqg0vdFgNAXaX9ZHZy25wQ==}
     dev: true
 
   /abort-controller/3.0.0:

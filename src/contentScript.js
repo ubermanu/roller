@@ -1,3 +1,4 @@
+import '@webcomponents/webcomponentsjs'
 import defaults from './defaultOptions'
 import AutoScroll from './components/AutoScroll.svelte'
 
