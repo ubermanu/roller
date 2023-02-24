@@ -224,7 +224,7 @@
         event.clientY < htmlNode.clientHeight &&
         (options.scrollOnLinks || isScrollable(target))
       ) {
-        const elem = findScroll(target)
+        const elem = findScroll(target, options.innerScroll)
         if (elem !== null) {
           stopEvent(event, true)
           start(elem, event.clientX, event.clientY)
@@ -249,6 +249,6 @@
     style="transform: translateZ(0); position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2147483647; background-repeat: no-repeat;"
     style:background-image={`url("${backgroundImage}")`}
     style:background-position={`${backgroundPositionX - 13}px ${backgroundPositionY - 13}px`}
-    style:cursor={cursor}
+    style:cursor
   />
 {/if}
