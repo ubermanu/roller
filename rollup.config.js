@@ -6,6 +6,8 @@ import svg from 'rollup-plugin-svg'
 import postcss from 'rollup-plugin-postcss'
 import svelte from 'rollup-plugin-svelte'
 import json from '@rollup/plugin-json'
+import manifestJSON from 'rollup-plugin-manifest-json'
+import { version } from './package.json'
 
 export default [
   {
@@ -33,6 +35,11 @@ export default [
       commonjs(),
       copy({
         targets: [{ src: 'public/*', dest: 'dist' }],
+      }),
+      manifestJSON({
+        input: 'public/manifest.json',
+        output: 'manifest.json',
+        manifest: { version },
       }),
     ],
   },
