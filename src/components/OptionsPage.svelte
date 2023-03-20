@@ -107,6 +107,14 @@
         </label>
       </div>
     </div>
+    <div class="field">
+      <div class="control">
+        <label class="checkbox">
+          <input type="checkbox" bind:checked={$options.disableOnWindows} />{' '}
+          {$_('Disable on Windows platform')}
+        </label>
+      </div>
+    </div>
   </section>
   <section class="section">
     <div class="buttons">

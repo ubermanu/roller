@@ -10,4 +10,5 @@ export default {
   shouldCap: false,
   ctrlClick: true,
   middleClick: true,
+  disableOnWindows: true,
 }
