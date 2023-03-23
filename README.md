@@ -4,17 +4,16 @@
 
 Browser extension that allow auto scrolling of web pages, by pressing the mouse wheel button.
 
-## Installation
+## Install
 
-You can download the [latest release](https://github.com/ubermanu/roller/releases/latest) and install it manually in your browser.
+You can download the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/roller/kdcakfeidhfeilahlclgbnmpgebafjpm) or the [Firefox Add-ons Store](https://addons.mozilla.org/af/firefox/addon/roller-scroll/).
 
-## Compatibility
+## Usage
 
-This extension is compatible with the following browsers:
+Press the mouse wheel button to start scrolling, and release it to stop scrolling.
 
-- Chrome
-- Firefox
+Check the options page to configure the scrolling speed, drag threshold, and more.
 
-### Notes
+## Notes
 
 This is a fork of the original [AutoScroll](https://github.com/Pauan/AutoScroll) extension.
