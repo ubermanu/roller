@@ -1,13 +1,13 @@
-import copy from 'rollup-plugin-copy'
-import { terser } from 'rollup-plugin-terser'
-import resolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
-import svg from 'rollup-plugin-svg'
+import json from '@rollup/plugin-json'
+import resolve from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
+import copy from 'rollup-plugin-copy'
+import manifestJSON from 'rollup-plugin-manifest-json'
 import postcss from 'rollup-plugin-postcss'
 import svelte from 'rollup-plugin-svelte'
-import json from '@rollup/plugin-json'
-import manifestJSON from 'rollup-plugin-manifest-json'
-import { version } from './package.json'
+import svg from 'rollup-plugin-svg'
+import pkg from './package.json' assert { type: 'json' }
 
 export default [
   {
@@ -39,7 +39,7 @@ export default [
       manifestJSON({
         input: 'public/manifest.json',
         output: 'manifest.json',
-        manifest: { version },
+        manifest: { version: pkg.version },
       }),
     ],
   },
