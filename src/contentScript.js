@@ -1,6 +1,6 @@
 import '@webcomponents/custom-elements'
-import defaults from './defaultOptions'
 import AutoScroll from './components/AutoScroll.svelte'
+import defaults from './defaultOptions'
 
 const htmlNode = document.documentElement
 const autoScroll = new AutoScroll()

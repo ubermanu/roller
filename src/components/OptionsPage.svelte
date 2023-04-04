@@ -137,8 +137,8 @@
 
   .input {
     display: inline;
-    width: 5em;
     vertical-align: baseline;
+    width: 5em;
   }
 
   .control {

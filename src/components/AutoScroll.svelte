@@ -33,6 +33,7 @@
 
   /**
    * The timer that does the actual scrolling; must be very fast so that the scrolling is smooth.
+   *
    * @param elem
    * @param scroller
    * @param root
@@ -93,16 +94,12 @@
     return value / options.moveSpeed
   }
 
-  /**
-   * @param {WheelEvent} event
-   */
+  /** @param {WheelEvent} event */
   function handleMouseWheel(event) {
     stopEvent(event, true)
   }
 
-  /**
-   * @param {MouseEvent} event
-   */
+  /** @param {MouseEvent} event */
   function handleMouseMove(event) {
     stopEvent(event, true)
 
@@ -137,9 +134,7 @@
     }
   }
 
-  /**
-   * @param {MouseEvent} event
-   */
+  /** @param {MouseEvent} event */
   function handleMouseUp(event) {
     stopEvent(event, true)
 
@@ -153,10 +148,7 @@
     }
   }
 
-  /**
-   * Stop the scrolling
-   * Remove all the listeners, and reset the scrolling state values
-   */
+  /** Stop the scrolling Remove all the listeners, and reset the scrolling state values */
   function stop() {
     cancelAnimationFrame(timeout)
     timeout = null
@@ -180,6 +172,7 @@
 
   /**
    * Start the scrolling
+   *
    * @param o
    * @param x
    * @param y
@@ -204,9 +197,7 @@
     htmlNode.style.setProperty('scroll-behavior', 'auto')
   }
 
-  /**
-   * @param {MouseEvent} event
-   */
+  /** @param {MouseEvent} event */
   function handleMouseDown(event) {
     if (scrolling) {
       stopEvent(event, true)

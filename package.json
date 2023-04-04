@@ -1,7 +1,6 @@
 {
   "name": "@ubermanu/roller",
   "version": "1.1.0",
-  "license": "MIT",
   "description": "Browser extension that allow auto scrolling of web pages, by pressing the mouse wheel button",
   "keywords": [
     "linux",
@@ -12,26 +11,28 @@
     "google-chrome-extension",
     "auto-scroll"
   ],
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/roller.git"
   },
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "files": [
     "dist"
   ],
   "scripts": {
-    "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
     "build": "rimraf dist && rollup -c",
-    "watch": "rimraf dist && rollup -c -w",
     "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force",
-    "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest",
-    "prepublishOnly": "pnpm run build"
+    "prepublishOnly": "pnpm run build",
+    "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
+    "watch": "rimraf dist && rollup -c -w",
+    "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.1.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
+    "@ubermanu/prettier-config": "^1.7.1",
     "@webcomponents/custom-elements": "^1.5.1",
     "format-message": "^6.2.3",
     "pngquant": "^3.1.0",
