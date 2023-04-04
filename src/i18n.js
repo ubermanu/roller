@@ -1,4 +1,6 @@
 import { getBrowserLocale, locale, translations } from 'svelte-intl'
+
+// Translations are stored in JSON files in the i18n directory.
 import de from './i18n/de_DE.json'
 import es from './i18n/es_ES.json'
 import fr from './i18n/fr_FR.json'
