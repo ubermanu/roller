@@ -2,7 +2,7 @@ name: Release ZIP file
 
 on:
   push:
-    tags: [ '*' ]
+    tags: ['*']
 
 jobs:
   release:
@@ -28,16 +28,16 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: [ release ]
+    needs: [release]
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: '18.x'
+          node-version: '19.x'
           registry-url: 'https://registry.npmjs.org'
       - uses: pnpm/action-setup@v2
         with:
-          version: 7.11.0
+          version: 8.1.1
       - run: pnpm i
       - run: pnpm zip
       - name: Upload Release Extension
@@ -52,7 +52,7 @@ jobs:
 
   publish:
     runs-on: ubuntu-latest
-    needs: [ release, build ]
+    needs: [release, build]
     steps:
       - uses: eregon/publish-release@v1
         env:
