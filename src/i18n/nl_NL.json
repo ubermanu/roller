@@ -1,0 +1,22 @@
+{
+  "Basic": "Basis",
+  "Scroll without holding down the mouse button": "Scrollen zonder de muisknop ingedrukt te houden",
+  "...if moving less than": "...als er minder dan",
+  "pixels": "pixels",
+  "Scroll if moving more than": "Scrollen als er meer dan",
+  "Scroll by using (Middle Click)": "Scrollen met (middenklik)",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "Scrollen met (Ctrl/⌘ + linker muisklik)",
+  "Speed": "Snelheid",
+  "Move speed:": "Snelheid:",
+  "Move speed in pixels": "Snelheid van scrollen in pixels",
+  "(lower is faster)": "(lager is sneller)",
+  "Scroll at the same speed (ignore mouse movement)": "Scrollen met dezelfde snelheid (negeer muisbeweging)",
+  "Don't scroll faster than": "Niet sneller scrollen dan",
+  "Speed cap in pixels": "Snelheidslimiet in pixels",
+  "Advanced": "Geavanceerd",
+  "Scroll on inner elements": "Scrollen in binnenste elementen",
+  "Scroll when clicking on a link or textarea": "Scrollen bij het klikken op een link of tekstgebied",
+  "Disable on Windows platform": "Uitschakelen op het Windows-platform",
+  "Save": "Opslaan",
+  "Reset": "Herstellen"
+}

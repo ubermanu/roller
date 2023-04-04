@@ -1,0 +1,22 @@
+{
+  "Basic": "基本",
+  "Scroll without holding down the mouse button": "不需要按住鼠标按钮滚动",
+  "...if moving less than": "...如果移动距离小于",
+  "pixels": "像素",
+  "Scroll if moving more than": "如果移动距离大于，则滚动",
+  "Scroll by using (Middle Click)": "通过 (中键点击) 滚动",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "通过 (Ctrl/⌘ + 左键点击) 滚动",
+  "Speed": "速度",
+  "Move speed:": "移动速度：",
+  "Move speed in pixels": "滚动速度（像素）",
+  "(lower is faster)": "（速度更低）",
+  "Scroll at the same speed (ignore mouse movement)": "以相同速度滚动 (忽略鼠标移动)",
+  "Don't scroll faster than": "不要滚动得更快",
+  "Speed cap in pixels": "速度上限（像素）",
+  "Advanced": "高级",
+  "Scroll on inner elements": "在内部元素上滚动",
+  "Scroll when clicking on a link or textarea": "单击链接或文本区域时滚动",
+  "Disable on Windows platform": "在 Windows 平台上禁用",
+  "Save": "保存",
+  "Reset": "重置"
+}

@@ -1,0 +1,22 @@
+{
+  "Basic": "Grundlegend",
+  "Scroll without holding down the mouse button": "Scrollen ohne Maustaste gedrückt zu halten",
+  "...if moving less than": "...falls weniger als",
+  "pixels": "Pixel",
+  "Scroll if moving more than": "Scrollen wenn mehr als",
+  "Scroll by using (Middle Click)": "Scrollen durch (Mittelklick)",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "Scrollen durch (Strg/⌘ + Linksklick)",
+  "Speed": "Geschwindigkeit",
+  "Move speed:": "Bewegungsgeschwindigkeit:",
+  "Move speed in pixels": "Scrollgeschwindigkeit in Pixel",
+  "(lower is faster)": "(niedriger ist schneller)",
+  "Scroll at the same speed (ignore mouse movement)": "Mit gleicher Geschwindigkeit scrollen (Mausbewegungen ignorieren)",
+  "Don't scroll faster than": "Nicht schneller scrollen als",
+  "Speed cap in pixels": "Geschwindigkeitsbegrenzung in Pixel",
+  "Advanced": "Erweitert",
+  "Scroll on inner elements": "Auf inneren Elementen scrollen",
+  "Scroll when clicking on a link or textarea": "Beim Klicken auf einen Link oder ein Textfeld scrollen",
+  "Disable on Windows platform": "Auf Windows-Plattform deaktivieren",
+  "Save": "Speichern",
+  "Reset": "Zurücksetzen"
+}

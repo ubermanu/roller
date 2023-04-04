@@ -1,0 +1,22 @@
+{
+  "Basic": "基本的な",
+  "Scroll without holding down the mouse button": "マウスボタンを押し続けなくてもスクロールする",
+  "...if moving less than": "移動距離が以下の場合、",
+  "pixels": "ピクセル",
+  "Scroll if moving more than": "移動距離が以上の場合、スクロールする",
+  "Scroll by using (Middle Click)": "（中央クリック）でスクロールする",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "（Ctrl/⌘ + 左クリック）でスクロールする",
+  "Speed": "スピード",
+  "Move speed:": "移動速度：",
+  "Move speed in pixels": "スクロール速度（ピクセル）",
+  "(lower is faster)": "（低いほど速い）",
+  "Scroll at the same speed (ignore mouse movement)": "同じ速度でスクロールする（マウスの移動を無視する）",
+  "Don't scroll faster than": "以下の速度でしかスクロールしない",
+  "Speed cap in pixels": "スピード上限（ピクセル）",
+  "Advanced": "高度な設定",
+  "Scroll on inner elements": "内部要素でスクロールする",
+  "Scroll when clicking on a link or textarea": "リンクまたはテキストエリアをクリックしたときにスクロールする",
+  "Disable on Windows platform": "Windows プラットフォームでは無効にする",
+  "Save": "保存",
+  "Reset": "リセット"
+}

@@ -1,0 +1,22 @@
+{
+  "Basic": "Основные",
+  "Scroll without holding down the mouse button": "Прокручивать без зажатия кнопки мыши",
+  "...if moving less than": "...если перемещение меньше чем",
+  "pixels": "пикселей",
+  "Scroll if moving more than": "Прокручивать, если перемещение больше чем",
+  "Scroll by using (Middle Click)": "Прокручивать с помощью (средней кнопки мыши)",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "Прокручивать с помощью (Ctrl/⌘ + Левый клик)",
+  "Speed": "Скорость",
+  "Move speed:": "Скорость перемещения:",
+  "Move speed in pixels": "Скорость прокручивания в пикселях",
+  "(lower is faster)": "(чем ниже, тем быстрее)",
+  "Scroll at the same speed (ignore mouse movement)": "Прокручивать с одинаковой скоростью (игнорировать движение мыши)",
+  "Don't scroll faster than": "Не прокручивать быстрее чем",
+  "Speed cap in pixels": "Максимальная скорость в пикселях",
+  "Advanced": "Дополнительно",
+  "Scroll on inner elements": "Прокручивать внутренние элементы",
+  "Scroll when clicking on a link or textarea": "Прокручивать при клике на ссылку или текстовую область",
+  "Disable on Windows platform": "Отключить на платформе Windows",
+  "Save": "Сохранить",
+  "Reset": "Сбросить"
+}

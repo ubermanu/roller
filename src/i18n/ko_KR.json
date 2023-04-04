@@ -1,0 +1,22 @@
+{
+  "Basic": "기본",
+  "Scroll without holding down the mouse button": "마우스 버튼을 누르지 않고 스크롤",
+  "...if moving less than": "...이동 거리가 다음보다 작으면",
+  "pixels": "픽셀",
+  "Scroll if moving more than": "이동 거리가 다음보다 크면 스크롤",
+  "Scroll by using (Middle Click)": "(가운데 클릭)으로 스크롤",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "(Ctrl/⌘ + 왼쪽 클릭)으로 스크롤",
+  "Speed": "속도",
+  "Move speed:": "이동 속도:",
+  "Move speed in pixels": "픽셀 단위의 스크롤 속도",
+  "(lower is faster)": "(숫자가 작을수록 빠름)",
+  "Scroll at the same speed (ignore mouse movement)": "동일한 속도로 스크롤 (마우스 움직임 무시)",
+  "Don't scroll faster than": "다음보다 빠르게 스크롤하지 마세요",
+  "Speed cap in pixels": "최대 스크롤 속도 (픽셀)",
+  "Advanced": "고급 설정",
+  "Scroll on inner elements": "내부 요소에서 스크롤",
+  "Scroll when clicking on a link or textarea": "링크 또는 텍스트 영역을 클릭했을 때 스크롤",
+  "Disable on Windows platform": "Windows 플랫폼에서 비활성화",
+  "Save": "저장",
+  "Reset": "초기화"
+}

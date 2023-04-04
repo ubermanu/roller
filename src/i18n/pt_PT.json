@@ -1,0 +1,22 @@
+{
+  "Basic": "Básico",
+  "Scroll without holding down the mouse button": "Rolar sem manter pressionado o botão do mouse",
+  "...if moving less than": "...se movendo menos que",
+  "pixels": "pixels",
+  "Scroll if moving more than": "Rolar se movendo mais que",
+  "Scroll by using (Middle Click)": "Rolar usando (Clique no meio)",
+  "Scroll by using (Ctrl/⌘ + Left Click)": "Rolar usando (Ctrl/⌘ + Clique esquerdo)",
+  "Speed": "Velocidade",
+  "Move speed:": "Velocidade de movimento:",
+  "Move speed in pixels": "Velocidade de rolagem em pixels",
+  "(lower is faster)": "(menor é mais rápido)",
+  "Scroll at the same speed (ignore mouse movement)": "Rolar na mesma velocidade (ignorar movimento do mouse)",
+  "Don't scroll faster than": "Não rolar mais rápido do que",
+  "Speed cap in pixels": "Limite de velocidade em pixels",
+  "Advanced": "Avançado",
+  "Scroll on inner elements": "Rolar em elementos internos",
+  "Scroll when clicking on a link or textarea": "Rolar ao clicar em um link ou área de texto",
+  "Disable on Windows platform": "Desativar na plataforma Windows",
+  "Save": "Salvar",
+  "Reset": "Reiniciar"
+}
