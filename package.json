@@ -24,6 +24,7 @@
     "build": "rimraf dist && rollup -c",
     "optimize": "svgo src/images/origin/*.svg && pngquant public/icons/*.png --ext=.png --force",
     "prepublishOnly": "pnpm run build",
+    "start:chrome": "pnpm run build && node scripts/chrome-ext.cjs",
     "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
     "watch": "rimraf dist && rollup -c -w",
     "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest"
@@ -34,6 +35,7 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@types/chrome": "^0.0.243",
+    "@types/node": "^20.6.0",
     "@ubermanu/prettier-config": "^1.7.1",
     "@webcomponents/custom-elements": "^1.6.0",
     "format-message": "^6.2.4",
@@ -41,6 +43,7 @@
     "postcss": "^8.4.21",
     "prettier": "^2.8.7",
     "prettier-plugin-svelte": "^2.10.0",
+    "puppeteer": "^21.1.1",
     "rimraf": "^4.4.1",
     "rollup": "^3.20.2",
     "rollup-plugin-copy": "^3.4.0",
