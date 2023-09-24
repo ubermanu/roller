@@ -6,7 +6,7 @@ Browser extension that allow auto scrolling of web pages, by pressing the mouse 
 
 ## Install
 
-You can download the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/roller/kdcakfeidhfeilahlclgbnmpgebafjpm) or the [Firefox Add-ons Store](https://addons.mozilla.org/af/firefox/addon/roller-scroll/).
+You can download the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/roller/kdcakfeidhfeilahlclgbnmpgebafjpm) or the [Firefox Add-ons Store](https://addons.mozilla.org/firefox/addon/roller-scroll/).
 
 ## Usage
 
