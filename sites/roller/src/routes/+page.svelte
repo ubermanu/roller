@@ -36,10 +36,17 @@
         class="mx-auto mb-6 max-w-[100px] drop-shadow sm:max-w-[120px]"
         alt=""
       />
-      <h1 class="mb-1 font-serif text-3xl text-sky-950">Roller</h1>
-      <p class="text-neutral-900 sm:text-lg">
-        Enable auto scrolling with the mouse wheel button on Linux
-      </p>
+      <h1 class="mb-4 font-serif text-3xl text-sky-950">Roller</h1>
+      <div class="prose mx-auto max-w-xl text-neutral-900">
+        <p>
+          <b>Roller</b> is browser extension that allow auto scrolling of web pages
+          (on Linux), by pressing the mouse wheel button, and moving the mouse up
+          or down.
+        </p>
+        <p>
+          This is a maintained fork of the <b>AutoScroll</b> extension.
+        </p>
+      </div>
 
       <div class="mt-10">
         {#each downloads as download}
@@ -54,9 +61,9 @@
       </div>
     </div>
   </div>
-  <div class="p-4 text-center text-neutral-900">
+  <div class="p-4 text-center text-sm text-neutral-900">
     Built with
-    <img class="inline h-4 w-4 align-baseline" src={svelteIcon} alt="Svelte" />
+    <img class="inline h-3 w-3 align-baseline" src={svelteIcon} alt="Svelte" />
     on
     <a href="https://github.com/ubermanu/roller" class="hover:underline">
       GitHub
