@@ -4,11 +4,7 @@ import typography from '@tailwindcss/typography'
 export default {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    extend: {
-      fontFamily: {
-        serif: ['Suez One', 'serif'],
-      },
-    },
+    extend: {},
   },
   plugins: [typography()],
 }
