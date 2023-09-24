@@ -29,6 +29,7 @@
     "watch": "rimraf dist && rollup -c -w",
     "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest"
   },
+  "prettier": "@ubermanu/prettier-config",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.1",
     "@rollup/plugin-json": "^6.0.0",
