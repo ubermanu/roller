@@ -33,7 +33,7 @@
     <div class="my-auto">
       <img
         src={rollerIcon}
-        class="mx-auto mb-6 max-w-[100px] drop-shadow sm:max-w-[120px]"
+        class="logo mx-auto mb-6 max-w-[100px] drop-shadow sm:max-w-[120px]"
         alt=""
       />
       <h1 class="mb-4 font-serif text-3xl text-sky-950">Roller</h1>
