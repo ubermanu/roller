@@ -39,7 +39,7 @@
       <h1 class="mb-4 font-serif text-3xl text-sky-950">Roller</h1>
       <div class="prose mx-auto max-w-xl text-neutral-900">
         <p>
-          <b>Roller</b> is browser extension that allow auto scrolling of web pages
+          <b>Roller</b> is a browser extension that allow auto scrolling of web pages
           (on Linux), by pressing the mouse wheel button, and moving the mouse up
           or down.
         </p>
