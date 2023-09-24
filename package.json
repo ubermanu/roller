@@ -17,6 +17,9 @@
   },
   "license": "MIT",
   "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "exports": {
+    "./package.json": "./package.json"
+  },
   "files": [
     "dist"
   ],

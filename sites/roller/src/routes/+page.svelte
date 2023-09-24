@@ -3,6 +3,7 @@
   import firefoxIcon from '$lib/images/firefox.svg'
   import rollerIcon from '$lib/images/roller.svg'
   import svelteIcon from '$lib/images/svelte.svg'
+  import pkg from '@ubermanu/roller/package.json'
 
   const downloads = [
     {
@@ -33,12 +34,20 @@
     <div class="my-auto">
       <img
         src={rollerIcon}
-        class="logo mx-auto max-w-[100px] drop-shadow sm:mb-12 sm:max-w-[120px]"
+        class="logo mx-auto mb-12 max-w-[100px] drop-shadow sm:max-w-[120px]"
         alt=""
       />
 
-      <div class="prose mx-auto my-10 max-w-xl text-neutral-900">
-        <h1 class="sr-only">Roller</h1>
+      <h1 class="my-6 inline-flex items-center gap-2">
+        <span class="text-5xl font-black">Roller</span>
+        <span
+          class="flex rounded bg-blue-300 px-1 py-0.5 text-xs text-neutral-900"
+        >
+          v{pkg.version}
+        </span>
+      </h1>
+
+      <div class="prose mx-auto max-w-xl text-neutral-900">
         <p>
           <b>Roller</b> is a browser extension that allow auto scrolling of web pages
           (on Linux), by pressing the mouse wheel button, and moving the mouse up
