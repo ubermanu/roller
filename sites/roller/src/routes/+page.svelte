@@ -13,7 +13,7 @@
     },
     {
       name: 'Firefox',
-      url: 'https://addons.mozilla.org/af/firefox/addon/roller-scroll/',
+      url: 'https://addons.mozilla.org/firefox/addon/roller-scroll/',
       icon: firefoxIcon,
     },
   ]
