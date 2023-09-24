@@ -33,17 +33,18 @@
     <div class="my-auto">
       <img
         src={rollerIcon}
-        class="logo mx-auto mb-6 max-w-[100px] drop-shadow sm:max-w-[120px]"
+        class="logo mx-auto max-w-[100px] drop-shadow sm:mb-12 sm:max-w-[120px]"
         alt=""
       />
-      <div class="prose mx-auto max-w-xl text-neutral-900">
+
+      <div class="prose mx-auto my-10 max-w-xl text-neutral-900">
         <h1 class="sr-only">Roller</h1>
         <p>
           <b>Roller</b> is a browser extension that allow auto scrolling of web pages
           (on Linux), by pressing the mouse wheel button, and moving the mouse up
           or down.
         </p>
-        <p>
+        <p class="text-sm">
           This is a maintained fork of the <b>AutoScroll</b> extension.
         </p>
       </div>
