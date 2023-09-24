@@ -35,9 +35,10 @@ jobs:
         with:
           node-version: '19.x'
           registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
       - uses: pnpm/action-setup@v2
         with:
-          version: 8.1.1
+          version: 8
       - run: pnpm i
       - run: pnpm zip
       - name: Upload Release Extension
