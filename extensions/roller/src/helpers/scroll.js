@@ -1,4 +1,8 @@
 export function canScroll(style) {
+  return style === 'auto' || style === 'scroll' || style === 'visible'
+}
+
+function canScrollContainer(style) {
   return style === 'auto' || style === 'scroll'
 }
 
@@ -8,9 +12,9 @@ export function findScrollNormal(elem) {
   }
   const style = getComputedStyle(elem)
   const width =
-    canScroll(style.overflowX) && elem.scrollWidth > elem.clientWidth
+    canScrollContainer(style.overflowX) && elem.scrollWidth > elem.clientWidth
   const height =
-    canScroll(style.overflowY) && elem.scrollHeight > elem.clientHeight
+    canScrollContainer(style.overflowY) && elem.scrollHeight > elem.clientHeight
 
   if (width || height) {
     return {
@@ -43,12 +47,10 @@ export function findScrollTop(element) {
 
   const scrollerStyle = getComputedStyle(scroller)
   const width =
-    (canScroll(scrollerStyle.overflowX) ||
-      scrollerStyle.overflowX === 'visible') &&
+    canScroll(scrollerStyle.overflowX) &&
     scroller.scrollWidth > scroller.clientWidth
   const height =
-    (canScroll(scrollerStyle.overflowY) ||
-      scrollerStyle.overflowY === 'visible') &&
+    canScroll(scrollerStyle.overflowY) &&
     scroller.scrollHeight > scroller.clientHeight
 
   if (width || height) {
