@@ -296,20 +296,25 @@ export default class AutoScroll {
       const path = event.composedPath()
       const target = path.find(node => node.nodeType === 1) ?? null
 
-      if (target != null &&
-        ((event.button === 1 && this.options.middleClick) ||
-          (event.button === 0 &&
-            (event.ctrlKey || event.metaKey) &&
-            this.options.ctrlClick)) &&
-        event.clientX < this.htmlNode.clientWidth &&
-        event.clientY < this.htmlNode.clientHeight &&
-        (this.options.scrollOnLinks || isScrollable(target))
-      ) {
-        const elem = findScroll(target, this.options.innerScroll)
+     if (target != null &&
+         target.localName !== 'iframe' &&
+         ((event.button === 1 && this.options.middleClick) ||
+           (event.button === 0 &&
+             (event.ctrlKey || event.metaKey) &&
+             this.options.ctrlClick)) &&
+         event.clientX < this.htmlNode.clientWidth &&
+         event.clientY < this.htmlNode.clientHeight &&
+         (this.options.scrollOnLinks || isScrollable(target))
+       ) {
+         const elem =
+          this.isInIframe && !this.options.innerScroll
+            ? null
+            : findScroll(target, this.options.innerScroll)
         if (elem !== null) {
           utils.stopEvent(event, true)
           this.start(elem, event.clientX, event.clientY)
-        } else if (this.isInIframe) {
+        } else if (this.isInIframe && this.options.innerScroll) {
+          utils.stopEvent(event, true)
           window.parent.postMessage(
             {
               type: 'roller-scroll',
