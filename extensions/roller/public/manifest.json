@@ -11,8 +11,7 @@
   },
   "permissions": ["storage"],
   "options_ui": {
-    "page": "options_page.html",
-    "browser_style": true
+    "page": "options_page.html"
   },
   "content_scripts": [
     {
