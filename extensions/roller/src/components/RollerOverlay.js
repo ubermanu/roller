@@ -33,16 +33,7 @@ class RollerOverlay extends HTMLElement {
   }
 }
 
-const wcRegistered =
-  customElements &&
-  !customElements.get('roller-overlay') &&
-  (customElements.define('roller-overlay', RollerOverlay), true)
-
 function createOverlay() {
-  if (wcRegistered) {
-    return document.createElement('roller-overlay')
-  }
-
   const overlay = document.createElement('div')
   overlay.style.transform = 'translateZ(0)'
   overlay.style.position = 'fixed'
