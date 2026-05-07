@@ -8,7 +8,7 @@ export default {
   sameSpeed: false,
   capSpeed: 10,
   shouldCap: false,
-  ctrlClick: true,
+  ctrlClick: false,
   middleClick: true,
   disableOnWindows: true,
 }

@@ -19,8 +19,7 @@
   }
 
   function handleReset() {
-    Object.assign(options, defaults)
-    jsonDump()
+    options = { ...defaults }
   }
 </script>
 
