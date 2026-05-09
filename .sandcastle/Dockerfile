@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
 RUN usermod -d /home/agent -m -l agent node
 
 # Install pi coding agent and pnpm (run as root before USER agent)
-RUN npm install -g @mariozechner/pi-coding-agent pnpm@10
+RUN npm install -g @earendil-works/pi-coding-agent pnpm@10
 
 USER agent
 
