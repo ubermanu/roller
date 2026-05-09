@@ -58,7 +58,7 @@ export function angle(x, y) {
  * @param {number} angle
  * @returns {string}
  */
-export function getStyleFromAngle(angle) {
+export function getCursorStyleFromAngle(angle) {
   if (angle < 30 || angle >= 330) {
     return 'e-resize'
   } else if (angle < 60) {

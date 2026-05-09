@@ -118,7 +118,7 @@ export default class Roller {
     const y = event.clientY - this.oldY
 
     if (utils.hypot(x, y) > this.options.moveThreshold) {
-      this.cursor = utils.getStyleFromAngle(utils.angle(x, y))
+      this.cursor = utils.getCursorStyleFromAngle(utils.angle(x, y))
 
       let dx = x
       let dy = y
@@ -248,7 +248,7 @@ export default class Roller {
       const dy = y - this.iframeOldY
 
       if (utils.hypot(dx, dy) > this.options.moveThreshold) {
-        this.cursor = utils.getStyleFromAngle(utils.angle(dx, dy))
+        this.cursor = utils.getCursorStyleFromAngle(utils.angle(dx, dy))
 
         let scrollDx = dx
         let scrollDy = dy
