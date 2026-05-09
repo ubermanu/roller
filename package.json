@@ -17,9 +17,9 @@
     "@ubermanu/prettier-config": "^3.5.1",
     "husky": "^9.1.7",
     "knip": "^6.12.2",
-    "lint-staged": "^16.4.0",
+    "lint-staged": "^17.0.3",
     "prettier": "~3.6",
     "prettier-plugin-svelte": "^3.5.1",
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "prettier-plugin-tailwindcss": "^0.8.0"
   }
 }
