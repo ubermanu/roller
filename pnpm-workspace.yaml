@@ -1,9 +1,13 @@
 packages:
   - extensions/*
   - sites/*
+
 allowBuilds:
   '@sveltejs/kit': true
   esbuild: true
   puppeteer: true
   spawn-sync: true
   svelte-preprocess: true
+
+onlyBuiltDependencies:
+  - '@tailwindcss/oxide'

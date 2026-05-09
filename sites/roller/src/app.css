@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-brand-100: #e0f2fe;
+  --color-brand-200: #bae6fd;
+  --color-brand-500: #0ea5e9;
+  --color-brand-600: #0284c7;
+  --color-brand-700: #0369a1;
+  --color-brand-900: #0c4a6e;
+
+  --animate-drift: drift 1.4s ease 1s forwards;
+}
+
+@keyframes drift {
+  30% {
+    transform: translateX(10%);
+  }
+  50% {
+    transform: translateX(-50%);
+  }
+  90% {
+    transform: translateX(0) rotate(-10deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@custom-variant dark (&:is(.dark *));

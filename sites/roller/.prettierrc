@@ -1,0 +1,3 @@
+{
+  "tailwindStylesheet": "./src/routes/layout.css"
+}
