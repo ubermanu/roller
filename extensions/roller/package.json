@@ -27,7 +27,7 @@
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "lint": "tsc --noEmit",
-    "prepare": "pnpm run build",
+    "prepublishOnly": "pnpm run build",
     "start:chrome": "pnpm run build && node scripts/chrome-ext.cjs",
     "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
     "watch": "rimraf dist && rollup -c -w",
