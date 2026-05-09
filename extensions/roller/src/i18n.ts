@@ -9,7 +9,9 @@ import pt from './i18n/pt_PT.json'
 import ru from './i18n/ru_RU.json'
 import zh from './i18n/zh_Hans_CN.json'
 
-const allTranslations = {
+type Translations = Record<string, string | undefined>
+
+const allTranslations: Record<string, Translations> = {
   en: {},
   de,
   es,
@@ -23,12 +25,16 @@ const allTranslations = {
   zh,
 }
 
-function getBrowserLocale(fallback) {
+function getBrowserLocale(fallback: string): string {
   if (typeof navigator !== 'undefined') {
-    const lang = navigator.language || navigator.userLanguage
-    const short = lang.substring(0, 2).toLowerCase()
-    if (allTranslations[short]) {
-      return short
+    const lang =
+      (navigator as Navigator & { userLanguage?: string }).language ||
+      (navigator as Navigator & { userLanguage?: string }).userLanguage
+    if (lang) {
+      const short = lang.substring(0, 2).toLowerCase()
+      if (allTranslations[short]) {
+        return short
+      }
     }
   }
   return fallback
@@ -36,11 +42,11 @@ function getBrowserLocale(fallback) {
 
 const currentLocale = getBrowserLocale('en')
 
-function _(key) {
-  let result = key
+function _(key: string): string {
+  let result: string = key
   const dict = allTranslations[currentLocale]
   if (dict && dict[key] !== undefined) {
-    result = dict[key]
+    result = dict[key]!
   }
   return result
 }

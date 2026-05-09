@@ -1,12 +1,14 @@
-function canScroll(style) {
+import type { DocumentContext, ScrollResult } from '../types'
+
+function canScroll(style: string): boolean {
   return style === 'auto' || style === 'scroll' || style === 'visible'
 }
 
-function canScrollContainer(style) {
+function canScrollContainer(style: string): boolean {
   return style === 'auto' || style === 'scroll'
 }
 
-function findScrollNormal(elem) {
+function findScrollNormal(elem: HTMLElement | null): ScrollResult | null {
   if (!elem || elem.nodeType !== 1) {
     return null
   }
@@ -20,21 +22,18 @@ function findScrollNormal(elem) {
     return {
       element: elem,
       scroller: elem,
-      width: width,
-      height: height,
+      width,
+      height,
       root: false,
     }
-  } else {
-    return null
   }
+  return null
 }
 
-export function getDocumentContext() {
+export function getDocumentContext(): DocumentContext {
   const htmlNode = document.documentElement
   const bodyNode = document.body ?? htmlNode
-  const scroller = document.scrollingElement
-    ? document.scrollingElement
-    : bodyNode
+  const scroller = document.scrollingElement ?? bodyNode
   return {
     htmlNode,
     bodyNode,
@@ -42,7 +41,7 @@ export function getDocumentContext() {
   }
 }
 
-export function findScrollTop(element) {
+export function findScrollTop(element: HTMLElement): ScrollResult | null {
   const { scroller } = getDocumentContext()
 
   const scrollerStyle = getComputedStyle(scroller)
@@ -55,30 +54,32 @@ export function findScrollTop(element) {
 
   if (width || height) {
     return {
-      element: element,
-      scroller: scroller,
-      width: width,
-      height: height,
+      element,
+      scroller,
+      width,
+      height,
       root: true,
     }
-  } else {
-    return null
   }
+  return null
 }
 
-export function findScroll(elem, innerScroll = false) {
+export function findScroll(
+  elem: Node | null,
+  innerScroll: boolean = false
+): ScrollResult | null {
   const { htmlNode, bodyNode } = getDocumentContext()
 
   if (innerScroll) {
     while (elem !== document && elem !== htmlNode && elem !== bodyNode) {
       if (elem == null) {
         return null
-      } else if (elem.host instanceof ShadowRoot) {
-        elem = elem.host
+      } else if ((elem as any).host instanceof ShadowRoot) {
+        elem = (elem as any).host
       } else {
-        const x = findScrollNormal(elem)
+        const x = findScrollNormal(elem as HTMLElement)
         if (x === null) {
-          elem = elem.parentNode
+          elem = (elem as HTMLElement).parentNode
         } else {
           return x
         }
@@ -91,17 +92,12 @@ export function findScroll(elem, innerScroll = false) {
   if (document.compatMode === 'CSS1Compat') {
     const result = findScrollTop(htmlNode)
     if (result) return result
-    return findScrollNormal(bodyNode) ?? null
-  } else {
-    return findScrollTop(bodyNode)
+    return findScrollNormal(bodyNode)
   }
+  return findScrollTop(bodyNode)
 }
 
-/**
- * @param elem
- * @returns {boolean}
- */
-export function isScrollable(elem) {
+export function isScrollable(elem: Node | null): boolean {
   const { htmlNode, bodyNode } = getDocumentContext()
 
   while (true) {
@@ -109,34 +105,28 @@ export function isScrollable(elem) {
       return false
     } else if (elem === document || elem === htmlNode || elem === bodyNode) {
       return true
-    } else if (elem.host instanceof ShadowRoot) {
-      elem = elem.host
-    } else if (isInput(elem)) {
+    } else if ((elem as any).host instanceof ShadowRoot) {
+      elem = (elem as any).host
+    } else if (isInput(elem as HTMLElement)) {
       return false
     } else {
-      elem = elem.parentNode
+      elem = (elem as HTMLElement).parentNode
     }
   }
 }
 
-/**
- * @param elem
- * @returns {boolean | any | false}
- */
-function isInput(elem) {
-  return (
+function isInput(elem: HTMLElement): boolean {
+  return !!(
     elem.isContentEditable ||
-    (elem.localName === 'a' && elem.href) ||
-    (elem.localName === 'area' && elem.href) ||
-    (elem.localName === 'textarea' && isEditableText(elem)) ||
-    (elem.localName === 'input' && isEditableText(elem))
+    (elem.localName === 'a' && (elem as HTMLAnchorElement).href) ||
+    (elem.localName === 'area' && (elem as HTMLAreaElement).href) ||
+    (elem.localName === 'textarea' &&
+      isEditableText(elem as HTMLTextAreaElement | HTMLInputElement)) ||
+    (elem.localName === 'input' &&
+      isEditableText(elem as HTMLTextAreaElement | HTMLInputElement))
   )
 }
 
-/**
- * @param elem
- * @returns {boolean}
- */
-function isEditableText(elem) {
+function isEditableText(elem: HTMLTextAreaElement | HTMLInputElement): boolean {
   return !(elem.disabled || elem.readOnly)
 }

@@ -7,8 +7,44 @@ import {
   isScrollable,
 } from './helpers/scroll'
 import * as utils from './helpers/utils'
+import type { RollerOptions, ScrollResult } from './types'
+
+interface FrameMessageData {
+  type: string
+  action: string
+  clientX?: number
+  clientY?: number
+  frameId?: string
+}
 
 export default class Roller {
+  options: RollerOptions
+  visible: boolean
+  backgroundImage: string | null
+  backgroundPositionX: number
+  backgroundPositionY: number
+  cursor: string
+  timeout: ReturnType<typeof requestAnimationFrame> | null
+  oldX: number | null
+  oldY: number | null
+  dirX: number
+  dirY: number
+  clicked: boolean
+  scrolling: boolean
+  overlay:
+    | (HTMLElement & { bgImage?: string; bgPosition?: string; cursor?: string })
+    | null
+  isInIframe: boolean
+  frameId: string
+  iframeScrolling: boolean
+  iframeOldX: number | null
+  iframeOldY: number | null
+
+  htmlNode: HTMLElement
+  bodyNode: HTMLElement
+  htmlScrollBehavior: string
+  bodyScrollBehavior: string
+
   constructor() {
     this.options = defaultOptions
     this.visible = false
@@ -43,14 +79,14 @@ export default class Roller {
     this.handleFrameMessage = this.handleFrameMessage.bind(this)
   }
 
-  init() {
+  init(): void {
     addEventListener('mousedown', this.handleMouseDown, true)
     if (!this.isInIframe) {
       addEventListener('message', this.handleFrameMessage)
     }
   }
 
-  destroy() {
+  destroy(): void {
     this.stop()
     removeEventListener('mousedown', this.handleMouseDown, true)
     if (!this.isInIframe) {
@@ -58,21 +94,31 @@ export default class Roller {
     }
   }
 
-  startCycle(elem, scroller, root) {
-    let scrollX, scrollY
-
+  startCycle(
+    _elem: Element | HTMLElement,
+    scroller: Element | HTMLElement,
+    root: boolean
+  ): void {
     const scrollerStyle = getComputedStyle(scroller)
     const rowReverse = scrollerStyle.flexDirection === 'row-reverse'
     const colReverse = scrollerStyle.flexDirection === 'column-reverse'
 
-    const loop = () => {
+    const loop = (): void => {
       this.timeout = requestAnimationFrame(loop)
 
-      scrollX = root ? window.scrollX : scroller.scrollLeft
-      scrollY = root ? window.scrollY : scroller.scrollTop
+      let scrollX: number = root
+        ? window.scrollX
+        : (scroller as HTMLElement).scrollLeft
+      let scrollY: number = root
+        ? window.scrollY
+        : (scroller as HTMLElement).scrollTop
 
-      const scrollWidth = scroller.scrollWidth - scroller.clientWidth
-      const scrollHeight = scroller.scrollHeight - scroller.clientHeight
+      const scrollWidth =
+        (scroller as HTMLElement).scrollWidth -
+        (scroller as HTMLElement).clientWidth
+      const scrollHeight =
+        (scroller as HTMLElement).scrollHeight -
+        (scroller as HTMLElement).clientHeight
 
       scrollX = utils.clamp(
         scrollX + this.dirX,
@@ -88,34 +134,34 @@ export default class Roller {
       if (root) {
         window.scroll(scrollX, scrollY)
       } else {
-        scroller.scrollLeft = scrollX
-        scroller.scrollTop = scrollY
+        ;(scroller as HTMLElement).scrollLeft = scrollX
+        ;(scroller as HTMLElement).scrollTop = scrollY
       }
     }
 
     loop()
   }
 
-  shouldSticky(x, y) {
+  shouldSticky(x: number, y: number): boolean {
     return (
       this.options.stickyScroll &&
       utils.hypot(x, y) < this.options.dragThreshold
     )
   }
 
-  scale(value) {
+  scale(value: number): number {
     return value / this.options.moveSpeed
   }
 
-  handleMouseWheel(event) {
+  handleMouseWheel(event: WheelEvent): void {
     utils.stopEvent(event, true)
   }
 
-  handleMouseMove(event) {
+  handleMouseMove(event: MouseEvent): void {
     utils.stopEvent(event, true)
 
-    const x = event.clientX - this.oldX
-    const y = event.clientY - this.oldY
+    const x = event.clientX - this.oldX!
+    const y = event.clientY - this.oldY!
 
     if (utils.hypot(x, y) > this.options.moveThreshold) {
       this.cursor = utils.getCursorStyleFromAngle(utils.angle(x, y))
@@ -145,11 +191,11 @@ export default class Roller {
     }
   }
 
-  handleMouseUp(event) {
+  handleMouseUp(event: MouseEvent): void {
     utils.stopEvent(event, true)
 
-    const x = event.clientX - this.oldX
-    const y = event.clientY - this.oldY
+    const x = event.clientX - this.oldX!
+    const y = event.clientY - this.oldY!
 
     if (this.clicked || !this.shouldSticky(x, y)) {
       this.stop()
@@ -158,9 +204,11 @@ export default class Roller {
     }
   }
 
-  stop() {
-    cancelAnimationFrame(this.timeout)
-    this.timeout = null
+  stop(): void {
+    if (this.timeout !== null) {
+      cancelAnimationFrame(this.timeout)
+      this.timeout = null
+    }
 
     removeEventListener('wheel', this.handleMouseWheel, true)
     removeEventListener('mousemove', this.handleMouseMove, true)
@@ -187,7 +235,7 @@ export default class Roller {
     this.bodyNode.style.setProperty('scroll-behavior', this.bodyScrollBehavior)
   }
 
-  start(o, x, y) {
+  start(o: ScrollResult, x: number, y: number): void {
     this.scrolling = true
     this.oldX = x
     this.oldY = y
@@ -209,31 +257,37 @@ export default class Roller {
     this.bodyNode.style.setProperty('scroll-behavior', 'auto', 'important')
   }
 
-  updateOverlay() {
+  updateOverlay(): void {
     if (this.visible) {
       if (!this.overlay) {
-        this.overlay = document.createElement('roller-overlay')
+        this.overlay = document.createElement(
+          'roller-overlay'
+        ) as HTMLElement & {
+          bgImage?: string
+          bgPosition?: string
+          cursor?: string
+        }
         document.documentElement.appendChild(this.overlay)
       }
-      this.overlay.bgImage = this.backgroundImage
+      this.overlay.bgImage = this.backgroundImage ?? ''
       this.overlay.bgPosition = `${this.backgroundPositionX - 13}px ${this.backgroundPositionY - 13}px`
       this.overlay.cursor = this.cursor
     }
   }
 
-  handleFrameMessage(event) {
+  handleFrameMessage(event: MessageEvent<FrameMessageData | undefined>): void {
     if (event.data?.type !== 'roller-scroll') {
       return
     }
 
-    const iframe = this.findIframeByWindow(event.source)
+    const iframe = this.findIframeByWindow(event.source as Window | null)
     if (!iframe) {
       return
     }
 
     const rect = iframe.getBoundingClientRect()
-    const x = event.data.clientX + rect.left + (window.scrollX || 0)
-    const y = event.data.clientY + rect.top + (window.scrollY || 0)
+    const x = (event.data.clientX ?? 0) + rect.left + (window.scrollX || 0)
+    const y = (event.data.clientY ?? 0) + rect.top + (window.scrollY || 0)
 
     if (event.data.action === 'start') {
       const elem = findScrollTop(this.htmlNode)
@@ -244,8 +298,8 @@ export default class Roller {
         this.iframeOldY = y
       }
     } else if (event.data.action === 'move' && this.iframeScrolling) {
-      const dx = x - this.iframeOldX
-      const dy = y - this.iframeOldY
+      const dx = x - this.iframeOldX!
+      const dy = y - this.iframeOldY!
 
       if (utils.hypot(dx, dy) > this.options.moveThreshold) {
         this.cursor = utils.getCursorStyleFromAngle(utils.angle(dx, dy))
@@ -285,7 +339,8 @@ export default class Roller {
     }
   }
 
-  findIframeByWindow(win) {
+  findIframeByWindow(win: Window | null): HTMLIFrameElement | null {
+    if (!win) return null
     for (const iframe of document.querySelectorAll('iframe')) {
       if (iframe.contentWindow === win) {
         return iframe
@@ -294,12 +349,15 @@ export default class Roller {
     return null
   }
 
-  handleMouseDown(event) {
+  handleMouseDown(event: MouseEvent): void {
     if (this.scrolling) {
       utils.stopEvent(event, true)
     } else {
-      const path = event.composedPath()
-      const target = path.find((node) => node.nodeType === 1) ?? null
+      const path: EventTarget[] = event.composedPath()
+      const target = path.find((node) => (node as Node).nodeType === 1) as
+        | HTMLElement
+        | null
+        | undefined
 
       if (
         target != null &&
@@ -312,7 +370,7 @@ export default class Roller {
         event.clientY < this.htmlNode.clientHeight &&
         (this.options.scrollOnLinks || isScrollable(target))
       ) {
-        const elem =
+        const elem: ScrollResult | null =
           this.isInIframe && !this.options.innerScroll
             ? null
             : findScroll(target, this.options.innerScroll)
@@ -334,7 +392,7 @@ export default class Roller {
           this.iframeOldX = event.clientX
           this.iframeOldY = event.clientY
 
-          const handleIframeMouseMove = (e) => {
+          const handleIframeMouseMove = (e: MouseEvent): void => {
             window.parent.postMessage(
               {
                 type: 'roller-scroll',
@@ -347,7 +405,7 @@ export default class Roller {
             )
           }
 
-          const handleIframeMouseUp = () => {
+          const handleIframeMouseUp = (): void => {
             window.parent.postMessage(
               {
                 type: 'roller-scroll',

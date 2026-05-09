@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "commonjs",
-    "checkJs": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "types": ["chrome"],
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "allowJs": true,
-    "strict": false,
+    "strict": true,
     "skipLibCheck": true,
     "noEmit": true,
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true
   },
-  "include": ["src/**/*.js"],
+  "include": ["src/**/*.ts", "src/**/*.svelte"],
   "exclude": ["node_modules", "dist"]
 }

@@ -38,6 +38,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
+    "@rollup/plugin-typescript": "^12.3.0",
     "@types/chrome": "^0.1.36",
     "@types/node": "^24",
     "@webcomponents/custom-elements": "^1.6.0",
@@ -51,6 +52,7 @@
     "rollup-plugin-svelte": "^7.2.3",
     "rollup-plugin-svg": "^2.0.0",
     "svelte": "^5.55.5",
+    "tslib": "^2.8.1",
     "typescript": "^5.2.2",
     "web-ext": "^10.1.0",
     "webext-base-css": "^2.1.0"

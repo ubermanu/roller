@@ -1,42 +1,22 @@
 import originBoth from '../images/origin/both.svg'
 import originHorizontal from '../images/origin/horizontal.svg'
 import originVertical from '../images/origin/vertical.svg'
+import type { ScrollResult } from '../types'
 
-/**
- * @param {number} x
- * @param {number} y
- * @returns {number}
- */
-export function hypot(x, y) {
+export function hypot(x: number, y: number): number {
   return Math.sqrt(x * x + y * y)
 }
 
-/**
- * @param {number} num
- * @param {number} cap
- * @returns {any | number}
- */
-export function max(num, cap) {
-  let neg = cap * -1
+export function max(num: number, cap: number): number {
+  const neg = cap * -1
   return num > cap ? cap : num < neg ? neg : num
 }
 
-/**
- * @param {number} value
- * @param {number} min
- * @param {number} max
- * @returns {number}
- */
-export function clamp(value, min, max) {
+export function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max)
 }
 
-/**
- * @param {number} x
- * @param {number} y
- * @returns {number}
- */
-export function angle(x, y) {
+export function angle(x: number, y: number): number {
   let angle = Math.atan2(y, x) * (180 / Math.PI)
   if (angle < 0) {
     angle += 360
@@ -44,11 +24,7 @@ export function angle(x, y) {
   return angle
 }
 
-/**
- * @param {number} angle
- * @returns {string}
- */
-export function getCursorStyleFromAngle(angle) {
+export function getCursorStyleFromAngle(angle: number): string {
   if (angle < 30 || angle >= 330) {
     return 'e-resize'
   } else if (angle < 60) {
@@ -68,7 +44,7 @@ export function getCursorStyleFromAngle(angle) {
   }
 }
 
-export function getImageFromScrollNormal(o) {
+export function getImageFromScrollNormal(o: ScrollResult): string {
   if (o.width && o.height) {
     return originBoth
   } else if (o.width) {
@@ -78,13 +54,7 @@ export function getImageFromScrollNormal(o) {
   }
 }
 
-/**
- * Stop event propagation
- *
- * @param {Event} e
- * @param {boolean} preventDefault
- */
-export function stopEvent(e, preventDefault = false) {
+export function stopEvent(e: Event, preventDefault: boolean = false): void {
   e.stopImmediatePropagation()
   e.stopPropagation()
 

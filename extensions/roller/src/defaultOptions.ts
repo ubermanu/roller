@@ -1,4 +1,6 @@
-export default {
+import type { RollerOptions } from './types'
+
+const defaultOptions: RollerOptions = {
   dragThreshold: 10,
   moveThreshold: 10,
   moveSpeed: 10,
@@ -12,3 +14,5 @@ export default {
   middleClick: true,
   disableOnWindows: true,
 }
+
+export default defaultOptions

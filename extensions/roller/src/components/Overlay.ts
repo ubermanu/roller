@@ -1,5 +1,6 @@
-/** @public */
 export default class Overlay extends HTMLElement {
+  #el: HTMLElement
+
   constructor() {
     super()
 
@@ -20,23 +21,18 @@ export default class Overlay extends HTMLElement {
       </style>
       <div id="overlay"></div>
     `
-    this.#el = shadow.getElementById('overlay')
+    this.#el = shadow.getElementById('overlay')!
   }
 
-  #el
-
-  /** @param {string} value */
-  set bgImage(value) {
+  set bgImage(value: string) {
     this.#el.style.backgroundImage = value ? `url("${value}")` : 'none'
   }
 
-  /** @param {string} value */
-  set bgPosition(value) {
+  set bgPosition(value: string) {
     this.#el.style.backgroundPosition = value
   }
 
-  /** @param {string} value */
-  set cursor(value) {
+  set cursor(value: string) {
     this.#el.style.cursor = value
   }
 }
