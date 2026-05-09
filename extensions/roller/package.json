@@ -34,18 +34,18 @@
     "zip": "pnpm run build && web-ext build --source-dir ./dist/ --overwrite-dest"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^28.0.9",
+    "@rollup/plugin-commonjs": "^29.0.2",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^16.0.3",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@types/chrome": "^0.1.36",
+    "@types/chrome": "^0.1.42",
     "@types/node": "^24",
     "@webcomponents/custom-elements": "^1.6.0",
-    "postcss": "^8.5.12",
-    "puppeteer": "^24.36.1",
+    "postcss": "^8.5.14",
+    "puppeteer": "^24.43.0",
     "rimraf": "^6.1.2",
-    "rollup": "^4.57.1",
+    "rollup": "^4.60.3",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-manifest-json": "^1.7.0",
     "rollup-plugin-postcss": "^4.0.2",
@@ -53,7 +53,7 @@
     "rollup-plugin-svg": "^2.0.0",
     "svelte": "^5.55.5",
     "tslib": "^2.8.1",
-    "typescript": "^5.2.2",
+    "typescript": "^6.0.3",
     "web-ext": "^10.1.0",
     "webext-base-css": "^2.1.0"
   }
