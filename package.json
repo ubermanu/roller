@@ -19,7 +19,7 @@
     "husky": "^9.1.7",
     "knip": "^6.12.2",
     "lint-staged": "^17.0.3",
-    "prettier": "~3.6",
+    "prettier": "^3.8.3",
     "prettier-plugin-svelte": "^3.5.1",
     "prettier-plugin-tailwindcss": "^0.8.0"
   }

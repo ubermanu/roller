@@ -40,7 +40,7 @@
       </div>
 
       <h1
-        class="mb-6 flex flex-col items-center justify-center gap-4 text-6xl font-black tracking-tight text-neutral-900 dark:text-white sm:flex-row sm:text-7xl"
+        class="mb-6 flex flex-col items-center justify-center gap-4 text-6xl font-black tracking-tight text-neutral-900 sm:flex-row sm:text-7xl dark:text-white"
       >
         Roller
         <span
@@ -63,7 +63,7 @@
         {#each downloads as download}
           <a
             href={download.url}
-            class="group inline-flex w-full items-center justify-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-semibold text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300/50 transition-all hover:bg-neutral-50 hover:shadow-md active:bg-neutral-100 dark:bg-white/10 dark:text-white dark:ring-white/20 dark:hover:bg-white/20 dark:active:bg-white/10 sm:w-auto"
+            class="group inline-flex w-full items-center justify-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-semibold text-neutral-900 shadow-sm ring-1 ring-neutral-300/50 transition-all ring-inset hover:bg-neutral-50 hover:shadow-md active:bg-neutral-100 sm:w-auto dark:bg-white/10 dark:text-white dark:ring-white/20 dark:hover:bg-white/20 dark:active:bg-white/10"
           >
             <img
               class="h-8 w-8 transition-transform group-hover:scale-110"
