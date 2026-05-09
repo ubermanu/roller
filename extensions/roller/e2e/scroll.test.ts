@@ -12,6 +12,7 @@ beforeAll(async () => {
   browser = await puppeteer.launch({
     pipe: true,
     enableExtensions: true,
+    args: process.env.CI ? ['--no-sandbox', '--disable-setuid-sandbox'] : [],
   })
 
   const extensionId = await browser.installExtension(pathToExtension)
