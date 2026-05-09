@@ -27,9 +27,7 @@ const allTranslations: Record<string, Translations> = {
 
 function getBrowserLocale(fallback: string): string {
   if (typeof navigator !== 'undefined') {
-    const lang =
-      (navigator as Navigator & { userLanguage?: string }).language ||
-      (navigator as Navigator & { userLanguage?: string }).userLanguage
+    const lang = navigator.language
     if (lang) {
       const short = lang.substring(0, 2).toLowerCase()
       if (allTranslations[short]) {

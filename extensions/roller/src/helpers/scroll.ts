@@ -1,22 +1,23 @@
 import type { DocumentContext, ScrollResult } from '../types'
 
-function canScroll(style: string): boolean {
-  return style === 'auto' || style === 'scroll' || style === 'visible'
+function canScroll(overflowStyle: string): boolean {
+  return overflowStyle === 'auto' || overflowStyle === 'scroll'
 }
 
-function canScrollContainer(style: string): boolean {
-  return style === 'auto' || style === 'scroll'
+function canScrollOrVisible(overflowStyle: string): boolean {
+  return canScroll(overflowStyle) || overflowStyle === 'visible'
 }
 
 function findScrollNormal(elem: HTMLElement | null): ScrollResult | null {
   if (!elem || elem.nodeType !== 1) {
     return null
   }
+
   const style = getComputedStyle(elem)
   const width =
-    canScrollContainer(style.overflowX) && elem.scrollWidth > elem.clientWidth
+    canScroll(style.overflowX) && elem.scrollWidth > elem.clientWidth
   const height =
-    canScrollContainer(style.overflowY) && elem.scrollHeight > elem.clientHeight
+    canScroll(style.overflowY) && elem.scrollHeight > elem.clientHeight
 
   if (width || height) {
     return {
@@ -27,6 +28,7 @@ function findScrollNormal(elem: HTMLElement | null): ScrollResult | null {
       root: false,
     }
   }
+
   return null
 }
 
@@ -46,10 +48,10 @@ export function findScrollTop(element: HTMLElement): ScrollResult | null {
 
   const scrollerStyle = getComputedStyle(scroller)
   const width =
-    canScroll(scrollerStyle.overflowX) &&
+    canScrollOrVisible(scrollerStyle.overflowX) &&
     scroller.scrollWidth > scroller.clientWidth
   const height =
-    canScroll(scrollerStyle.overflowY) &&
+    canScrollOrVisible(scrollerStyle.overflowY) &&
     scroller.scrollHeight > scroller.clientHeight
 
   if (width || height) {
@@ -61,6 +63,7 @@ export function findScrollTop(element: HTMLElement): ScrollResult | null {
       root: true,
     }
   }
+
   return null
 }
 
@@ -90,10 +93,9 @@ export function findScroll(
   // hack needed to work around non-spec-compliant versions of Chrome
   // https://code.google.com/p/chromium/issues/detail?id=157855
   if (document.compatMode === 'CSS1Compat') {
-    const result = findScrollTop(htmlNode)
-    if (result) return result
-    return findScrollNormal(bodyNode)
+    return findScrollTop(htmlNode) || findScrollNormal(bodyNode)
   }
+
   return findScrollTop(bodyNode)
 }
 
@@ -110,7 +112,7 @@ export function isScrollable(elem: Node | null): boolean {
     } else if (isInput(elem as HTMLElement)) {
       return false
     } else {
-      elem = (elem as HTMLElement).parentNode
+      elem = elem.parentNode
     }
   }
 }
