@@ -1,21 +1,21 @@
 <script>
-import chromeIcon from "$lib/images/chrome.svg";
-import firefoxIcon from "$lib/images/firefox.svg";
-import rollerIcon from "$lib/images/roller.svg";
-import pkg from "@ubermanu/roller/package.json";
+  import chromeIcon from '$lib/images/chrome.svg'
+  import firefoxIcon from '$lib/images/firefox.svg'
+  import rollerIcon from '$lib/images/roller.svg'
+  import pkg from '@ubermanu/roller/package.json'
 
-const downloads = [
-  {
-    name: "Chrome",
-    url: "https://chrome.google.com/webstore/detail/roller/kdcakfeidhfeilahlclgbnmpgebafjpm",
-    icon: chromeIcon,
-  },
-  {
-    name: "Firefox",
-    url: "https://addons.mozilla.org/firefox/addon/roller-scroll/",
-    icon: firefoxIcon,
-  },
-];
+  const downloads = [
+    {
+      name: 'Chrome',
+      url: 'https://chrome.google.com/webstore/detail/roller/kdcakfeidhfeilahlclgbnmpgebafjpm',
+      icon: chromeIcon,
+    },
+    {
+      name: 'Firefox',
+      url: 'https://addons.mozilla.org/firefox/addon/roller-scroll/',
+      icon: firefoxIcon,
+    },
+  ]
 </script>
 
 <svelte:head>
@@ -40,7 +40,7 @@ const downloads = [
       </div>
 
       <h1
-        class="mb-6 flex flex-col items-center justify-center gap-4 text-6xl font-black tracking-tight text-neutral-900 sm:flex-row sm:text-7xl dark:text-white"
+        class="mb-6 flex flex-col items-center justify-center gap-4 text-6xl font-black tracking-tight text-neutral-900 dark:text-white sm:flex-row sm:text-7xl"
       >
         Roller
         <span
@@ -51,7 +51,7 @@ const downloads = [
       </h1>
 
       <div
-        class="mx-auto prose prose-lg mb-12 text-neutral-700 dark:text-neutral-300 dark:prose-invert"
+        class="prose prose-lg dark:prose-invert mx-auto mb-12 text-neutral-700 dark:text-neutral-300"
       >
         <p class="lead text-xl font-medium sm:text-2xl">
           Auto-scroll web pages effortlessly on Linux with just your middle
@@ -63,7 +63,7 @@ const downloads = [
         {#each downloads as download}
           <a
             href={download.url}
-            class="group inline-flex w-full items-center justify-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-semibold text-neutral-900 shadow-sm ring-1 ring-neutral-300/50 transition-all ring-inset hover:bg-neutral-50 hover:shadow-md active:bg-neutral-100 sm:w-auto dark:bg-white/10 dark:text-white dark:ring-white/20 dark:hover:bg-white/20 dark:active:bg-white/10"
+            class="group inline-flex w-full items-center justify-center gap-3 rounded-xl bg-white px-8 py-4 text-lg font-semibold text-neutral-900 shadow-sm ring-1 ring-inset ring-neutral-300/50 transition-all hover:bg-neutral-50 hover:shadow-md active:bg-neutral-100 dark:bg-white/10 dark:text-white dark:ring-white/20 dark:hover:bg-white/20 dark:active:bg-white/10 sm:w-auto"
           >
             <img
               class="h-8 w-8 transition-transform group-hover:scale-110"
