@@ -26,8 +26,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && rollup -c",
-    "optimize": "svgo src/images/origin/*.svg",
-    "prepublishOnly": "pnpm run build",
+    "prepare": "pnpm run build",
     "start:chrome": "pnpm run build && node scripts/chrome-ext.cjs",
     "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
     "watch": "rimraf dist && rollup -c -w",
@@ -54,7 +53,6 @@
     "rollup-plugin-svelte": "^7.2.3",
     "rollup-plugin-svg": "^2.0.0",
     "svelte": "^5.55.5",
-    "svgo": "^4.0.1",
     "web-ext": "^10.1.0",
     "webext-base-css": "^2.1.0"
   }
