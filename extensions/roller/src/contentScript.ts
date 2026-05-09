@@ -18,4 +18,6 @@ chrome?.storage?.local?.get(defaults, (options: RollerOptions) => {
   roller.init()
 })
 
+window.roller = roller
+
 export default roller
