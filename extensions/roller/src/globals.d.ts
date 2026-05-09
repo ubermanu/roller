@@ -1,10 +1,7 @@
-declare module '*.svg' {
-  const content: string
-  export default content
-}
+import type Overlay from './components/Overlay'
 
-declare module '*.svelte' {
-  import type { ComponentType } from 'svelte'
-  const component: ComponentType
-  export default component
+declare global {
+  interface HTMLElementTagNameMap {
+    'roller-overlay': Overlay
+  }
 }

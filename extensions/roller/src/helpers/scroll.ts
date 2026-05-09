@@ -121,9 +121,8 @@ function isInput(elem: HTMLElement): boolean {
     (elem.localName === 'a' && (elem as HTMLAnchorElement).href) ||
     (elem.localName === 'area' && (elem as HTMLAreaElement).href) ||
     (elem.localName === 'textarea' &&
-      isEditableText(elem as HTMLTextAreaElement | HTMLInputElement)) ||
-    (elem.localName === 'input' &&
-      isEditableText(elem as HTMLTextAreaElement | HTMLInputElement))
+      isEditableText(elem as HTMLTextAreaElement)) ||
+    (elem.localName === 'input' && isEditableText(elem as HTMLInputElement))
   )
 }
 

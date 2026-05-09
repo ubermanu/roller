@@ -1,4 +1,4 @@
-import './components/Overlay'
+import Overlay from './components/Overlay'
 import defaultOptions from './defaultOptions'
 import {
   findScroll,
@@ -24,16 +24,14 @@ export default class Roller {
   backgroundPositionX: number
   backgroundPositionY: number
   cursor: string
-  timeout: ReturnType<typeof requestAnimationFrame> | null
+  timeout: number | null
   oldX: number | null
   oldY: number | null
   dirX: number
   dirY: number
   clicked: boolean
   scrolling: boolean
-  overlay:
-    | (HTMLElement & { bgImage?: string; bgPosition?: string; cursor?: string })
-    | null
+  overlay: Overlay | null
   isInIframe: boolean
   frameId: string
   iframeScrolling: boolean
@@ -106,19 +104,11 @@ export default class Roller {
     const loop = (): void => {
       this.timeout = requestAnimationFrame(loop)
 
-      let scrollX: number = root
-        ? window.scrollX
-        : (scroller as HTMLElement).scrollLeft
-      let scrollY: number = root
-        ? window.scrollY
-        : (scroller as HTMLElement).scrollTop
+      let scrollX = root ? window.scrollX : scroller.scrollLeft
+      let scrollY = root ? window.scrollY : scroller.scrollTop
 
-      const scrollWidth =
-        (scroller as HTMLElement).scrollWidth -
-        (scroller as HTMLElement).clientWidth
-      const scrollHeight =
-        (scroller as HTMLElement).scrollHeight -
-        (scroller as HTMLElement).clientHeight
+      const scrollWidth = scroller.scrollWidth - scroller.clientWidth
+      const scrollHeight = scroller.scrollHeight - scroller.clientHeight
 
       scrollX = utils.clamp(
         scrollX + this.dirX,
@@ -134,8 +124,8 @@ export default class Roller {
       if (root) {
         window.scroll(scrollX, scrollY)
       } else {
-        ;(scroller as HTMLElement).scrollLeft = scrollX
-        ;(scroller as HTMLElement).scrollTop = scrollY
+        scroller.scrollLeft = scrollX
+        scroller.scrollTop = scrollY
       }
     }
 
@@ -260,13 +250,7 @@ export default class Roller {
   updateOverlay(): void {
     if (this.visible) {
       if (!this.overlay) {
-        this.overlay = document.createElement(
-          'roller-overlay'
-        ) as HTMLElement & {
-          bgImage?: string
-          bgPosition?: string
-          cursor?: string
-        }
+        this.overlay = document.createElement('roller-overlay')
         document.documentElement.appendChild(this.overlay)
       }
       this.overlay.bgImage = this.backgroundImage ?? ''
@@ -353,7 +337,7 @@ export default class Roller {
     if (this.scrolling) {
       utils.stopEvent(event, true)
     } else {
-      const path: EventTarget[] = event.composedPath()
+      const path = event.composedPath()
       const target = path.find((node) => (node as Node).nodeType === 1) as
         | HTMLElement
         | null

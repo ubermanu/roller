@@ -36,7 +36,3 @@ export default class Overlay extends HTMLElement {
     this.#el.style.cursor = value
   }
 }
-
-if (!customElements.get('roller-overlay')) {
-  customElements.define('roller-overlay', Overlay)
-}
