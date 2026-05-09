@@ -1,14 +1,15 @@
-import AutoScroll from './components/AutoScroll'
+import '@webcomponents/custom-elements'
+import Roller from './Roller'
 import defaults from './defaultOptions'
 
-const autoScroll = new AutoScroll()
+const roller = new Roller()
 
 chrome?.storage?.local?.get(defaults, (options) => {
   if (navigator.platform === 'Win32' && options.disableOnWindows) {
     return
   }
-  autoScroll.options = options
-  autoScroll.init()
+  roller.options = options
+  roller.init()
 })
 
-export default autoScroll
+export default roller
