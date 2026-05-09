@@ -21,5 +21,6 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
       - run: pnpm i
-      - run: pnpm build
       - run: pnpm knip
+      - run: pnpm lint
+      - run: pnpm build

@@ -5,6 +5,7 @@
     "build": "pnpm -r build",
     "format": "prettier --write --ignore-unknown .",
     "knip": "knip",
+    "lint": "pnpm -r lint",
     "prepare": "husky"
   },
   "lint-staged": {
