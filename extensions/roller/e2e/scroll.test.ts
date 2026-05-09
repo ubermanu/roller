@@ -177,3 +177,53 @@ it('should scroll an inner element if innerScroll is enabled', async () => {
   expect(mainScrollY).toBe(0) // Window shouldn't have scrolled
   expect(innerScrollY).toBeGreaterThan(10) // Inner box should have scrolled
 })
+
+it('should NOT trigger sticky scrolling when stickyScroll is disabled', async () => {
+  // Reset options with stickyScroll disabled
+  await extensionRealm.evaluate(() => {
+    Object.assign(window.roller.options, {
+      dragThreshold: 10,
+      moveThreshold: 10,
+      moveSpeed: 10,
+      stickyScroll: false,
+      innerScroll: true,
+      scrollOnLinks: true,
+      sameSpeed: false,
+      capSpeed: 10,
+      shouldCap: false,
+      ctrlClick: false,
+      middleClick: true,
+      disableOnWindows: true,
+    })
+  })
+  await new Promise((r) => setTimeout(r, 200))
+
+  // Set up a tall page
+  await page.evaluate(() => {
+    document.body.style.height = '5000px'
+  })
+
+  // Reset scroll to 0 and assert it's 0
+  await page.evaluate(() => window.scrollTo(0, 0))
+  let scrollY = await page.evaluate(() => window.scrollY)
+  expect(scrollY).toBe(0)
+
+  // Middle-click sequence
+  await page.mouse.move(200, 200)
+  await page.mouse.down({ button: 'middle' })
+  await new Promise((r) => setTimeout(r, 100))
+  await page.mouse.up({ button: 'middle' })
+  await new Promise((r) => setTimeout(r, 100))
+  await page.mouse.move(200, 300)
+  await new Promise((r) => setTimeout(r, 1500))
+
+  // Read scrollY
+  scrollY = await page.evaluate(() => window.scrollY)
+
+  // Stop scrolling
+  await page.mouse.down({ button: 'left' })
+  await page.mouse.up({ button: 'left' })
+
+  // Assert that scroll did NOT happen (stickyScroll is disabled)
+  expect(scrollY).toBeLessThan(5)
+})
