@@ -77,12 +77,12 @@ export function findScroll(
     while (elem !== document && elem !== htmlNode && elem !== bodyNode) {
       if (elem == null) {
         return null
-      } else if ((elem as any).host instanceof ShadowRoot) {
-        elem = (elem as any).host
+      } else if (elem instanceof ShadowRoot) {
+        elem = elem.host
       } else {
         const x = findScrollNormal(elem as HTMLElement)
         if (x === null) {
-          elem = (elem as HTMLElement).parentNode
+          elem = elem.parentNode
         } else {
           return x
         }
@@ -107,8 +107,8 @@ export function isScrollable(elem: Node | null): boolean {
       return false
     } else if (elem === document || elem === htmlNode || elem === bodyNode) {
       return true
-    } else if ((elem as any).host instanceof ShadowRoot) {
-      elem = (elem as any).host
+    } else if (elem instanceof ShadowRoot) {
+      elem = elem.host
     } else if (isInput(elem as HTMLElement)) {
       return false
     } else {
