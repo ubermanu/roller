@@ -1,0 +1,6 @@
+flake.lock
+LICENSE
+pnpm-lock.yaml
+.svelte-kit
+dist
+build

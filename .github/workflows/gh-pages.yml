@@ -2,7 +2,7 @@ name: gh-pages
 
 on:
   push:
-    tags: [ '*' ]
+    tags: ['*']
   workflow_dispatch:
 
 permissions:
@@ -25,11 +25,11 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 10
 
       - uses: actions/setup-node@v6
         with:
-          node-version: 21
+          node-version: 24
           registry-url: 'https://registry.npmjs.org'
           cache: 'pnpm'
 

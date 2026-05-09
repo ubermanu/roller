@@ -2,35 +2,30 @@ import commonjs from '@rollup/plugin-commonjs'
 import json from '@rollup/plugin-json'
 import resolve from '@rollup/plugin-node-resolve'
 import terser from '@rollup/plugin-terser'
+import typescript from '@rollup/plugin-typescript'
 import copy from 'rollup-plugin-copy'
 import manifestJSON from 'rollup-plugin-manifest-json'
 import postcss from 'rollup-plugin-postcss'
 import svelte from 'rollup-plugin-svelte'
 import svg from 'rollup-plugin-svg'
-import pkg from './package.json' assert { type: 'json' }
+import pkg from './package.json' with { type: 'json' }
 
 export default [
   {
-    input: 'src/contentScript.js',
+    input: 'src/contentScript.ts',
     output: {
-      name: 'AutoScroll',
+      name: 'Roller',
       file: 'dist/content_script.js',
       format: 'iife',
     },
     plugins: [
-      svelte({
-        emitCss: false,
-        compilerOptions: {
-          customElement: true,
-        },
-      }),
+      typescript({ tsconfig: './tsconfig.json' }),
       svg({
         base64: true,
       }),
       terser(),
       resolve({
         browser: true,
-        dedupe: ['svelte'],
       }),
       commonjs(),
       copy({
@@ -44,13 +39,14 @@ export default [
     ],
   },
   {
-    input: 'src/optionsPage.js',
+    input: 'src/optionsPage.ts',
     output: {
       name: 'app',
       file: 'dist/options_page.js',
       format: 'iife',
     },
     plugins: [
+      typescript({ tsconfig: './tsconfig.json' }),
       svelte({
         emitCss: false,
       }),

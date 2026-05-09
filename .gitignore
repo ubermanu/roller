@@ -6,3 +6,5 @@ web-ext-artifacts
 *.zip
 *.xpi
 *.crx
+.playwright-mcp
+package-lock.json
