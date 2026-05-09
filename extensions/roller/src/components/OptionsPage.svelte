@@ -1,22 +1,19 @@
 <script>
+  import { onMount } from 'svelte'
   import defaults from '../defaultOptions'
   import { _ as t } from '../i18n'
 
   let options = $state({ ...defaults })
 
-  $effect(() => {
+  onMount(() => {
     chrome.storage.local.get(defaults, (data) => {
       Object.assign(options, data)
     })
   })
 
   $effect(() => {
-    jsonDump()
-  })
-
-  function jsonDump() {
     chrome.storage.local.set({ ...options })
-  }
+  })
 
   function handleReset() {
     options = { ...defaults }
@@ -132,10 +129,7 @@
     <div class="field">
       <div class="control">
         <label class="checkbox">
-          <input
-            type="checkbox"
-            bind:checked={options.disableOnWindows}
-          />{' '}
+          <input type="checkbox" bind:checked={options.disableOnWindows} />{' '}
           {t('Disable on Windows platform')}
         </label>
       </div>
