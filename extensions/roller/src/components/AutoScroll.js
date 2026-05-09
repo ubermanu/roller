@@ -1,5 +1,10 @@
 import defaultOptions from '../defaultOptions'
-import { findScroll, findScrollTop, getDocumentContext, isScrollable } from '../helpers/scroll'
+import {
+  findScroll,
+  findScrollTop,
+  getDocumentContext,
+  isScrollable,
+} from '../helpers/scroll'
 import * as utils from '../helpers/utils'
 import { createOverlay } from './RollerOverlay'
 
@@ -294,19 +299,20 @@ export default class AutoScroll {
       utils.stopEvent(event, true)
     } else {
       const path = event.composedPath()
-      const target = path.find(node => node.nodeType === 1) ?? null
+      const target = path.find((node) => node.nodeType === 1) ?? null
 
-     if (target != null &&
-         target.localName !== 'iframe' &&
-         ((event.button === 1 && this.options.middleClick) ||
-           (event.button === 0 &&
-             (event.ctrlKey || event.metaKey) &&
-             this.options.ctrlClick)) &&
-         event.clientX < this.htmlNode.clientWidth &&
-         event.clientY < this.htmlNode.clientHeight &&
-         (this.options.scrollOnLinks || isScrollable(target))
-       ) {
-         const elem =
+      if (
+        target != null &&
+        target.localName !== 'iframe' &&
+        ((event.button === 1 && this.options.middleClick) ||
+          (event.button === 0 &&
+            (event.ctrlKey || event.metaKey) &&
+            this.options.ctrlClick)) &&
+        event.clientX < this.htmlNode.clientWidth &&
+        event.clientY < this.htmlNode.clientHeight &&
+        (this.options.scrollOnLinks || isScrollable(target))
+      ) {
+        const elem =
           this.isInIframe && !this.options.innerScroll
             ? null
             : findScroll(target, this.options.innerScroll)
@@ -323,7 +329,7 @@ export default class AutoScroll {
               clientY: event.clientY,
               frameId: this.frameId,
             },
-            '*',
+            '*'
           )
           this.iframeOldX = event.clientX
           this.iframeOldY = event.clientY
@@ -337,7 +343,7 @@ export default class AutoScroll {
                 clientY: e.clientY,
                 frameId: this.frameId,
               },
-              '*',
+              '*'
             )
           }
 
@@ -348,7 +354,7 @@ export default class AutoScroll {
                 action: 'stop',
                 frameId: this.frameId,
               },
-              '*',
+              '*'
             )
             removeEventListener('mousemove', handleIframeMouseMove, true)
             removeEventListener('mouseup', handleIframeMouseUp, true)
