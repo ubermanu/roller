@@ -13,6 +13,6 @@
     "esModuleInterop": true,
     "isolatedModules": true
   },
-  "include": ["src/**/*.ts", "src/**/*.svelte", "types/**/*.ts"],
+  "include": ["src/**/*.ts", "src/**/*.svelte", "types/**/*.ts", "e2e/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
