@@ -5,7 +5,7 @@ class Overlay extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' })
     shadow.innerHTML = `
       <style>
-        :host {
+        #overlay {
           position: fixed;
           top: 0;
           left: 0;
@@ -17,19 +17,26 @@ class Overlay extends HTMLElement {
           display: block;
         }
       </style>
+      <div id="overlay"></div>
     `
+    this.#el = shadow.getElementById('overlay')
   }
 
+  #el
+
+  /** @param {string} value */
   set bgImage(value) {
-    this.style.backgroundImage = value ? `url("${value}")` : 'none'
+    this.#el.style.backgroundImage = value ? `url("${value}")` : 'none'
   }
 
+  /** @param {string} value */
   set bgPosition(value) {
-    this.style.backgroundPosition = value
+    this.#el.style.backgroundPosition = value
   }
 
+  /** @param {string} value */
   set cursor(value) {
-    this.style.cursor = value
+    this.#el.style.cursor = value
   }
 }
 
