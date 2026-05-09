@@ -1,4 +1,5 @@
-class Overlay extends HTMLElement {
+/** @public */
+export default class Overlay extends HTMLElement {
   constructor() {
     super()
 
@@ -43,5 +44,3 @@ class Overlay extends HTMLElement {
 if (!customElements.get('roller-overlay')) {
   customElements.define('roller-overlay', Overlay)
 }
-
-export default Overlay

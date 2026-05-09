@@ -2,7 +2,9 @@
   "name": "roller-monorepo",
   "private": true,
   "scripts": {
-    "format": "prettier --write .",
+    "build": "pnpm -r build",
+    "format": "prettier --write --ignore-unknown .",
+    "knip": "knip",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -13,6 +15,7 @@
     "@changesets/cli": "^2.31.0",
     "@ubermanu/prettier-config": "^3.5.1",
     "husky": "^9.1.7",
+    "knip": "^6.12.2",
     "lint-staged": "^16.4.0",
     "prettier": "~3.6",
     "prettier-plugin-svelte": "^3.5.1",

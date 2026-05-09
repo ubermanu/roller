@@ -1,4 +1,4 @@
-export function canScroll(style) {
+function canScroll(style) {
   return style === 'auto' || style === 'scroll' || style === 'visible'
 }
 
@@ -6,7 +6,7 @@ function canScrollContainer(style) {
   return style === 'auto' || style === 'scroll'
 }
 
-export function findScrollNormal(elem) {
+function findScrollNormal(elem) {
   if (!elem || elem.nodeType !== 1) {
     return null
   }

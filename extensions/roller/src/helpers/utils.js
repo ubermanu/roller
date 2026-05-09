@@ -14,16 +14,6 @@ export function hypot(x, y) {
 /**
  * @param {number} num
  * @param {number} cap
- * @returns {number | any}
- */
-export function min(num, cap) {
-  let neg = cap * -1
-  return num > neg && num < 0 ? neg : num < cap && num > 0 ? cap : num
-}
-
-/**
- * @param {number} num
- * @param {number} cap
  * @returns {any | number}
  */
 export function max(num, cap) {

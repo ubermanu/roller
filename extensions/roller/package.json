@@ -26,6 +26,7 @@
   ],
   "scripts": {
     "build": "rimraf dist && rollup -c",
+    "lint": "tsc --noEmit",
     "prepare": "pnpm run build",
     "start:chrome": "pnpm run build && node scripts/chrome-ext.cjs",
     "start:firefox": "pnpm run build && web-ext run --source-dir ./dist/",
@@ -40,10 +41,7 @@
     "@types/chrome": "^0.1.36",
     "@types/node": "^24",
     "@webcomponents/custom-elements": "^1.6.0",
-    "caniuse-lite": "^1.0.30001791",
-    "format-message": "^6.2.4",
     "postcss": "^8.5.12",
-    "prettier-plugin-svelte": "^3.4.1",
     "puppeteer": "^24.36.1",
     "rimraf": "^6.1.2",
     "rollup": "^4.57.1",
@@ -53,6 +51,7 @@
     "rollup-plugin-svelte": "^7.2.3",
     "rollup-plugin-svg": "^2.0.0",
     "svelte": "^5.55.5",
+    "typescript": "^5.2.2",
     "web-ext": "^10.1.0",
     "webext-base-css": "^2.1.0"
   }
