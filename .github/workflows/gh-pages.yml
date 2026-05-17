@@ -2,7 +2,10 @@ name: gh-pages
 
 on:
   push:
-    tags: ['*']
+    branches: ['main']
+    paths:
+      - 'sites/**'
+      - 'extensions/**'
   workflow_dispatch:
 
 permissions:
