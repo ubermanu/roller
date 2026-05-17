@@ -79,17 +79,13 @@ export default class Roller {
 
   init(): void {
     addEventListener('mousedown', this.handleMouseDown, true)
-    if (!this.isInIframe) {
-      addEventListener('message', this.handleFrameMessage)
-    }
+    addEventListener('message', this.handleFrameMessage)
   }
 
   destroy(): void {
     this.stop()
     removeEventListener('mousedown', this.handleMouseDown, true)
-    if (!this.isInIframe) {
-      removeEventListener('message', this.handleFrameMessage)
-    }
+    removeEventListener('message', this.handleFrameMessage)
   }
 
   startCycle(
@@ -274,52 +270,94 @@ export default class Roller {
     const y = (event.data.clientY ?? 0) + rect.top + (window.scrollY || 0)
 
     if (event.data.action === 'start') {
-      const elem = findScrollTop(this.htmlNode)
-      if (elem) {
+      if (this.isInIframe) {
+        window.parent.postMessage(
+          {
+            type: 'roller-scroll',
+            action: 'start',
+            clientX: x,
+            clientY: y,
+            frameId: event.data.frameId,
+          },
+          '*'
+        )
         this.iframeScrolling = true
-        this.start(elem, x, y)
         this.iframeOldX = x
         this.iframeOldY = y
+      } else {
+        const elem = findScrollTop(this.htmlNode)
+        if (elem) {
+          this.iframeScrolling = true
+          this.start(elem, x, y)
+          this.iframeOldX = x
+          this.iframeOldY = y
+        }
       }
     } else if (event.data.action === 'move' && this.iframeScrolling) {
-      const dx = x - this.iframeOldX!
-      const dy = y - this.iframeOldY!
-
-      if (utils.hypot(dx, dy) > this.options.moveThreshold) {
-        this.cursor = utils.getCursorStyleFromAngle(utils.angle(dx, dy))
-
-        let scrollDx = dx
-        let scrollDy = dy
-
-        if (this.options.sameSpeed) {
-          scrollDx = utils.max(scrollDx, 1) * 50
-          scrollDy = utils.max(scrollDy, 1) * 50
-        }
-
-        scrollDx = this.scale(scrollDx)
-        scrollDy = this.scale(scrollDy)
-
-        if (this.options.shouldCap) {
-          scrollDx = utils.max(scrollDx, this.options.capSpeed)
-          scrollDy = utils.max(scrollDy, this.options.capSpeed)
-        }
-
-        this.dirX = scrollDx
-        this.dirY = scrollDy
+      if (this.isInIframe) {
+        window.parent.postMessage(
+          {
+            type: 'roller-scroll',
+            action: 'move',
+            clientX: x,
+            clientY: y,
+            frameId: event.data.frameId,
+          },
+          '*'
+        )
+        this.iframeOldX = x
+        this.iframeOldY = y
       } else {
-        this.cursor = 'auto'
-        this.dirX = 0
-        this.dirY = 0
-      }
+        const dx = x - this.iframeOldX!
+        const dy = y - this.iframeOldY!
 
-      this.iframeOldX = x
-      this.iframeOldY = y
-      this.backgroundPositionX = x
-      this.backgroundPositionY = y
-      this.updateOverlay()
+        if (utils.hypot(dx, dy) > this.options.moveThreshold) {
+          this.cursor = utils.getCursorStyleFromAngle(utils.angle(dx, dy))
+
+          let scrollDx = dx
+          let scrollDy = dy
+
+          if (this.options.sameSpeed) {
+            scrollDx = utils.max(scrollDx, 1) * 50
+            scrollDy = utils.max(scrollDy, 1) * 50
+          }
+
+          scrollDx = this.scale(scrollDx)
+          scrollDy = this.scale(scrollDy)
+
+          if (this.options.shouldCap) {
+            scrollDx = utils.max(scrollDx, this.options.capSpeed)
+            scrollDy = utils.max(scrollDy, this.options.capSpeed)
+          }
+
+          this.dirX = scrollDx
+          this.dirY = scrollDy
+        } else {
+          this.cursor = 'auto'
+          this.dirX = 0
+          this.dirY = 0
+        }
+
+        this.iframeOldX = x
+        this.iframeOldY = y
+        this.backgroundPositionX = x
+        this.backgroundPositionY = y
+        this.updateOverlay()
+      }
     } else if (event.data.action === 'stop' && this.iframeScrolling) {
+      if (this.isInIframe) {
+        window.parent.postMessage(
+          {
+            type: 'roller-scroll',
+            action: 'stop',
+            frameId: event.data.frameId,
+          },
+          '*'
+        )
+      }
       this.iframeScrolling = false
-      this.stop()
+      this.iframeOldX = null
+      this.iframeOldY = null
     }
   }
 
