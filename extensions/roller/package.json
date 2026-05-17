@@ -1,6 +1,6 @@
 {
   "name": "@ubermanu/roller",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Browser extension that allow auto scrolling of web pages, by pressing the mouse wheel button",
   "keywords": [
     "linux",
