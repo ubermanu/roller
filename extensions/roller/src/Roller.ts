@@ -266,8 +266,8 @@ export default class Roller {
     }
 
     const rect = iframe.getBoundingClientRect()
-    const x = (event.data.clientX ?? 0) + rect.left + (window.scrollX || 0)
-    const y = (event.data.clientY ?? 0) + rect.top + (window.scrollY || 0)
+    const x = (event.data.clientX ?? 0) + rect.left
+    const y = (event.data.clientY ?? 0) + rect.top
 
     if (event.data.action === 'start') {
       if (this.isInIframe) {
