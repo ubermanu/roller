@@ -5,7 +5,7 @@ on:
     branches: ['main']
     paths:
       - 'sites/**'
-      - 'extensions/**'
+      - 'extensions/roller/package.json'
   workflow_dispatch:
 
 permissions:
