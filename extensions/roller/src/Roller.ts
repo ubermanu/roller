@@ -496,6 +496,7 @@ export default class Roller {
             const elem = findScroll(target, this.options.innerScroll)
             if (elem !== null) {
               this.start(elem, pendingX, pendingY)
+              this.handleMouseMove(e)
             }
           }
         }
