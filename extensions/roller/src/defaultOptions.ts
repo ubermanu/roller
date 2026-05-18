@@ -6,7 +6,6 @@ const defaultOptions: RollerOptions = {
   moveSpeed: 10,
   stickyScroll: true,
   innerScroll: true,
-  scrollOnLinks: true,
   sameSpeed: false,
   capSpeed: 10,
   shouldCap: false,
