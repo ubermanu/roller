@@ -121,14 +121,6 @@
     <div class="field">
       <div class="control">
         <label class="checkbox">
-          <input type="checkbox" bind:checked={options.scrollOnLinks} />{' '}
-          {t('Scroll when clicking on a link or textarea')}
-        </label>
-      </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        <label class="checkbox">
           <input type="checkbox" bind:checked={options.disableOnWindows} />{' '}
           {t('Disable on Windows platform')}
         </label>

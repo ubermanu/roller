@@ -98,36 +98,3 @@ export function findScroll(
 
   return findScrollTop(bodyNode)
 }
-
-export function isScrollable(elem: Node | null): boolean {
-  const { htmlNode, bodyNode } = getDocumentContext()
-
-  while (true) {
-    if (elem == null) {
-      return false
-    } else if (elem === document || elem === htmlNode || elem === bodyNode) {
-      return true
-    } else if (elem instanceof ShadowRoot) {
-      elem = elem.host
-    } else if (isInput(elem as HTMLElement)) {
-      return false
-    } else {
-      elem = elem.parentNode
-    }
-  }
-}
-
-function isInput(elem: HTMLElement): boolean {
-  return !!(
-    elem.isContentEditable ||
-    (elem.localName === 'a' && (elem as HTMLAnchorElement).href) ||
-    (elem.localName === 'area' && (elem as HTMLAreaElement).href) ||
-    (elem.localName === 'textarea' &&
-      isEditableText(elem as HTMLTextAreaElement)) ||
-    (elem.localName === 'input' && isEditableText(elem as HTMLInputElement))
-  )
-}
-
-function isEditableText(elem: HTMLTextAreaElement | HTMLInputElement): boolean {
-  return !(elem.disabled || elem.readOnly)
-}

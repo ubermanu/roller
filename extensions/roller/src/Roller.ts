@@ -1,11 +1,6 @@
 import Overlay from './components/Overlay'
 import defaultOptions from './defaultOptions'
-import {
-  findScroll,
-  findScrollTop,
-  getDocumentContext,
-  isScrollable,
-} from './helpers/scroll'
+import { findScroll, findScrollTop, getDocumentContext } from './helpers/scroll'
 import * as utils from './helpers/utils'
 import type { RollerOptions, ScrollResult } from './types'
 
@@ -38,6 +33,16 @@ export default class Roller {
   iframeOldX: number | null
   iframeOldY: number | null
 
+  // Pending (pre-threshold) state
+  pendingX: number | null
+  pendingY: number | null
+  pendingTarget: HTMLElement | null
+  pendingButton: number
+  pendingCtrl: boolean
+  pendingMeta: boolean
+  handlePendingMouseMove: ((e: MouseEvent) => void) | null
+  handlePendingMouseUp: ((e: MouseEvent) => void) | null
+
   htmlNode: HTMLElement
   bodyNode: HTMLElement
   htmlScrollBehavior: string
@@ -63,6 +68,15 @@ export default class Roller {
     this.iframeScrolling = false
     this.iframeOldX = null
     this.iframeOldY = null
+
+    this.pendingX = null
+    this.pendingY = null
+    this.pendingTarget = null
+    this.pendingButton = 0
+    this.pendingCtrl = false
+    this.pendingMeta = false
+    this.handlePendingMouseMove = null
+    this.handlePendingMouseUp = null
 
     const { htmlNode, bodyNode } = getDocumentContext()
     this.htmlNode = htmlNode
@@ -221,6 +235,23 @@ export default class Roller {
     this.bodyNode.style.setProperty('scroll-behavior', this.bodyScrollBehavior)
   }
 
+  clearPending(): void {
+    if (this.handlePendingMouseMove) {
+      removeEventListener('mousemove', this.handlePendingMouseMove, true)
+      this.handlePendingMouseMove = null
+    }
+    if (this.handlePendingMouseUp) {
+      removeEventListener('mouseup', this.handlePendingMouseUp, true)
+      this.handlePendingMouseUp = null
+    }
+    this.pendingX = null
+    this.pendingY = null
+    this.pendingTarget = null
+    this.pendingButton = 0
+    this.pendingCtrl = false
+    this.pendingMeta = false
+  }
+
   start(o: ScrollResult, x: number, y: number): void {
     this.scrolling = true
     this.oldX = x
@@ -374,76 +405,132 @@ export default class Roller {
   handleMouseDown(event: MouseEvent): void {
     if (this.scrolling) {
       utils.stopEvent(event, true)
-    } else {
-      const path = event.composedPath()
-      const target = path.find((node) => (node as Node).nodeType === 1) as
-        | HTMLElement
-        | null
-        | undefined
+      return
+    }
 
-      if (
-        target != null &&
-        target.localName !== 'iframe' &&
-        ((event.button === 1 && this.options.middleClick) ||
-          (event.button === 0 &&
-            (event.ctrlKey || event.metaKey) &&
-            this.options.ctrlClick)) &&
-        event.clientX < this.htmlNode.clientWidth &&
-        event.clientY < this.htmlNode.clientHeight &&
-        (this.options.scrollOnLinks || isScrollable(target))
-      ) {
-        const elem: ScrollResult | null =
-          this.isInIframe && !this.options.innerScroll
-            ? null
-            : findScroll(target, this.options.innerScroll)
-        if (elem !== null) {
-          utils.stopEvent(event, true)
-          this.start(elem, event.clientX, event.clientY)
-        } else if (this.isInIframe && this.options.innerScroll) {
-          utils.stopEvent(event, true)
-          window.parent.postMessage(
-            {
-              type: 'roller-scroll',
-              action: 'start',
-              clientX: event.clientX,
-              clientY: event.clientY,
-              frameId: this.frameId,
-            },
-            '*'
-          )
-          this.iframeOldX = event.clientX
-          this.iframeOldY = event.clientY
+    const path = event.composedPath()
+    const target = path.find((node) => (node as Node).nodeType === 1) as
+      | HTMLElement
+      | null
+      | undefined
 
-          const handleIframeMouseMove = (e: MouseEvent): void => {
+    if (
+      target != null &&
+      target.localName !== 'iframe' &&
+      ((event.button === 1 && this.options.middleClick) ||
+        (event.button === 0 &&
+          (event.ctrlKey || event.metaKey) &&
+          this.options.ctrlClick)) &&
+      event.clientX < this.htmlNode.clientWidth &&
+      event.clientY < this.htmlNode.clientHeight
+    ) {
+      // Prevent default immediately so links don't navigate before we know
+      // whether the user is dragging or just clicking.
+      event.preventDefault()
+
+      const pendingX = event.clientX
+      const pendingY = event.clientY
+      const pendingButton = event.button
+      const pendingCtrl = event.ctrlKey
+      const pendingMeta = event.metaKey
+
+      this.pendingX = pendingX
+      this.pendingY = pendingY
+      this.pendingTarget = target
+      this.pendingButton = pendingButton
+      this.pendingCtrl = pendingCtrl
+      this.pendingMeta = pendingMeta
+
+      const onMove = (e: MouseEvent): void => {
+        const dx = e.clientX - pendingX
+        const dy = e.clientY - pendingY
+
+        if (utils.hypot(dx, dy) > this.options.dragThreshold) {
+          this.clearPending()
+          utils.stopEvent(e, true)
+
+          if (this.isInIframe && !this.options.innerScroll) {
+            // Bubble up to parent frame
             window.parent.postMessage(
               {
                 type: 'roller-scroll',
-                action: 'move',
-                clientX: e.clientX,
-                clientY: e.clientY,
+                action: 'start',
+                clientX: pendingX,
+                clientY: pendingY,
                 frameId: this.frameId,
               },
               '*'
             )
-          }
+            this.iframeOldX = pendingX
+            this.iframeOldY = pendingY
 
-          const handleIframeMouseUp = (): void => {
-            window.parent.postMessage(
-              {
-                type: 'roller-scroll',
-                action: 'stop',
-                frameId: this.frameId,
-              },
-              '*'
-            )
-            removeEventListener('mousemove', handleIframeMouseMove, true)
-            removeEventListener('mouseup', handleIframeMouseUp, true)
-          }
+            const handleIframeMouseMove = (ev: MouseEvent): void => {
+              window.parent.postMessage(
+                {
+                  type: 'roller-scroll',
+                  action: 'move',
+                  clientX: ev.clientX,
+                  clientY: ev.clientY,
+                  frameId: this.frameId,
+                },
+                '*'
+              )
+            }
 
-          addEventListener('mousemove', handleIframeMouseMove, true)
-          addEventListener('mouseup', handleIframeMouseUp, true)
+            const handleIframeMouseUp = (): void => {
+              window.parent.postMessage(
+                {
+                  type: 'roller-scroll',
+                  action: 'stop',
+                  frameId: this.frameId,
+                },
+                '*'
+              )
+              removeEventListener('mousemove', handleIframeMouseMove, true)
+              removeEventListener('mouseup', handleIframeMouseUp, true)
+            }
+
+            addEventListener('mousemove', handleIframeMouseMove, true)
+            addEventListener('mouseup', handleIframeMouseUp, true)
+          } else {
+            const elem = findScroll(target, this.options.innerScroll)
+            if (elem !== null) {
+              this.start(elem, pendingX, pendingY)
+            }
+          }
         }
       }
+
+      const onUp = (e: MouseEvent): void => {
+        this.clearPending()
+        // User released without crossing the drag threshold — synthesize the
+        // native action that preventDefault() suppressed.
+        const link =
+          (e.target as HTMLElement | null)?.closest?.('a[href]') ??
+          (target.localName === 'a' && (target as HTMLAnchorElement).href
+            ? target
+            : null)
+        if (link || pendingButton === 1) {
+          // Fire a synthetic click so links still work
+          target.dispatchEvent(
+            new MouseEvent('click', {
+              bubbles: true,
+              cancelable: true,
+              button: pendingButton,
+              ctrlKey: pendingCtrl,
+              metaKey: pendingMeta,
+              clientX: pendingX,
+              clientY: pendingY,
+            })
+          )
+        }
+      }
+
+      this.handlePendingMouseMove = onMove
+      this.handlePendingMouseUp = onUp
+
+      addEventListener('mousemove', onMove, true)
+      addEventListener('mouseup', onUp, true)
     }
   }
 }

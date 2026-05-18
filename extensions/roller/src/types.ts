@@ -4,7 +4,6 @@ export interface RollerOptions {
   moveSpeed: number
   stickyScroll: boolean
   innerScroll: boolean
-  scrollOnLinks: boolean
   sameSpeed: boolean
   capSpeed: number
   shouldCap: boolean

@@ -188,7 +188,6 @@ it('should NOT trigger sticky scrolling when stickyScroll is disabled', async ()
       moveSpeed: 10,
       stickyScroll: false,
       innerScroll: true,
-      scrollOnLinks: true,
       sameSpeed: false,
       capSpeed: 10,
       shouldCap: false,
@@ -229,7 +228,7 @@ it('should NOT trigger sticky scrolling when stickyScroll is disabled', async ()
   expect(scrollY).toBeLessThan(5)
 })
 
-it('should NOT trigger scroll on links when scrollOnLinks is disabled, but should when enabled', async () => {
+it('should trigger scrolling when dragging on a link past the drag threshold', async () => {
   // Reset all roller options to defaults
   await extensionRealm.evaluate(() => {
     Object.assign(window.roller.options, {
@@ -238,7 +237,6 @@ it('should NOT trigger scroll on links when scrollOnLinks is disabled, but shoul
       moveSpeed: 10,
       stickyScroll: true,
       innerScroll: true,
-      scrollOnLinks: true,
       sameSpeed: false,
       capSpeed: 10,
       shouldCap: false,
@@ -249,85 +247,87 @@ it('should NOT trigger scroll on links when scrollOnLinks is disabled, but shoul
   })
   await new Promise((r) => setTimeout(r, 200))
 
-  // Set up a page with a link and tall body for scrolling
+  // Set up a page with a link and tall body
   await page.evaluate(() => {
     document.body.innerHTML = `
       <a href="#" id="test-link" style="display:block;margin:100px;padding:40px;border:1px solid black">Click me</a>
       <div style="height:5000px"></div>
     `
   })
-  // Wait a moment for page to settle
   await new Promise((r) => setTimeout(r, 200))
 
-  // Get the link coordinates
   const linkRect = await page.evaluate(() => {
     const link = document.getElementById('test-link')
     const rect = link!.getBoundingClientRect()
-    return {
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2,
-    }
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
   })
 
-  // Reset scroll and assert
   await page.evaluate(() => window.scrollTo(0, 0))
   let scrollY = await page.evaluate(() => window.scrollY)
   expect(scrollY).toBe(0)
 
-  // Test with scrollOnLinks: false
-  await extensionRealm.evaluate(() => {
-    window.roller.options.scrollOnLinks = false
-  })
-  await new Promise((r) => setTimeout(r, 200))
-
-  // Middle-click on the link
+  // Middle-click on the link and drag down past the threshold while holding
   await page.mouse.move(linkRect.x, linkRect.y)
   await page.mouse.down({ button: 'middle' })
-  await new Promise((r) => setTimeout(r, 100))
-  await page.mouse.up({ button: 'middle' })
-  await new Promise((r) => setTimeout(r, 100))
-
-  // Move mouse down
-  await page.mouse.move(linkRect.x, linkRect.y + 100)
+  await page.mouse.move(linkRect.x, linkRect.y + 50)
   await new Promise((r) => setTimeout(r, 1500))
 
-  // Read scrollY
   scrollY = await page.evaluate(() => window.scrollY)
 
   // Stop scrolling
-  await page.mouse.down({ button: 'left' })
-  await page.mouse.up({ button: 'left' })
-
-  // Assert scroll did NOT occur
-  expect(scrollY).toBeLessThan(5)
-
-  // Now test with scrollOnLinks: true
-  await extensionRealm.evaluate(() => {
-    window.roller.options.scrollOnLinks = true
-  })
-  await new Promise((r) => setTimeout(r, 200))
-
-  // Reset scroll back to 0
-  await page.evaluate(() => window.scrollTo(0, 0))
-
-  // Repeat the middle-click on the link
-  await page.mouse.move(linkRect.x, linkRect.y)
-  await page.mouse.down({ button: 'middle' })
-  await new Promise((r) => setTimeout(r, 100))
   await page.mouse.up({ button: 'middle' })
-  await new Promise((r) => setTimeout(r, 100))
-
-  // Move mouse down
-  await page.mouse.move(linkRect.x, linkRect.y + 100)
-  await new Promise((r) => setTimeout(r, 1500))
-
-  // Read scrollY again
-  scrollY = await page.evaluate(() => window.scrollY)
-
-  // Stop scrolling
   await page.mouse.down({ button: 'left' })
   await page.mouse.up({ button: 'left' })
 
-  // Assert scroll DID occur
   expect(scrollY).toBeGreaterThan(10)
+})
+
+it('should NOT trigger scrolling when clicking a link without dragging past the threshold', async () => {
+  // Reset all roller options to defaults
+  await extensionRealm.evaluate(() => {
+    Object.assign(window.roller.options, {
+      dragThreshold: 10,
+      moveThreshold: 10,
+      moveSpeed: 10,
+      stickyScroll: true,
+      innerScroll: true,
+      sameSpeed: false,
+      capSpeed: 10,
+      shouldCap: false,
+      ctrlClick: false,
+      middleClick: true,
+      disableOnWindows: true,
+    })
+  })
+  await new Promise((r) => setTimeout(r, 200))
+
+  await page.evaluate(() => {
+    document.body.innerHTML = `
+      <a href="#" id="test-link" style="display:block;margin:100px;padding:40px;border:1px solid black">Click me</a>
+      <div style="height:5000px"></div>
+    `
+  })
+  await new Promise((r) => setTimeout(r, 200))
+
+  const linkRect = await page.evaluate(() => {
+    const link = document.getElementById('test-link')
+    const rect = link!.getBoundingClientRect()
+    return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 }
+  })
+
+  await page.evaluate(() => window.scrollTo(0, 0))
+  let scrollY = await page.evaluate(() => window.scrollY)
+  expect(scrollY).toBe(0)
+
+  // Middle-click on the link and release immediately without dragging
+  await page.mouse.move(linkRect.x, linkRect.y)
+  await page.mouse.down({ button: 'middle' })
+  await new Promise((r) => setTimeout(r, 50))
+  await page.mouse.up({ button: 'middle' })
+
+  // Wait to confirm no scrolling starts
+  await new Promise((r) => setTimeout(r, 1000))
+
+  scrollY = await page.evaluate(() => window.scrollY)
+  expect(scrollY).toBeLessThan(5)
 })
