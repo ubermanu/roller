@@ -1,9 +1,9 @@
 {
   "Basic": "Basis",
   "Scroll without holding down the mouse button": "Scrollen zonder de muisknop ingedrukt te houden",
-  "...if moving less than": "...als er minder dan",
+  "...if moving less than": "Scrollen als er meer dan",
   "pixels": "pixels",
-  "Scroll if moving more than": "Scrollen als er meer dan",
+  "Scroll if moving more than": "...als er minder dan",
   "Scroll by using (Middle Click)": "Scrollen met (middenklik)",
   "Scroll by using (Ctrl/⌘ + Left Click)": "Scrollen met (Ctrl/⌘ + linker muisklik)",
   "Speed": "Snelheid",
