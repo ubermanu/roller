@@ -1,9 +1,9 @@
 {
   "Basic": "Основные",
   "Scroll without holding down the mouse button": "Прокручивать без зажатия кнопки мыши",
-  "...if moving less than": "Прокручивать, если перемещение больше чем",
+  "...if moving less than": "...если перемещение меньше чем",
   "pixels": "пикселей",
-  "Scroll if moving more than": "...если перемещение меньше чем",
+  "Scroll if moving more than": "Прокручивать, если перемещение больше чем",
   "Scroll by using (Middle Click)": "Прокручивать с помощью (средней кнопки мыши)",
   "Scroll by using (Ctrl/⌘ + Left Click)": "Прокручивать с помощью (Ctrl/⌘ + Левый клик)",
   "Speed": "Скорость",

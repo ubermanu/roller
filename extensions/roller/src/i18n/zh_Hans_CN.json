@@ -1,9 +1,9 @@
 {
   "Basic": "基本",
   "Scroll without holding down the mouse button": "不需要按住鼠标按钮滚动",
-  "...if moving less than": "如果移动距离大于，则滚动",
+  "...if moving less than": "...如果移动距离小于",
   "pixels": "像素",
-  "Scroll if moving more than": "...如果移动距离小于",
+  "Scroll if moving more than": "如果移动距离大于，则滚动",
   "Scroll by using (Middle Click)": "通过 (中键点击) 滚动",
   "Scroll by using (Ctrl/⌘ + Left Click)": "通过 (Ctrl/⌘ + 左键点击) 滚动",
   "Speed": "速度",

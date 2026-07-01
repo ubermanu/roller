@@ -1,9 +1,9 @@
 {
   "Basic": "기본",
   "Scroll without holding down the mouse button": "마우스 버튼을 누르지 않고 스크롤",
-  "...if moving less than": "이동 거리가 다음보다 크면 스크롤",
+  "...if moving less than": "...이동 거리가 다음보다 작으면",
   "pixels": "픽셀",
-  "Scroll if moving more than": "...이동 거리가 다음보다 작으면",
+  "Scroll if moving more than": "이동 거리가 다음보다 크면 스크롤",
   "Scroll by using (Middle Click)": "(가운데 클릭)으로 스크롤",
   "Scroll by using (Ctrl/⌘ + Left Click)": "(Ctrl/⌘ + 왼쪽 클릭)으로 스크롤",
   "Speed": "속도",
