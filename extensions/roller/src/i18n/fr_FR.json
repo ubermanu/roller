@@ -1,9 +1,9 @@
 {
   "Basic": "Basique",
   "Scroll without holding down the mouse button": "Défiler sans maintenir le bouton enfoncé",
-  "...if moving less than": "Défiler si le curseur a bougé plus de",
+  "...if moving less than": "...si le curseur se déplace de moins de",
   "pixels": "pixels",
-  "Scroll if moving more than": "...si le curseur se déplace de plus de",
+  "Scroll if moving more than": "Défiler si le curseur a bougé plus de",
   "Scroll by using (Middle Click)": "Défiler en utilisant le Clic de la molette (bouton du milieu)",
   "Scroll by using (Ctrl/⌘ + Left Click)": "Défiler en utilisant (Ctrl/⌘ + Clic Gauche)",
   "Speed": "Vitesse",
