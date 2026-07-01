@@ -27,6 +27,7 @@ export default class Roller {
   timeout: number | null
   oldX: number | null
   oldY: number | null
+  maxDragDistance: number
   dirX: number
   dirY: number
   clicked: boolean
@@ -53,6 +54,7 @@ export default class Roller {
     this.timeout = null
     this.oldX = null
     this.oldY = null
+    this.maxDragDistance = 0
     this.dirX = 0
     this.dirY = 0
     this.clicked = false
@@ -128,10 +130,10 @@ export default class Roller {
     loop()
   }
 
-  shouldSticky(x: number, y: number): boolean {
+  shouldSticky(): boolean {
     return (
       this.options.stickyScroll &&
-      utils.hypot(x, y) < this.options.dragThreshold
+      this.maxDragDistance < this.options.dragThreshold
     )
   }
 
@@ -149,7 +151,12 @@ export default class Roller {
     const x = event.clientX - this.oldX!
     const y = event.clientY - this.oldY!
 
-    if (utils.hypot(x, y) > this.options.moveThreshold) {
+    const distance = utils.hypot(x, y)
+    if (distance > this.maxDragDistance) {
+      this.maxDragDistance = distance
+    }
+
+    if (distance > this.options.moveThreshold) {
       this.cursor = utils.getCursorStyleFromAngle(utils.angle(x, y))
 
       let dx = x
@@ -180,10 +187,7 @@ export default class Roller {
   handleMouseUp(event: MouseEvent): void {
     utils.stopEvent(event, true)
 
-    const x = event.clientX - this.oldX!
-    const y = event.clientY - this.oldY!
-
-    if (this.clicked || !this.shouldSticky(x, y)) {
+    if (this.clicked || !this.shouldSticky()) {
       this.stop()
     } else {
       this.clicked = true
@@ -204,6 +208,7 @@ export default class Roller {
     this.cursor = 'auto'
     this.oldX = null
     this.oldY = null
+    this.maxDragDistance = 0
     this.dirX = 0
     this.dirY = 0
     this.clicked = false
@@ -310,6 +315,11 @@ export default class Roller {
       } else {
         const dx = x - this.iframeOldX!
         const dy = y - this.iframeOldY!
+
+        const dragDistance = utils.hypot(x - this.oldX!, y - this.oldY!)
+        if (dragDistance > this.maxDragDistance) {
+          this.maxDragDistance = dragDistance
+        }
 
         if (utils.hypot(dx, dy) > this.options.moveThreshold) {
           this.cursor = utils.getCursorStyleFromAngle(utils.angle(dx, dy))
