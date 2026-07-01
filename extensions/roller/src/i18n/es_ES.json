@@ -1,9 +1,9 @@
 {
   "Basic": "Básico",
   "Scroll without holding down the mouse button": "Desplazar sin mantener presionado el botón del mouse",
-  "...if moving less than": "...si se mueve menos de",
+  "...if moving less than": "Desplazar si se mueve más de",
   "pixels": "píxeles",
-  "Scroll if moving more than": "Desplazar si se mueve más de",
+  "Scroll if moving more than": "...si se mueve menos de",
   "Scroll by using (Middle Click)": "Desplazar usando (Clic central)",
   "Scroll by using (Ctrl/⌘ + Left Click)": "Desplazar usando (Ctrl/⌘ + Clic izquierdo)",
   "Speed": "Velocidad",
