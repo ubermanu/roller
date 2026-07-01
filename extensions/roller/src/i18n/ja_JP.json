@@ -1,9 +1,9 @@
 {
   "Basic": "基本的な",
   "Scroll without holding down the mouse button": "マウスボタンを押し続けなくてもスクロールする",
-  "...if moving less than": "移動距離が以下の場合、",
+  "...if moving less than": "移動距離が以上の場合、スクロールする",
   "pixels": "ピクセル",
-  "Scroll if moving more than": "移動距離が以上の場合、スクロールする",
+  "Scroll if moving more than": "移動距離が以下の場合、",
   "Scroll by using (Middle Click)": "（中央クリック）でスクロールする",
   "Scroll by using (Ctrl/⌘ + Left Click)": "（Ctrl/⌘ + 左クリック）でスクロールする",
   "Speed": "スピード",

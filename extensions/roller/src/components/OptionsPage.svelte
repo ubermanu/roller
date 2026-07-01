@@ -25,6 +25,18 @@
     <h2 class="title is-5">{t('Basic')}</h2>
     <div class="field">
       <div class="control">
+        {t('Scroll if moving more than')}{' '}
+        <input
+          type="number"
+          class="input"
+          bind:value={options.moveThreshold}
+          aria-label={t('Move threshold in pixels')}
+        />{' '}
+        {t('pixels')}
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
         <label class="checkbox">
           <input type="checkbox" bind:checked={options.stickyScroll} />{' '}
           {t('Scroll without holding down the mouse button')}
@@ -32,18 +44,6 @@
       </div>
       <div class="control">
         {t('...if moving less than')}{' '}
-        <input
-          type="number"
-          class="input"
-          bind:value={options.moveThreshold}
-          aria-label={t('...if moving less than X pixels')}
-        />{' '}
-        {t('pixels')}
-      </div>
-    </div>
-    <div class="field">
-      <div class="control">
-        {t('Scroll if moving more than')}{' '}
         <input
           type="number"
           class="input"
