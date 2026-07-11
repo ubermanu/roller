@@ -1,38 +1,37 @@
-export default class Overlay extends HTMLElement {
-  #el: HTMLElement
+export interface OverlayHandle {
+  setBgImage: (value: string) => void
+  setBgPosition: (value: string) => void
+  setCursor: (value: string) => void
+  remove: () => void
+}
 
-  constructor() {
-    super()
+export default function createOverlay(): OverlayHandle {
+  const overlay = document.createElement('div')
+  overlay.id = 'roller-overlay'
+  overlay.style.position = 'fixed'
+  overlay.style.top = '0'
+  overlay.style.left = '0'
+  overlay.style.width = '100%'
+  overlay.style.height = '100%'
+  overlay.style.zIndex = '2147483647'
+  overlay.style.backgroundRepeat = 'no-repeat'
+  overlay.style.transform = 'translateZ(0)'
+  overlay.style.display = 'block'
 
-    const shadow = this.attachShadow({ mode: 'open' })
-    shadow.innerHTML = `
-      <style>
-        #overlay {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          z-index: 2147483647;
-          background-repeat: no-repeat;
-          transform: translateZ(0);
-          display: block;
-        }
-      </style>
-      <div id="overlay"></div>
-    `
-    this.#el = shadow.getElementById('overlay')!
-  }
+  document.documentElement.appendChild(overlay)
 
-  set bgImage(value: string) {
-    this.#el.style.backgroundImage = value ? `url("${value}")` : 'none'
-  }
-
-  set bgPosition(value: string) {
-    this.#el.style.backgroundPosition = value
-  }
-
-  set cursor(value: string) {
-    this.#el.style.cursor = value
+  return {
+    setBgImage(value: string) {
+      overlay.style.backgroundImage = value ? `url("${value}")` : 'none'
+    },
+    setBgPosition(value: string) {
+      overlay.style.backgroundPosition = value
+    },
+    setCursor(value: string) {
+      overlay.style.cursor = value
+    },
+    remove() {
+      overlay.remove()
+    },
   }
 }

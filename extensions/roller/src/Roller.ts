@@ -1,4 +1,4 @@
-import Overlay from './components/Overlay'
+import createOverlay, { type OverlayHandle } from './components/Overlay'
 import defaultOptions from './defaultOptions'
 import {
   findScroll,
@@ -31,7 +31,7 @@ export default class Roller {
   dirY: number
   clicked: boolean
   scrolling: boolean
-  overlay: Overlay | null
+  overlay: OverlayHandle | null
   isInIframe: boolean
   frameId: string
   iframeScrolling: boolean
@@ -246,12 +246,13 @@ export default class Roller {
   updateOverlay(): void {
     if (this.visible) {
       if (!this.overlay) {
-        this.overlay = document.createElement('roller-overlay')
-        document.documentElement.appendChild(this.overlay)
+        this.overlay = createOverlay()
       }
-      this.overlay.bgImage = this.backgroundImage ?? ''
-      this.overlay.bgPosition = `${this.backgroundPositionX - 13}px ${this.backgroundPositionY - 13}px`
-      this.overlay.cursor = this.cursor
+      this.overlay.setBgImage(this.backgroundImage ?? '')
+      this.overlay.setBgPosition(
+        `${this.backgroundPositionX - 13}px ${this.backgroundPositionY - 13}px`
+      )
+      this.overlay.setCursor(this.cursor)
     }
   }
 

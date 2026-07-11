@@ -1,12 +1,6 @@
-import '@webcomponents/custom-elements'
 import Roller from './Roller'
-import Overlay from './components/Overlay'
 import defaults from './defaultOptions'
 import type { RollerOptions } from './types'
-
-if (!customElements.get('roller-overlay')) {
-  customElements.define('roller-overlay', Overlay)
-}
 
 const roller = new Roller()
 
