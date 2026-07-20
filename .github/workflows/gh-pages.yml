@@ -47,7 +47,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: 'sites/roller/build'
+          path: 'site/build'
 
       - name: Deploy to GitHub Pages
         id: deployment
