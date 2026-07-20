@@ -32,4 +32,4 @@ jobs:
       - run: pnpm lint
       - run: pnpm build
       - run: pnpm test:e2e
-        working-directory: extensions/roller
+        working-directory: extension

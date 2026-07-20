@@ -1,6 +1,6 @@
 packages:
-  - extensions/*
-  - sites/*
+  - extension
+  - site
 
 allowBuilds:
   '@sveltejs/kit': true
