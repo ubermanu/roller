@@ -17,7 +17,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
     "@ubermanu/roller": "workspace:*",
-    "svelte": "^5.55.2",
+    "svelte": "^5.56.6",
     "svelte-check": "^4.4.6",
     "tailwindcss": "^4.2.2",
     "typescript": "^6.0.3",
