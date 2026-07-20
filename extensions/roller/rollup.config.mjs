@@ -12,6 +12,34 @@ import pkg from './package.json' with { type: 'json' }
 
 export default [
   {
+    input: 'src/popup.ts',
+    output: {
+      name: 'popup',
+      file: 'dist/popup.js',
+      format: 'iife',
+    },
+    plugins: [
+      typescript({ tsconfig: './tsconfig.json' }),
+      svelte({
+        emitCss: false,
+      }),
+      postcss({
+        extract: true,
+        minimize: true,
+      }),
+      json(),
+      resolve({
+        browser: true,
+        dedupe: ['svelte'],
+      }),
+      commonjs(),
+      terser(),
+      copy({
+        targets: [{ src: 'public/popup.html', dest: 'dist' }],
+      }),
+    ],
+  },
+  {
     input: 'src/contentScript.ts',
     output: {
       name: 'Roller',
@@ -36,31 +64,6 @@ export default [
         output: 'manifest.json',
         manifest: { version: pkg.version },
       }),
-    ],
-  },
-  {
-    input: 'src/optionsPage.ts',
-    output: {
-      name: 'app',
-      file: 'dist/options_page.js',
-      format: 'iife',
-    },
-    plugins: [
-      typescript({ tsconfig: './tsconfig.json' }),
-      svelte({
-        emitCss: false,
-      }),
-      postcss({
-        extract: true,
-        minimize: true,
-      }),
-      json(),
-      resolve({
-        browser: true,
-        dedupe: ['svelte'],
-      }),
-      commonjs(),
-      terser(),
     ],
   },
 ]
