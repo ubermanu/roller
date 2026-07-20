@@ -28,7 +28,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-puppeteer-chrome-
       - run: pnpm dlx puppeteer browsers install chrome
-      - run: pnpm knip
+      - run: pnpm fallow
       - run: pnpm lint
       - run: pnpm build
       - run: pnpm test:e2e

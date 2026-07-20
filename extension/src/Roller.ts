@@ -84,6 +84,7 @@ export default class Roller {
     addEventListener('message', this.handleFrameMessage)
   }
 
+  // fallow-ignore-next-line unused-class-member
   destroy(): void {
     this.stop()
     removeEventListener('mousedown', this.handleMouseDown, true)
