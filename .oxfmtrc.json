@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "jsdoc": true,
+  "sortImports": { "newlinesBetween": false },
+  "semi": false,
+  "singleQuote": true,
+  "printWidth": 80,
+  "sortPackageJson": true,
+  "sortTailwindcss": true,
+  "svelte": true,
+  "ignorePatterns": [
+    "flake.lock",
+    "LICENSE",
+    "pnpm-lock.yaml",
+    ".svelte-kit",
+    "dist",
+    "build"
+  ]
+}

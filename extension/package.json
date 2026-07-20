@@ -3,27 +3,27 @@
   "version": "2.0.0",
   "description": "Browser extension that allow auto scrolling of web pages, by pressing the mouse wheel button",
   "keywords": [
-    "linux",
-    "wheel",
-    "scroll",
-    "mouse",
+    "auto-scroll",
     "firefox-extension",
     "google-chrome-extension",
-    "auto-scroll"
+    "linux",
+    "mouse",
+    "scroll",
+    "wheel"
   ],
+  "license": "MIT",
+  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ubermanu/roller.git"
   },
-  "license": "MIT",
-  "author": "Emmanuel Vodor <manu@paca.happy-dev.fr>",
+  "files": [
+    "dist"
+  ],
   "type": "commonjs",
   "exports": {
     "./package.json": "./package.json"
   },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "rimraf dist && rollup -c",
     "lint": "tsc --noEmit",
