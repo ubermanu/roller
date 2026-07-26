@@ -11,10 +11,10 @@
   "devDependencies": {
     "@changesets/cli": "^2.31.1",
     "@types/node": "^24",
-    "fallow": "^3.6.0",
+    "fallow": "^3.9.1",
     "husky": "^9.1.7",
-    "lint-staged": "^17.0.8",
-    "oxfmt": "^0.59.0"
+    "lint-staged": "^17.2.0",
+    "oxfmt": "^0.60.0"
   },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"
