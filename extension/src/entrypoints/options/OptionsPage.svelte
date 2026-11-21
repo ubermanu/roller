@@ -1,18 +1,19 @@
 <script>
   import { onMount } from 'svelte'
-  import defaults from '../defaultOptions'
-  import { _ as t } from '../i18n'
+  import { browser } from 'wxt/browser'
+  import defaults from '../../defaultOptions'
+  import { _ as t } from '../../i18n'
 
   let options = $state({ ...defaults })
 
   onMount(() => {
-    chrome.storage.local.get(defaults, (data) => {
+    browser.storage.local.get(defaults).then((data) => {
       Object.assign(options, data)
     })
   })
 
   $effect(() => {
-    chrome.storage.local.set({ ...options })
+    browser.storage.local.set({ ...options })
   })
 
   function handleReset() {

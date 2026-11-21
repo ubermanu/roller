@@ -45,8 +45,9 @@ jobs:
         if: steps.changesets.outputs.published == 'true'
         run: |
           TAG=$(echo '${{ steps.changesets.outputs.publishedPackages }}' | jq -r '.[0].name + "@" + .[0].version')
-          rm extension/web-ext-artifacts -rf
+          rm -f extension/dist/*.zip
           pnpm --filter @ubermanu/roller zip
-          gh release upload "$TAG" extension/web-ext-artifacts/*.zip
+          pnpm --filter @ubermanu/roller zip:firefox
+          gh release upload "$TAG" extension/dist/*.zip
         env:
           GH_TOKEN: ${{ github.token }}

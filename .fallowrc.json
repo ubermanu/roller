@@ -1,6 +1,8 @@
 {
   "$schema": "./node_modules/fallow/schema.json",
-  "entry": ["extension/src/contentScript.ts", "extension/src/optionsPage.ts"],
-  "ignoreDependencies": ["tslib"],
-  "ignoreUnresolvedImports": ["**/options_page.*"]
+  "entry": [
+    "extension/wxt.config.ts",
+    "extension/src/entrypoints/content.ts",
+    "extension/src/entrypoints/options/index.html"
+  ]
 }

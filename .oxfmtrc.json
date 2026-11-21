@@ -15,6 +15,7 @@
     "LICENSE",
     "pnpm-lock.yaml",
     ".svelte-kit",
+    ".wxt",
     "dist",
     "build"
   ]

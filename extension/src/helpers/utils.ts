@@ -1,6 +1,6 @@
-import originBoth from '../images/origin/both.svg'
-import originHorizontal from '../images/origin/horizontal.svg'
-import originVertical from '../images/origin/vertical.svg'
+import originBoth from '../images/origin/both.svg?inline'
+import originHorizontal from '../images/origin/horizontal.svg?inline'
+import originVertical from '../images/origin/vertical.svg?inline'
 import type { ScrollResult } from '../types'
 
 export function hypot(x: number, y: number): number {

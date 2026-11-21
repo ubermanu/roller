@@ -14,6 +14,18 @@ Press the mouse wheel button to start scrolling, and release it to stop scrollin
 
 Check the options page to configure the scrolling speed, drag threshold, and more.
 
+## Development
+
+The extension lives in `extension/` and is built with [WXT](https://wxt.dev).
+
+```sh
+pnpm install
+pnpm --filter @ubermanu/roller dev          # Chrome, with hot reload
+pnpm --filter @ubermanu/roller dev:firefox  # Firefox
+pnpm --filter @ubermanu/roller build        # dist/chrome-mv3
+pnpm --filter @ubermanu/roller zip          # store-ready archive in dist/
+```
+
 ## Notes
 
 This is a fork of the original [AutoScroll](https://github.com/Pauan/AutoScroll) extension.

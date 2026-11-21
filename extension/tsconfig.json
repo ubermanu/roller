@@ -1,18 +1,8 @@
 {
+  "extends": "./.wxt/tsconfig.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "ESNext",
-    "moduleResolution": "bundler",
-    "types": ["chrome"],
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "strict": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "isolatedModules": true
+    "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "src/**/*.svelte", "types/**/*.ts", "e2e/**/*.ts"],
-  "exclude": ["node_modules", "dist"]
+  "include": [".wxt/wxt.d.ts", "src/**/*.ts", "e2e/**/*.ts", "*.config.ts"]
 }

@@ -2,7 +2,7 @@ import path from 'path'
 import puppeteer, { Browser, Page, Realm } from 'puppeteer'
 import { afterAll, beforeAll, expect, it } from 'vitest'
 
-const pathToExtension = path.resolve(import.meta.dirname, '../dist')
+const pathToExtension = path.resolve(import.meta.dirname, '../dist/chrome-mv3')
 
 let browser: Browser
 let page: Page
